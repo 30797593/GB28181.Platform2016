@@ -74,7 +74,13 @@ namespace GrpcAgent.WebsocketRpcServer
                 _AddDeviceRequest.Device.Add(_device);
                 _AddDeviceRequest.LoginRoleId = "XXXX";
                 var reply = client.AddDevice(_AddDeviceRequest);
-                logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have completed registering DMS service.");
+                if (reply.Status == OP_RESULT_STATUS.OpSuccess)
+                {
+                    logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have completed registering DMS service.");
+                }
+                else {
+                    logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived: " + reply.Status.ToString());
+                }
             }
             catch (Exception ex)
             {
