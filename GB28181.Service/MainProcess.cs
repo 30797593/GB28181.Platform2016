@@ -379,7 +379,7 @@ namespace GB28181Service
         }
         private void ConfigurationOverview(ConsulClientConfiguration obj)
         {
-            obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? "10.78.115.124:8500"));
+            obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? "10.78.115.182:8500"));
             obj.Datacenter = "dc1";
         }
         #endregion
