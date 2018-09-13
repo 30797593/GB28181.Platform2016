@@ -72,7 +72,7 @@ namespace GrpcAgent.WebsocketRpcServer
                 var client = new Manage.Manage.ManageClient(channel);
                 AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
                 _AddDeviceRequest.Device.Add(_device);
-                _AddDeviceRequest.LoginRoleId = "admin";
+                _AddDeviceRequest.LoginRoleId = "XXXX";
                 var reply = client.AddDevice(_AddDeviceRequest);
                 logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have completed registering DMS service.");
             }
