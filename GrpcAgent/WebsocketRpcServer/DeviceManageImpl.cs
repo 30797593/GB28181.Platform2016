@@ -59,13 +59,13 @@ namespace GrpcAgent.WebsocketRpcServer
                 //    "shapetype": 2
                 //}
                 _device.Guid = Guid.NewGuid().ToString();
-                _device.Name = "gbdevice";
+                _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//IPC
+                _device.Name = "gbdevice" + "_" + _device.IP;
                 _device.LoginUser.Add(new LoginUser() { LoginName = sIPAccount.SIPUsername ?? "admin", LoginPwd = sIPAccount.SIPPassword ?? "123456" });
+                _device.Port = Convert.ToUInt32(sipTransaction.TransactionRequest.RemoteSIPEndPoint.Port);//5060
+                _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001310000184
                 _device.PtzType = 0;
                 _device.ProtocolType = 0;
-                _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//10.78.116.188
-                _device.Port = 5060;
-                _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001310000184
                 _device.ShapeType = ShapeType.Dome;
                 //var options = new List<ChannelOption> { new ChannelOption(ChannelOptions.MaxMessageLength, int.MaxValue) };
                 Channel channel = new Channel(EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080", ChannelCredentials.Insecure);//10.78.115.182:8080
