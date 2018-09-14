@@ -3,7 +3,7 @@ FROM microsoft/dotnet:2.1-runtime-alpine3.7 AS build-env-GB28181-platform2016-se
 WORKDIR /go/src/honeywell.com/husplus/GB28181.platform2016.service
 COPY . .
 
-RUN dotnet build -o gb28181service && \
+RUN dotnet build GB28181.Platform.Service.sln -o gb28181service && \
      rm -rf ./vendor/*  && \
      rm -rf  ./*.md ./*.go
 
