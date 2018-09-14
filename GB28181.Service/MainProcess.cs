@@ -243,7 +243,7 @@ namespace GB28181Service
                     //obj.Owner = item.Name;
                     obj.GbVersion = string.IsNullOrEmpty(item.GbVersion) ? "GB-2016" : item.GbVersion;
                     obj.LocalID = string.IsNullOrEmpty(item.LocalID) ? "42010000002100000002" : item.LocalID;
-                    obj.LocalIP = System.Net.IPAddress.Parse(GetIPAddress()); //System.Net.IPAddress.Parse(item.LocalIP);
+                    obj.LocalIP = System.Net.IPAddress.Parse(GetIPAddress());
                     obj.LocalPort = string.IsNullOrEmpty(item.LocalPort) ? Convert.ToUInt16(5061) : Convert.ToUInt16(item.LocalPort);
                     obj.RemotePort = string.IsNullOrEmpty(item.RemotePort) ? Convert.ToUInt16(5060) : Convert.ToUInt16(item.RemotePort);
                     obj.Authentication = string.IsNullOrEmpty(item.Authentication) ? false : Boolean.Parse(item.Authentication);
@@ -342,6 +342,7 @@ namespace GB28181Service
         #region Consul Register
         public string GetIPAddress()
         {
+            string localip = string.Empty;
             string hostname = Dns.GetHostName();
             IPHostEntry ipadrlist = Dns.GetHostByName(hostname);
             IPAddress localaddr = null;
@@ -349,8 +350,10 @@ namespace GB28181Service
             {
                 localaddr = obj;
             }
-            logger.Debug("Local machine Dns: " + localaddr.ToString());
-            return localaddr.ToString();
+            localip = localaddr.ToString();
+            localip = "10.78.115.182";
+            logger.Debug("Local machine Dns: " + localip);
+            return localip;
         }
         /// <summary>
         /// Consul Register
@@ -363,14 +366,14 @@ namespace GB28181Service
                 var clients = new ConsulClient(ConfigurationOverview);
                 _AgentServiceRegistration = new AgentServiceRegistration()
                 {
-                    Address = "10.78.115.182",//GetIPAddress(),
+                    Address = GetIPAddress(),
                     ID = "gb28181" + Dns.GetHostName(),
                     Name = "gb28181",
                     Port = EnvironmentVariables.GBServerGrpcPort,
                     Tags = new[] { "gb28181" }
                 };
                 var result = clients.Agent.ServiceRegister(_AgentServiceRegistration).Result;
-                logger.Debug("GB server("+ "gb28181" + Dns.GetHostName() + ") registering consul completed.");
+                logger.Debug("GB server registering consul[" + _AgentServiceRegistration.Address + "] completed.");
             }
             catch (Exception ex)
             {
@@ -379,7 +382,7 @@ namespace GB28181Service
         }
         private void ConfigurationOverview(ConsulClientConfiguration obj)
         {
-            obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? "10.78.115.124:8500"));
+            obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? "10.78.115.182:8500"));
             obj.Datacenter = "dc1";
         }
         #endregion
