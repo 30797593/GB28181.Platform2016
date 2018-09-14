@@ -103,17 +103,27 @@ namespace GB28181Service
         {
             try
             {
-                var msg = "DeviceID:" + alarm.DeviceID +
-                   "\r\nSN:" + alarm.SN +
-                   "\r\nCmdType:" + alarm.CmdType +
-                   "\r\nAlarmPriority:" + alarm.AlarmPriority +
-                   "\r\nAlarmMethod:" + alarm.AlarmMethod +
-                   "\r\nAlarmTime:" + alarm.AlarmTime +
-                   "\r\nAlarmDescription:" + alarm.AlarmDescription;
-
+                Event.Alarm alm = new Event.Alarm();
+                alm.AlarmType = Event.Alarm.Types.AlarmType.NotEvent;
+                switch (alarm.AlarmMethod)
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        alm.AlarmType = Event.Alarm.Types.AlarmType.AlarmOutput;
+                        break;
+                }
+                alm.Detail = alarm.AlarmDescription ?? string.Empty;
+                alm.DeviceID = alarm.DeviceID;
+                alm.DeviceName = alarm.DeviceID;
+                DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
+                DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+                UInt64 time = (UInt64)(alarttime - startTime).TotalMilliseconds;
+                alm.EndTime = time;
+                alm.StartTime = time;
                 #region
-                string subject = "GB28181-Alarm";
-                byte[] payload = Encoding.UTF8.GetBytes(msg);
+                string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();
+                byte[] payload = Encoding.UTF8.GetBytes(alm.ToString());
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
                 using (IConnection c = new ConnectionFactory().CreateConnection(opts))

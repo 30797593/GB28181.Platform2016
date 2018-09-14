@@ -75,7 +75,7 @@ namespace NATS.Client
         /// <summary>
         /// The default NATS connect url ("nats://localhost:4222")
         /// </summary>
-        public const string Url     = "nats://10.78.115.149:4222";
+        public const string Url     = "nats://10.78.115.182:4222";
 
         /// <summary>
         /// The default NATS connect port. (4222)
