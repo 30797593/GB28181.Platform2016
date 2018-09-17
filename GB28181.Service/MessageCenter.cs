@@ -9,6 +9,7 @@ using System.Diagnostics;
 using SIPSorcery.GB28181.Sys;
 using System.Text;
 using Logger4Net;
+using Newtonsoft.Json;
 
 namespace GB28181Service
 {
@@ -115,7 +116,7 @@ namespace GB28181Service
                 }
                 alm.Detail = alarm.AlarmDescription ?? string.Empty;
                 alm.DeviceID = alarm.DeviceID;
-                alm.DeviceName = alarm.DeviceID;
+                alm.DeviceName = alarm.DeviceID;                
                 DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
                 DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
                 UInt64 time = (UInt64)(alarttime - startTime).TotalMilliseconds;
@@ -126,15 +127,19 @@ namespace GB28181Service
                 byte[] payload = Encoding.UTF8.GetBytes(alm.ToString());
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
+                logger.Error("Alarming is trying to connect with nats server.");
                 using (IConnection c = new ConnectionFactory().CreateConnection(opts))
                 {
                     c.Publish(subject, payload);
                     c.Flush();
+                    logger.Error("Alarming created connection and published.");
                 }
                 #endregion
 
                 new Action(() =>
                 {
+                    logger.Error("OnAlarmReceived AlarmResponse: " + JsonConvert.SerializeObject(alarm));
+
                     _sipCoreMessageService.NodeMonitorService[alarm.DeviceID].AlarmResponse(alarm);
                 }).Invoke();
             }
