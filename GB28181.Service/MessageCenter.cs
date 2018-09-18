@@ -138,7 +138,7 @@ namespace GB28181Service
 
                 new Action(() =>
                 {
-                    logger.Debug("OnAlarmReceived AlarmResponse: " + JsonConvert.SerializeObject(alarm));
+                    logger.Debug("OnAlarmReceived AlarmResponse: " + alm.ToString());
 
                     _sipCoreMessageService.NodeMonitorService[alarm.DeviceID].AlarmResponse(alarm);
                 }).Invoke();
