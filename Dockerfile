@@ -1,5 +1,5 @@
 
-FROM microsoft/dotnet:2.1-runtime-alpine3.7
+FROM microsoft/dotnet:2.1-runtime
 
 WORKDIR /opt/bin
 
