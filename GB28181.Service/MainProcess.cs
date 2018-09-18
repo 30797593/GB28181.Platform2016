@@ -233,8 +233,8 @@ namespace GB28181Service
                 var client = new ManageGbService.ManageGbServiceClient(channel);
                 //GbConfigRequest _GbConfigRequest = new GbConfigRequest();
                 QueryGb28181ConfigReply _GbConfigReply = new QueryGb28181ConfigReply();
+                logger.Debug("Start GetGb28181ServiceConfig...");
                 _GbConfigReply = client.GetGb28181ServiceConfig(new QueryGb28181ConfigRequest() { });
-                logger.Debug("QueryGb28181ConfigRequest Sipaccount.Count:" + _GbConfigReply.Sipaccount.Count);
                 List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
                 foreach (SIPAccount item in _GbConfigReply.Sipaccount)
                 {
@@ -262,7 +262,8 @@ namespace GB28181Service
             }
             catch (Exception ex)
             {
-                logger.Debug("Can't get gb info from device-mgr, it will get gb info from config.");
+                logger.Debug("QueryGb28181ConfigRequest: " + ex.Message);
+                //logger.Debug("Can't get gb info from device-mgr, it will get gb info from config.");
                 return null;
             }
         }
