@@ -127,18 +127,18 @@ namespace GB28181Service
                 byte[] payload = Encoding.UTF8.GetBytes(alm.ToString());
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
-                logger.Error("Alarming is trying to connect with nats server.");
+                //logger.Error("Alarming is trying to connect with nats server.");
                 using (IConnection c = new ConnectionFactory().CreateConnection(opts))
                 {
                     c.Publish(subject, payload);
                     c.Flush();
-                    logger.Error("Alarming created connection and published.");
+                    logger.Debug("Alarming created connection and published.");
                 }
                 #endregion
 
                 new Action(() =>
                 {
-                    logger.Error("OnAlarmReceived AlarmResponse: " + JsonConvert.SerializeObject(alarm));
+                    logger.Debug("OnAlarmReceived AlarmResponse: " + JsonConvert.SerializeObject(alarm));
 
                     _sipCoreMessageService.NodeMonitorService[alarm.DeviceID].AlarmResponse(alarm);
                 }).Invoke();
