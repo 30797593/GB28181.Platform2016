@@ -258,8 +258,8 @@ namespace GB28181Service
                     obj.KeepaliveInterval = string.IsNullOrEmpty(item.KeepaliveInterval) ? Convert.ToUInt16(5000) : Convert.ToUInt16(item.KeepaliveInterval);
                     obj.KeepaliveNumber = string.IsNullOrEmpty(item.KeepaliveNumber) ? Convert.ToByte(3) : Convert.ToByte(item.KeepaliveNumber);
                     _lstSIPAccount.Add(obj);
+                    logger.Debug("Gb28181ServiceConfig: " + JsonConvert.SerializeObject(obj));
                 }
-                logger.Debug("Gb28181ServiceConfig: " + JsonConvert.SerializeObject(_lstSIPAccount));
                 return _lstSIPAccount;
             }
             catch (Exception ex)
