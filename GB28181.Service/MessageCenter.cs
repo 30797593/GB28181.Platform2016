@@ -124,7 +124,7 @@ namespace GB28181Service
                 alm.StartTime = time;
                 #region
                 string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
-                byte[] payload = Encoding.UTF8.GetBytes(alm.ToString());
+                byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(alm));
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
                 //logger.Error("Alarming is trying to connect with nats server.");
