@@ -27,6 +27,7 @@ using Consul;
 using System.Net;
 using GrpcVideoOnDemand;
 using Manage;
+using Newtonsoft.Json;
 
 namespace GB28181Service
 {
@@ -233,7 +234,7 @@ namespace GB28181Service
                 var client = new ManageGbService.ManageGbServiceClient(channel);
                 //GbConfigRequest _GbConfigRequest = new GbConfigRequest();
                 QueryGb28181ConfigReply _GbConfigReply = new QueryGb28181ConfigReply();
-                logger.Debug("Start GetGb28181ServiceConfig...");
+                //logger.Debug("Start GetGb28181ServiceConfig...");
                 _GbConfigReply = client.GetGb28181ServiceConfig(new QueryGb28181ConfigRequest() { });
                 List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
                 foreach (SIPAccount item in _GbConfigReply.Sipaccount)
@@ -258,6 +259,7 @@ namespace GB28181Service
                     obj.KeepaliveNumber = string.IsNullOrEmpty(item.KeepaliveNumber) ? Convert.ToByte(3) : Convert.ToByte(item.KeepaliveNumber);
                     _lstSIPAccount.Add(obj);
                 }
+                logger.Error("Gb28181ServiceConfig: " + JsonConvert.SerializeObject(_lstSIPAccount));
                 return _lstSIPAccount;
             }
             catch (Exception ex)
