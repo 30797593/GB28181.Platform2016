@@ -123,7 +123,7 @@ namespace GB28181Service
                 alm.EndTime = time;
                 alm.StartTime = time;
                 #region
-                string subject = "GB28181-Alarm";//Event.AlarmTopic.OriginalAlarmTopic.ToString();
+                string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
                 byte[] payload = Encoding.UTF8.GetBytes(alm.ToString());
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
