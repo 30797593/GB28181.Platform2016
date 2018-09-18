@@ -259,7 +259,7 @@ namespace GB28181Service
                     obj.KeepaliveNumber = string.IsNullOrEmpty(item.KeepaliveNumber) ? Convert.ToByte(3) : Convert.ToByte(item.KeepaliveNumber);
                     _lstSIPAccount.Add(obj);
                 }
-                logger.Error("Gb28181ServiceConfig: " + JsonConvert.SerializeObject(_lstSIPAccount));
+                logger.Debug("Gb28181ServiceConfig: " + JsonConvert.SerializeObject(_lstSIPAccount));
                 return _lstSIPAccount;
             }
             catch (Exception ex)
