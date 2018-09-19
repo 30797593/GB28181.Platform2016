@@ -106,15 +106,15 @@ namespace GB28181Service
             try
             {
                 Event.Alarm alm = new Event.Alarm();
-                alm.AlarmType = Event.Alarm.Types.AlarmType.NotEvent;
-                switch (alarm.AlarmMethod)
-                {
-                    case "1":
-                        break;
-                    case "2":
-                        alm.AlarmType = Event.Alarm.Types.AlarmType.AlarmOutput;
-                        break;
-                }
+                alm.AlarmType = alm.AlarmType = Event.Alarm.Types.AlarmType.CrossingLine ;
+                //switch (alarm.AlarmMethod)
+                //{
+                //    case "1":
+                //        break;
+                //    case "2":
+                //        alm.AlarmType = Event.Alarm.Types.AlarmType.AlarmOutput;
+                //        break;
+                //}
                 alm.Detail = alarm.AlarmDescription ?? string.Empty;
                 alm.DeviceID = alarm.DeviceID;
                 alm.DeviceName = alarm.DeviceID;
