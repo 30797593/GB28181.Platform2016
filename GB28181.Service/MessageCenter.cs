@@ -127,8 +127,8 @@ namespace GB28181Service
                 Message message = new Message();
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("Content-Type", "application/octet-stream");
-                message.Header = JsonConvert.SerializeObject(dic);
-                message.Body = JsonConvert.SerializeObject(alm);
+                message.Header = dic;
+                message.Body = alm.ToByteArray();
 
                 byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
                 string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
@@ -207,7 +207,7 @@ namespace GB28181Service
 
     public class Message
     {
-        public string Header { get; set; }
-        public string Body { get; set; }
+        public Dictionary<string, string> Header { get; set; }
+        public byte[] Body { get; set; }
     }
 }
