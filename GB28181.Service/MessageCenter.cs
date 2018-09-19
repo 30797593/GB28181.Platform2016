@@ -9,7 +9,7 @@ using System.Diagnostics;
 using SIPSorcery.GB28181.Sys;
 using System.Text;
 using Logger4Net;
-using Newtonsoft.Json;
+using Google.Protobuf;
 
 namespace GB28181Service
 {
@@ -124,7 +124,7 @@ namespace GB28181Service
                 alm.StartTime = time;
                 #region
                 string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
-                byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(alm));
+                byte[] payload = alm.ToByteArray();
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
                 //logger.Error("Alarming is trying to connect with nats server.");
