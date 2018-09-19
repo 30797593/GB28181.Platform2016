@@ -371,7 +371,7 @@ namespace GB28181Service
                 {
                     Address = GetIPAddress(),
                     ID = "gb28181" + Dns.GetHostName(),
-                    Name = "gb28181",
+                    Name = "gbservice-50051",
                     Port = EnvironmentVariables.GBServerGrpcPort,
                     Tags = new[] { "gb28181" }
                 };
