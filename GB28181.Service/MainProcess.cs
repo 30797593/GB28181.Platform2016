@@ -370,8 +370,8 @@ namespace GB28181Service
                 _AgentServiceRegistration = new AgentServiceRegistration()
                 {
                     Address = GetIPAddress(),
-                    ID = "gbservice-50051",//"gb28181" + Dns.GetHostName(),
-                    Name = "gbservice-50051",
+                    ID = "gbdeviceservice",//"gb28181" + Dns.GetHostName(),
+                    Name = "gbdeviceservice",
                     Port = EnvironmentVariables.GBServerGrpcPort,
                     Tags = new[] { "gb28181" }
                 };
