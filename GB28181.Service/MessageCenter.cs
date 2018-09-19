@@ -123,12 +123,14 @@ namespace GB28181Service
                 UInt64 time = (UInt64)(alarttime - startTime).TotalMilliseconds;
                 alm.EndTime = time;
                 alm.StartTime = time;
+
                 Message message = new Message();
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("Content-Type", "application/octet-stream");
                 message.Header = JsonConvert.SerializeObject(dic);
                 message.Body = JsonConvert.SerializeObject(alm);
-                byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+
+                byte[] payload = alm.ToByteArray();//Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
                 string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
                 #region
                 Options opts = ConnectionFactory.GetDefaultOptions();
