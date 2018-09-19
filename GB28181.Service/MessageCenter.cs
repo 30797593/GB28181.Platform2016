@@ -130,7 +130,7 @@ namespace GB28181Service
                 message.Header = JsonConvert.SerializeObject(dic);
                 message.Body = JsonConvert.SerializeObject(alm);
 
-                byte[] payload = alm.ToByteArray();//Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
                 string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
                 #region
                 Options opts = ConnectionFactory.GetDefaultOptions();
