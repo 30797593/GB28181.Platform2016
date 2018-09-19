@@ -9,6 +9,7 @@ using System.Diagnostics;
 using SIPSorcery.GB28181.Sys;
 using System.Text;
 using Logger4Net;
+using Newtonsoft.Json;
 using Google.Protobuf;
 
 namespace GB28181Service
@@ -69,7 +70,7 @@ namespace GB28181Service
         private void DeviceStatusReceived(SIPEndPoint remoteEP, DeviceStatus device)
         {
         }
-        
+
         ///// <summary>
         ///// 录像查询回调
         ///// </summary>
@@ -116,15 +117,20 @@ namespace GB28181Service
                 }
                 alm.Detail = alarm.AlarmDescription ?? string.Empty;
                 alm.DeviceID = alarm.DeviceID;
-                alm.DeviceName = alarm.DeviceID;                
+                alm.DeviceName = alarm.DeviceID;
                 DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
                 DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
                 UInt64 time = (UInt64)(alarttime - startTime).TotalMilliseconds;
                 alm.EndTime = time;
                 alm.StartTime = time;
-                #region
+                Message message = new Message();
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                dic.Add("Content-Type", "application/octet-stream");
+                message.Header = JsonConvert.SerializeObject(dic);
+                message.Body = JsonConvert.SerializeObject(alm);
+                byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
                 string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
-                byte[] payload = alm.ToByteArray();
+                #region
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
                 //logger.Error("Alarming is trying to connect with nats server.");
@@ -195,5 +201,11 @@ namespace GB28181Service
         /// 心跳周期
         /// </summary>
         public KeepAlive Heart { get; set; }
+    }
+
+    public class Message
+    {
+        public string Header { get; set; }
+        public string Body { get; set; }
     }
 }
