@@ -116,11 +116,11 @@ namespace GB28181Service
                 //        break;
                 //}
                 alm.Detail = alarm.AlarmDescription ?? string.Empty;
-                alm.DeviceID = alarm.DeviceID;
-                alm.DeviceName = alarm.DeviceID;
+                alm.DeviceID = alarm.DeviceID;//dms deviceid
+                alm.DeviceName = alarm.DeviceID;//dms name
                 DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
-                DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-                UInt64 time = (UInt64)(alarttime - startTime).TotalMilliseconds;
+                DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1900, 1, 1));
+                UInt64 time = (UInt64)(alarttime - startTime).TotalSeconds;
                 alm.EndTime = time;
                 alm.StartTime = time;
 
