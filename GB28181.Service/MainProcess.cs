@@ -354,7 +354,7 @@ namespace GB28181Service
                 localaddr = obj;
             }
             localip = localaddr.ToString();
-            localip = "10.78.115.182";
+            //localip = "10.78.115.182";
             logger.Debug("Local machine Dns: " + localip);
             return localip;
         }
