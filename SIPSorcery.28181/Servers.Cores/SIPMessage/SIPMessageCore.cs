@@ -243,7 +243,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         {
             try
             {
-                logger.Debug("PtzControl started.");
+                //logger.Debug("PtzControl started.");
 
                 foreach (var item in _nodeMonitorService.ToArray())
                 {
@@ -252,8 +252,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                         item.Value.PtzContrl(ptzcmd, dwSpeed);
                     }
                 }
-
-                logger.Debug("PtzControl halted.");
+                //logger.Debug("PtzControl halted.");
             }
             catch (Exception excp)
             {
