@@ -1413,7 +1413,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         /// <param name="deviceid"></param>
         public void DeviceAlarmSubscribe(SIPEndPoint remoteEndPoint, string deviceid)
         {
-            SIPRequest eventSubscribeReq = QueryItems(remoteEndPoint, DeviceId);
+            SIPRequest eventSubscribeReq = QueryItemsSubscribe(remoteEndPoint, DeviceId);
             eventSubscribeReq.Method = SIPMethodsEnum.SUBSCRIBE;
             CatalogQuery catalog = new CatalogQuery()
             {
@@ -1530,6 +1530,35 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             SIPFromHeader from = new SIPFromHeader(null, localUri, fromTag);
             SIPToHeader to = new SIPToHeader(null, remoteUri, null);
             SIPRequest queryReq = _sipTransport.GetRequest(SIPMethodsEnum.MESSAGE, remoteUri);
+            queryReq.Header.From = from;
+            //queryReq.Header.Contact = null;
+            queryReq.Header.Allow = null;
+            queryReq.Header.To = to;
+            queryReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
+            queryReq.Header.CSeq = cSeq;
+            queryReq.Header.CallId = callId;//_reqSession.Header.CallId; //
+            queryReq.Header.ContentType = "Application/MANSCDP+xml";
+
+            return queryReq;
+        }
+        /// <summary>
+        /// 订阅请求
+        /// </summary>
+        /// <param name="remoteEndPoint"></param>
+        /// <param name="remoteSIPId"></param>
+        /// <returns></returns>
+        private SIPRequest QueryItemsSubscribe(SIPEndPoint remoteEndPoint, string remoteSIPId)
+        {
+            string fromTag = CallProperties.CreateNewTag();
+            string toTag = CallProperties.CreateNewTag();
+            int cSeq = CallProperties.CreateNewCSeq();
+            string callId = CallProperties.CreateNewCallId();
+
+            SIPURI remoteUri = new SIPURI(remoteSIPId, remoteEndPoint.ToHost(), "");
+            SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
+            SIPFromHeader from = new SIPFromHeader(null, localUri, fromTag);
+            SIPToHeader to = new SIPToHeader(null, remoteUri, null);
+            SIPRequest queryReq = _sipTransport.GetRequest(SIPMethodsEnum.SUBSCRIBE, remoteUri);
             queryReq.Header.From = from;
             //queryReq.Header.Contact = null;
             queryReq.Header.Allow = null;
