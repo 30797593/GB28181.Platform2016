@@ -115,6 +115,7 @@ namespace GB28181Service
         internal void OnDeviceAlarmSubscribeReceived(SIPTransaction sIPTransaction)
         {
             _sIPMonitorCore.DeviceAlarmSubscribe(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
+            logger.Debug("Device Alarm Subscribe: " + sIPTransaction.TransactionRequestFrom.URI.User);
         }
         /// <summary>
         /// 设备报警
