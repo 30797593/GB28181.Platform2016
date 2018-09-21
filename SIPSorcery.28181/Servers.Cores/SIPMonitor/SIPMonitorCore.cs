@@ -1406,6 +1406,30 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             eventSubscribeReq.Body = xmlBody;
             _sipMsgCoreService.SendRequest(RemoteEndPoint, eventSubscribeReq);
         }
+        /// <summary>
+        /// 报警订阅
+        /// </summary>
+        /// <param name="remoteEndPoint"></param>
+        /// <param name="deviceid"></param>
+        public void DeviceAlarmSubscribe(SIPEndPoint remoteEndPoint, string deviceid)
+        {
+            SIPRequest eventSubscribeReq = QueryItems(remoteEndPoint, DeviceId);
+            eventSubscribeReq.Method = SIPMethodsEnum.SUBSCRIBE;
+            CatalogQuery catalog = new CatalogQuery()
+            {
+                CommandType = CommandType.Alarm,
+                DeviceID = deviceid,
+                SN = new Random().Next(1, ushort.MaxValue),
+                StartAlarmPriority = "0",
+                EndAlarmPriority = "0",
+                AlarmMethod = "0",
+                StartTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
+                EndTime = DateTime.Now.AddHours(10).ToString("yyyy-MM-ddTHH:mm:ss")
+            };
+            string xmlBody = CatalogQuery.Instance.Save<CatalogQuery>(catalog);
+            eventSubscribeReq.Body = xmlBody;
+            _sipMsgCoreService.SendRequest(remoteEndPoint, eventSubscribeReq);
+        }
 
         /// <summary>
         /// 目录订阅

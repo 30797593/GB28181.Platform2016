@@ -135,6 +135,7 @@ namespace SIPSorcery.GB28181.Servers
         /// Éè±¸×¢²áµ½DMS
         /// </summary>
         public event RPCDmsRegisterDelegate RPCDmsRegisterReceived;
+        public event DeviceAlarmSubscribeDelegate DeviceAlarmSubscribe;
 
         public SIPRegistrarCoreService(ISIPTransport sipTransport, ISipAccountStorage sipAccountStorage, IMemoCache<Camera> cameraCache, bool mangleUACContact = true, bool strictRealmHandling = true)
         {
@@ -237,6 +238,9 @@ namespace SIPSorcery.GB28181.Servers
 
                                 logger.Debug("Camera[" + registrarTransaction.RemoteEndPoint + "] have completed registering GB service.");
                                 //CacheDeviceItem(registrarTransaction.TransactionRequest);
+
+                                //device alarm subscribe
+                                DeviceAlarmSubscribe?.Invoke(registrarTransaction);
                             }
                         }
                         catch (InvalidOperationException invalidOpExcp)

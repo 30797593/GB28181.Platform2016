@@ -14,5 +14,6 @@ namespace SIPSorcery.GB28181.Servers
         /// 设备注册到DMS
         /// </summary>
         event RPCDmsRegisterDelegate RPCDmsRegisterReceived;
+        event DeviceAlarmSubscribeDelegate DeviceAlarmSubscribe;
     }
 }

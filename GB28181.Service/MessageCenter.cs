@@ -11,6 +11,7 @@ using System.Text;
 using Logger4Net;
 using Newtonsoft.Json;
 using Google.Protobuf;
+using SIPSorcery.GB28181.SIP.App;
 
 namespace GB28181Service
 {
@@ -21,10 +22,15 @@ namespace GB28181Service
         private Queue<HeartBeatEndPoint> _keepAliveQueue = new Queue<HeartBeatEndPoint>();
         private Queue<Catalog> _catalogQueue = new Queue<Catalog>();
         private ISipMessageCore _sipCoreMessageService;
+        private ISIPMonitorCore _sIPMonitorCore;
+        private ISIPRegistrarCore _registrarCore;
 
-        public MessageCenter(ISipMessageCore sipCoreMessageService)
+        public MessageCenter(ISipMessageCore sipCoreMessageService, ISIPMonitorCore sIPMonitorCore, ISIPRegistrarCore sipRegistrarCore)
         {
             _sipCoreMessageService = sipCoreMessageService;
+            _sIPMonitorCore = sIPMonitorCore;
+            _registrarCore = sipRegistrarCore;
+            _registrarCore.DeviceAlarmSubscribe += OnDeviceAlarmSubscribeReceived;
         }
 
         internal void OnKeepaliveReceived(SIPEndPoint remoteEP, KeepAlive keapalive, string devId)
@@ -101,6 +107,19 @@ namespace GB28181Service
         //    }).BeginInvoke(null, null);
         //}
 
+        /// <summary>
+        /// 报警订阅
+        /// </summary>
+        /// <param name="sIPTransaction"></param>
+        /// <param name="sIPAccount"></param>
+        internal void OnDeviceAlarmSubscribeReceived(SIPTransaction sIPTransaction)
+        {
+            _sIPMonitorCore.DeviceAlarmSubscribe(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
+        }
+        /// <summary>
+        /// 设备报警
+        /// </summary>
+        /// <param name="alarm"></param>
         internal void OnAlarmReceived(Alarm alarm)
         {
             try

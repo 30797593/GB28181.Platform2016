@@ -48,12 +48,12 @@ namespace GrpcAgent.WebsocketRpcServer
                 else if (request.Xyz.X == 0 && request.Xyz.Y == 0 && request.Xyz.Z == 4)
                 {
                     logger.Debug("PtzDirect: Zoom1");
-                    _sipServiceDirector.PtzControl(PTZCommand.Zoom1, request.Speed * 50, request.Deviceid);
+                    _sipServiceDirector.PtzControl(PTZCommand.Zoom1, 1, request.Deviceid);
                 }
                 else if (request.Xyz.X == 0 && request.Xyz.Y == 0 && request.Xyz.Z == -4)
                 {
                     logger.Debug("PtzDirect: Zoom2");
-                    _sipServiceDirector.PtzControl(PTZCommand.Zoom2, request.Speed * 50, request.Deviceid);
+                    _sipServiceDirector.PtzControl(PTZCommand.Zoom2, 1, request.Deviceid);
                 }
                 else
                 {
