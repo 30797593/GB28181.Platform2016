@@ -1250,6 +1250,10 @@ namespace SIPSorcery.GB28181.SIP
                         else
                         {
                             rawSIPMessage = Encoding.Default.GetString(buffer, 0, buffer.Length);
+                            if (!rawSIPMessage.StartsWith("REGISTER") && !rawSIPMessage.StartsWith("MESSAGE"))
+                            {
+                                string debug = rawSIPMessage;
+                            }
                             if (rawSIPMessage.IsNullOrBlank())
                             {
                                 // An emptry transmission has been received. More than likely this is a NAT keep alive and can be disregarded.

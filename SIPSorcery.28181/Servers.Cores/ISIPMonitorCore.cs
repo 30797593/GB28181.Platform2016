@@ -74,6 +74,7 @@ namespace SIPSorcery.GB28181.Servers
         /// 报警复位
         /// </summary>
         void DeviceControlResetAlarm();
+        void DeviceControlResetAlarm(SIPEndPoint remoteEndPoint, string deviceid);
 
         /// <summary>
         /// 报警应答

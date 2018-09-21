@@ -1413,7 +1413,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         /// <param name="deviceid"></param>
         public void DeviceAlarmSubscribe(SIPEndPoint remoteEndPoint, string deviceid)
         {
-            SIPRequest eventSubscribeReq = QueryItemsSubscribe(remoteEndPoint, DeviceId);
+            SIPRequest eventSubscribeReq = QueryItemsSubscribe(remoteEndPoint, deviceid);
             eventSubscribeReq.Method = SIPMethodsEnum.SUBSCRIBE;
             CatalogQuery catalog = new CatalogQuery()
             {
@@ -1513,6 +1513,25 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             catalogReq.Body = xmlBody;
             _sipMsgCoreService.SendRequest(RemoteEndPoint, catalogReq);
         }
+        /// <summary>
+        /// 报警复位
+        /// </summary>
+        /// <param name="remoteEndPoint"></param>
+        /// <param name="deviceid"></param>
+        public void DeviceControlResetAlarm(SIPEndPoint remoteEndPoint, string deviceid)
+        {
+            SIPRequest catalogReq = QueryItems(remoteEndPoint, deviceid);
+            Control catalog = new Control()
+            {
+                CommandType = CommandType.DeviceControl,
+                DeviceID = DeviceId,
+                SN = new Random().Next(1, ushort.MaxValue),
+                AlarmCmd = "ResetAlarm"
+            };
+            string xmlBody = Control.Instance.Save<Control>(catalog);
+            catalogReq.Body = xmlBody;
+            _sipMsgCoreService.SendRequest(remoteEndPoint, catalogReq);
+        }
 
         /// <summary>
         /// 查询请求
@@ -1565,7 +1584,9 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             queryReq.Header.To = to;
             queryReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
             queryReq.Header.CSeq = cSeq;
-            queryReq.Header.CallId = callId;//_reqSession.Header.CallId; //
+            queryReq.Header.Expires = 90;
+            queryReq.Header.Event = "presence";
+            queryReq.Header.CallId = callId;
             queryReq.Header.ContentType = "Application/MANSCDP+xml";
 
             return queryReq;

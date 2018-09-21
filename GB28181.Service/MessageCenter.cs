@@ -21,6 +21,7 @@ namespace GB28181Service
         private DateTime _keepaliveTime;
         private Queue<HeartBeatEndPoint> _keepAliveQueue = new Queue<HeartBeatEndPoint>();
         private Queue<Catalog> _catalogQueue = new Queue<Catalog>();
+        private List<string> _deviceAlarmSubscribed = new List<string>();
         private ISipMessageCore _sipCoreMessageService;
         private ISIPMonitorCore _sIPMonitorCore;
         private ISIPRegistrarCore _registrarCore;
@@ -114,8 +115,22 @@ namespace GB28181Service
         /// <param name="sIPAccount"></param>
         internal void OnDeviceAlarmSubscribeReceived(SIPTransaction sIPTransaction)
         {
-            _sIPMonitorCore.DeviceAlarmSubscribe(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
-            logger.Debug("Device Alarm Subscribe: " + sIPTransaction.TransactionRequestFrom.URI.User);
+            try
+            {
+                string keyDeviceAlarmSubscribe = sIPTransaction.RemoteEndPoint.ToString() + " - " + sIPTransaction.TransactionRequestFrom.URI.User;
+                //if (!_deviceAlarmSubscribed.Contains(keyDeviceAlarmSubscribe))
+                //{
+                    _sIPMonitorCore.DeviceControlResetAlarm(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
+                    logger.Debug("Device Alarm Reset: " + keyDeviceAlarmSubscribe);
+                    _sIPMonitorCore.DeviceAlarmSubscribe(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
+                    logger.Debug("Device Alarm Subscribe: " + keyDeviceAlarmSubscribe);
+                    //_deviceAlarmSubscribed.Add(keyDeviceAlarmSubscribe);
+                //}
+            }
+            catch (Exception ex)
+            {
+                logger.Error("OnDeviceAlarmSubscribeReceived: " + ex.Message);
+            }
         }
         /// <summary>
         /// 设备报警
