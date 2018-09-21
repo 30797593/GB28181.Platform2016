@@ -229,7 +229,8 @@ namespace GB28181Service
         {
             try
             {
-                string GBServerChannelAddress = EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080";//devicemanagementservice
+                string GBServerChannelAddress = EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080";
+                logger.Debug("GB Server Channel Address: " + GBServerChannelAddress);
                 Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                 var client = new ManageGbService.ManageGbServiceClient(channel);
                 //GbConfigRequest _GbConfigRequest = new GbConfigRequest();
@@ -355,7 +356,7 @@ namespace GB28181Service
             }
             localip = localaddr.ToString();
             localip = EnvironmentVariables.GbServiceLocalIp ?? "10.78.115.182";
-            logger.Debug("Local machine Dns: " + localip);
+            logger.Debug("Gb Service Local Ip: " + localip);
             return localip;
         }
         /// <summary>
@@ -376,7 +377,6 @@ namespace GB28181Service
                     Tags = new[] { "gb28181" }
                 };
                 var result = clients.Agent.ServiceRegister(_AgentServiceRegistration).Result;
-                logger.Debug("GB server registering consul[" + _AgentServiceRegistration.Address + "] completed.");
             }
             catch (Exception ex)
             {
@@ -386,6 +386,7 @@ namespace GB28181Service
         private void ConfigurationOverview(ConsulClientConfiguration obj)
         {
             obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? "10.78.115.182:8500"));
+            logger.Debug("Consul Client: " + obj.Address);
             obj.Datacenter = "dc1";
         }
         #endregion

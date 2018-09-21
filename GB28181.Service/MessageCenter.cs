@@ -154,7 +154,7 @@ namespace GB28181Service
                 #region
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
-                //logger.Error("Alarming is trying to connect with nats server.");
+                logger.Debug("GB Nats Channel Address: " + opts.Url);
                 using (IConnection c = new ConnectionFactory().CreateConnection(opts))
                 {
                     c.Publish(subject, payload);
