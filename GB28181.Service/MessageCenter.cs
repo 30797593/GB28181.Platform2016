@@ -177,7 +177,7 @@ namespace GB28181Service
                 DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
                 DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)); // 当地时区
                 //long timeStamp = (long)(alarttime - startTime).TotalMilliseconds; // 相差毫秒数 
-                UInt64 timeStamp = (UInt64)(alarttime - startTime).TotalMilliseconds;
+                UInt64 timeStamp = (UInt64)(alarttime - startTime).TotalSeconds;
                 alm.EndTime = timeStamp;
                 alm.StartTime = timeStamp;
 
