@@ -162,10 +162,10 @@ namespace GB28181Service
                 QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
                 QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
                 logger.Debug("OnAlarmReceived Alarm: " + JsonConvert.SerializeObject(alarm));
+                req.GbIds.Add(alarm.DeviceID);
+                _rep = client.QueryGBDeviceByGBIDs(req);
                 if (_rep.Devices != null && _rep.Devices.Count > 0)
                 {
-                    req.GbIds.Add(alarm.DeviceID);
-                    _rep = client.QueryGBDeviceByGBIDs(req);
                     alm.DeviceID = _rep.Devices[0].GBID;
                     alm.DeviceName = _rep.Devices[0].Name;
                 }
