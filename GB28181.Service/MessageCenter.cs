@@ -161,13 +161,13 @@ namespace GB28181Service
                 var client = new Manage.Manage.ManageClient(channel);
                 QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
                 QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                logger.Debug("QueryGBDeviceByGBIDsRequest .Devices: " + _rep.Devices[0].ToString());
                 if (_rep.Devices != null && _rep.Devices.Count > 0)
                 {
                     req.GbIds.Add(alarm.DeviceID);
                     _rep = client.QueryGBDeviceByGBIDs(req);
                     alm.DeviceID = _rep.Devices[0].GBID;
                     alm.DeviceName = _rep.Devices[0].Name;
-                    logger.Debug("QueryGBDeviceByGBIDsRequest: " + alm.DeviceID + "," + alm.DeviceName);
                 }
                 DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
                 DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1900, 1, 1));
