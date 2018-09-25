@@ -28,6 +28,71 @@ service Manage {
     rpc UpdateViewName(UpdateViewNameRequest) returns (UpdateViewResponse){}
 
     rpc QueryDevicesByProtoTypes(QueryByProtoTypesRequest) returns(QueryByProtoTypesResponse){}
+
+    rpc QueryDeviceProfile(QueryDeviceProfileRequest) returns (QueryDeviceProfileResponse){}
+
+    rpc RefreshDeviceProfile(RefreshDeviceProfileRequest) returns(RefreshDeviceProfileResponse){}
+
+    rpc SearchGlobalDevices(SearchGlobalDevicesRequest) returns(SearchGlobalDevicesResponse){}
+
+    rpc QueryGBDeviceByGBIDs(QueryGBDeviceByGBIDsRequest) returns(QueryGBDeviceByGBIDsResponse){}
+}
+
+message QueryGBDeviceByGBIDsRequest{
+   repeated string gb_ids=1;
+}
+ 
+message QueryGBDeviceByGBIDsResponse{
+    repeated SimpleDevice devices = 1;
+}
+
+
+enum GlobalSearchType{
+    NoSpecified = 0;
+    IPC =1;
+}
+
+message GlobalSearchDevice{
+    Device device = 1;
+    bool existing_device =2;
+}
+
+message SearchGlobalDevicesRequest{
+    GlobalSearchType search_type=1;
+}
+ 
+message SearchGlobalDevicesResponse{
+    repeated GlobalSearchDevice devices = 1;
+}
+
+message RefreshDeviceProfileRequest{
+    Profile profile=1;
+}
+ 
+message RefreshDeviceProfileResponse{
+}
+
+message QueryDeviceProfileRequest{
+    string device_id = 1;
+}
+ 
+message QueryDeviceProfileResponse{
+   Profile profile=1;
+}
+
+message Profile{
+    string device_id=1;
+	repeated ProfileDetail details = 2;
+	string user_name =3;         
+    string password =4;
+}
+
+message ProfileDetail{
+	string name =1;      
+	string resolution =2;
+	string RTSPURL =3;   
+	int32 FPS =4;       
+	string encode_type =5; 
 }
 
 message QueryByProtoTypesRequest{
@@ -203,6 +268,7 @@ message SimpleDevice{
     string sub_id=12;
     string parent_id=13;
     ShapeType shape_type =14;
+    Profile profile =15;
 }    
 
  message LoginUser {

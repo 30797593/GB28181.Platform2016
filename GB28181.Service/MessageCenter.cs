@@ -12,6 +12,8 @@ using Logger4Net;
 using Newtonsoft.Json;
 using Google.Protobuf;
 using SIPSorcery.GB28181.SIP.App;
+using Manage;
+using Grpc.Core;
 
 namespace GB28181Service
 {
@@ -151,8 +153,22 @@ namespace GB28181Service
                 //        break;
                 //}
                 alm.Detail = alarm.AlarmDescription ?? string.Empty;
-                alm.DeviceID = alarm.DeviceID;//dms deviceid
-                alm.DeviceName = alarm.DeviceID;//dms name
+                //alm.DeviceID = alarm.DeviceID;//dms deviceid
+                //alm.DeviceName = alarm.DeviceID;//dms name
+                string GBServerChannelAddress = EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080";
+                logger.Debug("GB Server Channel Address: " + GBServerChannelAddress);
+                Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
+                var client = new Manage.Manage.ManageClient(channel);
+                QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
+                QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                if (_rep.Devices != null && _rep.Devices.Count > 0)
+                {
+                    req.GbIds.Add(alarm.DeviceID);
+                    _rep = client.QueryGBDeviceByGBIDs(req);
+                    alm.DeviceID = _rep.Devices[0].GBID;
+                    alm.DeviceName = _rep.Devices[0].Name;
+                    logger.Debug("QueryGBDeviceByGBIDsRequest: " + alm.DeviceID + "," + alm.DeviceName);
+                }
                 DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
                 DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1900, 1, 1));
                 UInt64 time = (UInt64)(alarttime - startTime).TotalSeconds;
