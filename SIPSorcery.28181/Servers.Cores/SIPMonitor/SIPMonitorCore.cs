@@ -1396,8 +1396,8 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
                 CommandType = CommandType.Alarm,
                 DeviceID = DeviceId,
                 SN = new Random().Next(1, ushort.MaxValue),
-                StartAlarmPriority = "0",
-                EndAlarmPriority = "0",
+                StartAlarmPriority = "1",
+                EndAlarmPriority = "4",
                 AlarmMethod = "0",
                 StartTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
                 EndTime = DateTime.Now.AddHours(10).ToString("yyyy-MM-ddTHH:mm:ss")
@@ -1584,7 +1584,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             queryReq.Header.To = to;
             queryReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
             queryReq.Header.CSeq = cSeq;
-            queryReq.Header.Expires = 9000;
+            queryReq.Header.Expires = 90;
             queryReq.Header.Event = "presence";
             queryReq.Header.CallId = callId;
             queryReq.Header.ContentType = "Application/MANSCDP+xml";

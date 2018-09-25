@@ -122,8 +122,8 @@ namespace GB28181Service
                 string keyDeviceAlarmSubscribe = sIPTransaction.RemoteEndPoint.ToString() + " - " + sIPTransaction.TransactionRequestFrom.URI.User;
                 //if (!_deviceAlarmSubscribed.Contains(keyDeviceAlarmSubscribe))
                 //{
-                    _sIPMonitorCore.DeviceControlResetAlarm(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
-                    logger.Debug("Device Alarm Reset: " + keyDeviceAlarmSubscribe);
+                    //_sIPMonitorCore.DeviceControlResetAlarm(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
+                    //logger.Debug("Device Alarm Reset: " + keyDeviceAlarmSubscribe);
                     _sIPMonitorCore.DeviceAlarmSubscribe(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
                     logger.Debug("Device Alarm Subscribe: " + keyDeviceAlarmSubscribe);
                     //_deviceAlarmSubscribed.Add(keyDeviceAlarmSubscribe);
