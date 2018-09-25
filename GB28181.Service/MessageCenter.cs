@@ -175,10 +175,11 @@ namespace GB28181Service
                 }
                 logger.Debug("QueryGBDeviceByGBIDsRequest .Devices: " + _rep.Devices[0].ToString());
                 DateTime alarttime = Convert.ToDateTime(alarm.AlarmTime ?? DateTime.Now.ToString());
-                DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1900, 1, 1));
-                UInt64 time = (UInt64)(alarttime - startTime).TotalSeconds;
-                alm.EndTime = time;
-                alm.StartTime = time;
+                DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)); // 当地时区
+                //long timeStamp = (long)(alarttime - startTime).TotalMilliseconds; // 相差毫秒数 
+                UInt64 timeStamp = (UInt64)(alarttime - startTime).TotalMilliseconds;
+                alm.EndTime = timeStamp;
+                alm.StartTime = timeStamp;
 
                 Message message = new Message();
                 Dictionary<string, string> dic = new Dictionary<string, string>();
