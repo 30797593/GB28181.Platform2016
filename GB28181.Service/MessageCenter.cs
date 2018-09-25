@@ -161,9 +161,9 @@ namespace GB28181Service
                 var client = new Manage.Manage.ManageClient(channel);
                 QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
                 QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                logger.Debug("OnAlarmReceived Alarm: " + alarm.ToString());
                 if (_rep.Devices != null && _rep.Devices.Count > 0)
                 {
-                    logger.Debug("QueryGBDeviceByGBIDsRequest DeviceID: " + alarm.DeviceID);
                     req.GbIds.Add(alarm.DeviceID);
                     _rep = client.QueryGBDeviceByGBIDs(req);
                     alm.DeviceID = _rep.Devices[0].GBID;
