@@ -1396,8 +1396,8 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
                 CommandType = CommandType.Alarm,
                 DeviceID = DeviceId,
                 SN = new Random().Next(1, ushort.MaxValue),
-                StartAlarmPriority = "1",
-                EndAlarmPriority = "4",
+                StartAlarmPriority = "0",
+                EndAlarmPriority = "0",
                 AlarmMethod = "0",
                 StartTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
                 EndTime = DateTime.Now.AddHours(10).ToString("yyyy-MM-ddTHH:mm:ss")
@@ -1420,8 +1420,8 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
                 CommandType = CommandType.Alarm,
                 DeviceID = deviceid,
                 SN = new Random().Next(1, ushort.MaxValue),
-                StartAlarmPriority = "0",
-                EndAlarmPriority = "0",
+                StartAlarmPriority = "1",
+                EndAlarmPriority = "4",
                 AlarmMethod = "0",
                 StartTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
                 EndTime = DateTime.Now.AddHours(10).ToString("yyyy-MM-ddTHH:mm:ss")
