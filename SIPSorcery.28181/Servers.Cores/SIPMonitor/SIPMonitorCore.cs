@@ -1579,7 +1579,10 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             SIPToHeader to = new SIPToHeader(null, remoteUri, null);
             SIPRequest queryReq = _sipTransport.GetRequest(SIPMethodsEnum.SUBSCRIBE, remoteUri);
             queryReq.Header.From = from;
-            //queryReq.Header.Contact = null;
+            queryReq.Header.Contact = new List<SIPContactHeader>
+            {
+                new SIPContactHeader(null, localUri)
+            };
             queryReq.Header.Allow = null;
             queryReq.Header.To = to;
             queryReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
