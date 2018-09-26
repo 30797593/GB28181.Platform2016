@@ -264,7 +264,7 @@ namespace GB28181Service
                 //}
                 //return _lstSIPAccount;
 
-                string GBServerChannelAddress = EnvironmentVariables.GBServerChannelAddress ?? "systemconfigurationservice:8080";
+                string GBServerChannelAddress = "systemconfigurationservice:8080";
                 logger.Debug("GB Server Channel Address: " + GBServerChannelAddress);
                 Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                 var client = new SystemConfig.Manage.ManageClient(channel);
