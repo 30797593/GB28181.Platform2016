@@ -268,11 +268,15 @@ namespace GB28181Service
                 logger.Debug("GB Server Channel Address: " + GBServerChannelAddress);
                 Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                 var client = new SystemConfig.Manage.ManageClient(channel);
-                GetIntegratedPlatformConfigResponse _GbConfigReply = client.GetIntegratedPlatformConfig(new GetIntegratedPlatformConfigRequest());
-                List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
-                GBPlatformConfig item = _GbConfigReply.Config;
-                logger.Debug("GetIntegratedPlatformConfigResponse: " + item.Name);
+                GetIntegratedPlatformConfigRequest req = new GetIntegratedPlatformConfigRequest();
+                GetIntegratedPlatformConfigResponse rep = client.GetIntegratedPlatformConfig(req);
+                GBPlatformConfig item = rep.Config;
+                if (rep.Config == null)
+                {
+                    logger.Debug("GetIntegratedPlatformConfigResponse: " + rep.Config);
+                }
                 logger.Debug("GetIntegratedPlatformConfigResponse: " + item.ToString());
+                List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
                 SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
                 obj.Id = Guid.NewGuid();
                 //obj.Owner = item.Name;
