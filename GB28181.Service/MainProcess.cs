@@ -270,12 +270,8 @@ namespace GB28181Service
                 var client = new SystemConfig.Manage.ManageClient(channel);
                 GetIntegratedPlatformConfigRequest req = new GetIntegratedPlatformConfigRequest();
                 GetIntegratedPlatformConfigResponse rep = client.GetIntegratedPlatformConfig(req);
+                logger.Debug("GetIntegratedPlatformConfigResponse: " + rep.Config.ToString());
                 GBPlatformConfig item = rep.Config;
-                if (rep.Config == null)
-                {
-                    logger.Debug("GetIntegratedPlatformConfigResponse: " + rep.Config);
-                }
-                logger.Debug("GetIntegratedPlatformConfigResponse: " + item.ToString());
                 List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
                 SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
                 obj.Id = Guid.NewGuid();
