@@ -276,13 +276,12 @@ namespace GB28181Service
                 SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
                 if (item.SIPUsername != "admin" && item.SIPPassword != "123456")
                 {
-                    item.GbVersion = null;
-                    item.LocalID = null;
-                    item.LocalPort = null;
-                    item.RemotePort = null;
-                    item.SIPUsername = null;
-                    item.SIPPassword = null;
-                    item.KeepaliveInterval = null;
+                    item.GbVersion = string.Empty;
+                    item.LocalID = string.Empty;
+                    item.LocalPort = string.Empty;
+                    item.RemotePort = string.Empty;
+                    item.SIPUsername = string.Empty;
+                    item.SIPPassword = string.Empty;
                 }
                 obj.Id = Guid.NewGuid();
                 //obj.Owner = item.Name;
