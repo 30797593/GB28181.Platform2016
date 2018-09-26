@@ -271,6 +271,8 @@ namespace GB28181Service
                 GetIntegratedPlatformConfigResponse _GbConfigReply = client.GetIntegratedPlatformConfig(new GetIntegratedPlatformConfigRequest());
                 List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
                 GBPlatformConfig item = _GbConfigReply.Config;
+                logger.Debug("GetIntegratedPlatformConfigResponse: " + item.Name);
+                logger.Debug("GetIntegratedPlatformConfigResponse: " + item.ToString());
                 SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
                 obj.Id = Guid.NewGuid();
                 //obj.Owner = item.Name;
@@ -290,7 +292,6 @@ namespace GB28181Service
                 obj.KeepaliveInterval = string.IsNullOrEmpty(item.KeepaliveInterval) ? Convert.ToUInt16(5000) : Convert.ToUInt16(item.KeepaliveInterval);
                 obj.KeepaliveNumber = string.IsNullOrEmpty(item.KeepaliveNumber) ? Convert.ToByte(3) : Convert.ToByte(item.KeepaliveNumber);
                 _lstSIPAccount.Add(obj);
-                logger.Debug("GetIntegratedPlatformConfigResponse: " + item.ToString());
                 return _lstSIPAccount;
             }
             catch (Exception ex)
