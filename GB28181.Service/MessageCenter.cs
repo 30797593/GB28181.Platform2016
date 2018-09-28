@@ -155,8 +155,8 @@ namespace GB28181Service
                 alm.Detail = alarm.AlarmDescription ?? string.Empty;
                 //alm.DeviceID = alarm.DeviceID;//dms deviceid
                 //alm.DeviceName = alarm.DeviceID;//dms name
-                string GBServerChannelAddress = EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080";
-                logger.Debug("GB Server Channel Address: " + GBServerChannelAddress);
+                string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
+                logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
                 Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                 var client = new Manage.Manage.ManageClient(channel);
                 QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();

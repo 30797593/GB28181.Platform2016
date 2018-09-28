@@ -12,8 +12,10 @@ namespace SIPSorcery.GB28181.Sys
         private static string _GB_SERVICE_LOCAL_ID;
         private const string GB_SERVICE_LOCAL_IP = "GB_SERVICE_LOCAL_IP";//10.78.115.182
         private static string _GB_SERVICE_LOCAL_IP;
-        private const string GB_SERVER_CHANNEL_ADDRESS = "GB_SERVER_CHANNEL_ADDRESS";//localhost:8080
-        private static string _GB_SERVER_CHANNEL_ADDRESS;
+        private const string DEVICE_MANAGEMENT_SERVICE_ADDRESS = "DEVICE_MANAGEMENT_SERVICE_ADDRESS";//devicemanagementservice:8080
+        private static string _DEVICE_MANAGEMENT_SERVICE_ADDRESS;
+        private const string SYSTEM_CONFIGURATION_SERVICE_ADDRESS = "SYSTEM_CONFIGURATION_SERVICE_ADDRESS";//systemconfigurationservice:8080
+        private static string _SYSTEM_CONFIGURATION_SERVICE_ADDRESS;
         private const string GB_NATS_CHANNEL_ADDRESS = "GB_NATS_CHANNEL_ADDRESS";//nats://10.78.115.182:4222
         private static string _GB_NATS_CHANNEL_ADDRESS;
         public static string MicroRegistryAddress
@@ -31,10 +33,15 @@ namespace SIPSorcery.GB28181.Sys
             get { return _GB_SERVICE_LOCAL_IP ?? Environment.GetEnvironmentVariable(GB_SERVICE_LOCAL_IP); }
             set { _GB_SERVICE_LOCAL_IP = value; }
         }
-        public static string GBServerChannelAddress
+        public static string DeviceManagementServiceAddress
         {
-            get { return _GB_SERVER_CHANNEL_ADDRESS ?? Environment.GetEnvironmentVariable(GB_SERVER_CHANNEL_ADDRESS); }
-            set { _GB_SERVER_CHANNEL_ADDRESS = value; }
+            get { return _DEVICE_MANAGEMENT_SERVICE_ADDRESS ?? Environment.GetEnvironmentVariable(DEVICE_MANAGEMENT_SERVICE_ADDRESS); }
+            set { _DEVICE_MANAGEMENT_SERVICE_ADDRESS = value; }
+        }
+        public static string SystemConfigurationServiceAddress
+        {
+            get { return _SYSTEM_CONFIGURATION_SERVICE_ADDRESS ?? Environment.GetEnvironmentVariable(SYSTEM_CONFIGURATION_SERVICE_ADDRESS); }
+            set { _SYSTEM_CONFIGURATION_SERVICE_ADDRESS = value; }
         }
         public static string GBNatsChannelAddress
         {

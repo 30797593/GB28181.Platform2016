@@ -264,9 +264,9 @@ namespace GB28181Service
                 //}
                 //return _lstSIPAccount;
 
-                string GBServerChannelAddress = "systemconfigurationservice:8080";
-                logger.Debug("GB Server Channel Address: " + GBServerChannelAddress);
-                Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
+                string SystemConfigurationServiceAddress = EnvironmentVariables.SystemConfigurationServiceAddress ?? "devicemanagementservice:8080";
+                logger.Debug("System Configuration Service Address: " + SystemConfigurationServiceAddress);
+                Channel channel = new Channel(SystemConfigurationServiceAddress, ChannelCredentials.Insecure);
                 var client = new SystemConfig.Manage.ManageClient(channel);
                 GetIntegratedPlatformConfigRequest req = new GetIntegratedPlatformConfigRequest();
                 GetIntegratedPlatformConfigResponse rep = client.GetIntegratedPlatformConfig(req);

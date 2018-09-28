@@ -81,7 +81,8 @@ namespace SIPSorcery.GB28181.Sys
                         logger.Debug("Logging initialised.");
                         logger.Debug("EnvironmentVariables.MICRO_REGISTRY_ADDRESS: " + EnvironmentVariables.MicroRegistryAddress);
                         logger.Debug("EnvironmentVariables.GB_NATS_CHANNEL_ADDRESS: " + EnvironmentVariables.GBNatsChannelAddress);
-                        logger.Debug("EnvironmentVariables.GB_SERVER_CHANNEL_ADDRESS: " + EnvironmentVariables.GBServerChannelAddress);
+                        logger.Debug("EnvironmentVariables.DEVICE_MANAGEMENT_SERVICE_ADDRESS: " + EnvironmentVariables.DeviceManagementServiceAddress);
+                        logger.Debug("EnvironmentVariables.SYSTEM_CONFIGURATION_SERVICE_ADDRESS: " + EnvironmentVariables.SystemConfigurationServiceAddress);
                         logger.Debug("EnvironmentVariables.GB_SERVICE_LOCAL_IP: " + EnvironmentVariables.GbServiceLocalIp);
                         logger.Debug("EnvironmentVariables.GbServiceLocalPort: " + EnvironmentVariables.GbServiceLocalPort);
                         logger.Debug("EnvironmentVariables.GB_SERVICE_LOCAL_ID: " + EnvironmentVariables.GbServiceLocalId);
