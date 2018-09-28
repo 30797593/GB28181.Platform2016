@@ -264,7 +264,7 @@ namespace GB28181Service
                 //}
                 //return _lstSIPAccount;
 
-                string SystemConfigurationServiceAddress = EnvironmentVariables.SystemConfigurationServiceAddress ?? "devicemanagementservice:8080";
+                string SystemConfigurationServiceAddress = EnvironmentVariables.SystemConfigurationServiceAddress ?? "systemconfigurationservice:8080";
                 logger.Debug("System Configuration Service Address: " + SystemConfigurationServiceAddress);
                 Channel channel = new Channel(SystemConfigurationServiceAddress, ChannelCredentials.Insecure);
                 var client = new SystemConfig.Manage.ManageClient(channel);
