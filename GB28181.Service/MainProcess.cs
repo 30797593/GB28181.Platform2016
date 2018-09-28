@@ -274,17 +274,6 @@ namespace GB28181Service
                 GBPlatformConfig item = rep.Config;
                 List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
                 SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
-                logger.Debug("item.SIPPassword1: " + item.SIPPassword);
-                if (item.SIPUsername != "admin" && item.SIPPassword != "123456")
-                {
-                    item.GbVersion = string.Empty;
-                    item.LocalID = string.Empty;
-                    item.LocalPort = string.Empty;
-                    item.RemotePort = string.Empty;
-                    item.SIPUsername = string.Empty;
-                    item.SIPPassword = string.Empty;
-                    logger.Debug("item.SIPPassword2: " + item.SIPPassword);
-                }
                 obj.Id = Guid.NewGuid();
                 //obj.Owner = item.Name;
                 obj.GbVersion = string.IsNullOrEmpty(item.GbVersion) ? "GB-2016" : item.GbVersion;
