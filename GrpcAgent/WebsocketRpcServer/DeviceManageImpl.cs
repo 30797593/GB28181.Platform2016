@@ -45,7 +45,7 @@ namespace GrpcAgent.WebsocketRpcServer
                 //    "protocoltype": 0,
                 //    "ip": "",
                 //    "port": 0,
-                //    "gbid": "42010000001310000184",
+                //    "gbid": "42010000001180000184",
                 //    "gbparentid": "",
                 //    "mediasrctype": [],
                 //    "mediainfo": null,
@@ -63,7 +63,7 @@ namespace GrpcAgent.WebsocketRpcServer
                 _device.Name = "gbdevice" + "_" + _device.IP;
                 _device.LoginUser.Add(new LoginUser() { LoginName = sIPAccount.SIPUsername ?? "admin", LoginPwd = sIPAccount.SIPPassword ?? "123456" });
                 _device.Port = Convert.ToUInt32(sipTransaction.TransactionRequest.RemoteSIPEndPoint.Port);//5060
-                _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001310000184
+                _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001180000184
                 _device.PtzType = 0;
                 _device.ProtocolType = 0;
                 _device.ShapeType = ShapeType.Dome;
