@@ -381,7 +381,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             return _recordTotal;
         }
         /// <summary>
-        /// 录像点播视频请求
+        /// 录像点播视频请求(回放)
         /// </summary>
         /// <param name="beginTime">开始时间</param>
         /// <param name="endTime">结束时间</param>
