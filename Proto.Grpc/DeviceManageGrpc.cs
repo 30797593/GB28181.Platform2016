@@ -45,6 +45,14 @@ namespace Manage {
     static readonly grpc::Marshaller<global::Manage.UpdateViewNameRequest> __Marshaller_UpdateViewNameRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.UpdateViewNameRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Manage.QueryByProtoTypesRequest> __Marshaller_QueryByProtoTypesRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.QueryByProtoTypesRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Manage.QueryByProtoTypesResponse> __Marshaller_QueryByProtoTypesResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.QueryByProtoTypesResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.QueryDeviceProfileRequest> __Marshaller_QueryDeviceProfileRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.QueryDeviceProfileRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.QueryDeviceProfileResponse> __Marshaller_QueryDeviceProfileResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.QueryDeviceProfileResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.RefreshDeviceProfileRequest> __Marshaller_RefreshDeviceProfileRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.RefreshDeviceProfileRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.RefreshDeviceProfileResponse> __Marshaller_RefreshDeviceProfileResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.RefreshDeviceProfileResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.SearchGlobalDevicesRequest> __Marshaller_SearchGlobalDevicesRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.SearchGlobalDevicesRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.SearchGlobalDevicesResponse> __Marshaller_SearchGlobalDevicesResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.SearchGlobalDevicesResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.QueryGBDeviceByGBIDsRequest> __Marshaller_QueryGBDeviceByGBIDsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.QueryGBDeviceByGBIDsRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Manage.QueryGBDeviceByGBIDsResponse> __Marshaller_QueryGBDeviceByGBIDsResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Manage.QueryGBDeviceByGBIDsResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Manage.AddDeviceRequest, global::Manage.AddDeviceResponse> __Method_AddDevice = new grpc::Method<global::Manage.AddDeviceRequest, global::Manage.AddDeviceResponse>(
         grpc::MethodType.Unary,
@@ -158,6 +166,34 @@ namespace Manage {
         __Marshaller_QueryByProtoTypesRequest,
         __Marshaller_QueryByProtoTypesResponse);
 
+    static readonly grpc::Method<global::Manage.QueryDeviceProfileRequest, global::Manage.QueryDeviceProfileResponse> __Method_QueryDeviceProfile = new grpc::Method<global::Manage.QueryDeviceProfileRequest, global::Manage.QueryDeviceProfileResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QueryDeviceProfile",
+        __Marshaller_QueryDeviceProfileRequest,
+        __Marshaller_QueryDeviceProfileResponse);
+
+    static readonly grpc::Method<global::Manage.RefreshDeviceProfileRequest, global::Manage.RefreshDeviceProfileResponse> __Method_RefreshDeviceProfile = new grpc::Method<global::Manage.RefreshDeviceProfileRequest, global::Manage.RefreshDeviceProfileResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "RefreshDeviceProfile",
+        __Marshaller_RefreshDeviceProfileRequest,
+        __Marshaller_RefreshDeviceProfileResponse);
+
+    static readonly grpc::Method<global::Manage.SearchGlobalDevicesRequest, global::Manage.SearchGlobalDevicesResponse> __Method_SearchGlobalDevices = new grpc::Method<global::Manage.SearchGlobalDevicesRequest, global::Manage.SearchGlobalDevicesResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SearchGlobalDevices",
+        __Marshaller_SearchGlobalDevicesRequest,
+        __Marshaller_SearchGlobalDevicesResponse);
+
+    static readonly grpc::Method<global::Manage.QueryGBDeviceByGBIDsRequest, global::Manage.QueryGBDeviceByGBIDsResponse> __Method_QueryGBDeviceByGBIDs = new grpc::Method<global::Manage.QueryGBDeviceByGBIDsRequest, global::Manage.QueryGBDeviceByGBIDsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "QueryGBDeviceByGBIDs",
+        __Marshaller_QueryGBDeviceByGBIDsRequest,
+        __Marshaller_QueryGBDeviceByGBIDsResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -243,6 +279,26 @@ namespace Manage {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Manage.QueryByProtoTypesResponse> QueryDevicesByProtoTypes(global::Manage.QueryByProtoTypesRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Manage.QueryDeviceProfileResponse> QueryDeviceProfile(global::Manage.QueryDeviceProfileRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Manage.RefreshDeviceProfileResponse> RefreshDeviceProfile(global::Manage.RefreshDeviceProfileRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Manage.SearchGlobalDevicesResponse> SearchGlobalDevices(global::Manage.SearchGlobalDevicesRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Manage.QueryGBDeviceByGBIDsResponse> QueryGBDeviceByGBIDs(global::Manage.QueryGBDeviceByGBIDsRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -528,6 +584,70 @@ namespace Manage {
       {
         return CallInvoker.AsyncUnaryCall(__Method_QueryDevicesByProtoTypes, null, options, request);
       }
+      public virtual global::Manage.QueryDeviceProfileResponse QueryDeviceProfile(global::Manage.QueryDeviceProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QueryDeviceProfile(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Manage.QueryDeviceProfileResponse QueryDeviceProfile(global::Manage.QueryDeviceProfileRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QueryDeviceProfile, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.QueryDeviceProfileResponse> QueryDeviceProfileAsync(global::Manage.QueryDeviceProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QueryDeviceProfileAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.QueryDeviceProfileResponse> QueryDeviceProfileAsync(global::Manage.QueryDeviceProfileRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QueryDeviceProfile, null, options, request);
+      }
+      public virtual global::Manage.RefreshDeviceProfileResponse RefreshDeviceProfile(global::Manage.RefreshDeviceProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RefreshDeviceProfile(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Manage.RefreshDeviceProfileResponse RefreshDeviceProfile(global::Manage.RefreshDeviceProfileRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_RefreshDeviceProfile, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.RefreshDeviceProfileResponse> RefreshDeviceProfileAsync(global::Manage.RefreshDeviceProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RefreshDeviceProfileAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.RefreshDeviceProfileResponse> RefreshDeviceProfileAsync(global::Manage.RefreshDeviceProfileRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_RefreshDeviceProfile, null, options, request);
+      }
+      public virtual global::Manage.SearchGlobalDevicesResponse SearchGlobalDevices(global::Manage.SearchGlobalDevicesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SearchGlobalDevices(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Manage.SearchGlobalDevicesResponse SearchGlobalDevices(global::Manage.SearchGlobalDevicesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SearchGlobalDevices, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.SearchGlobalDevicesResponse> SearchGlobalDevicesAsync(global::Manage.SearchGlobalDevicesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SearchGlobalDevicesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.SearchGlobalDevicesResponse> SearchGlobalDevicesAsync(global::Manage.SearchGlobalDevicesRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SearchGlobalDevices, null, options, request);
+      }
+      public virtual global::Manage.QueryGBDeviceByGBIDsResponse QueryGBDeviceByGBIDs(global::Manage.QueryGBDeviceByGBIDsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QueryGBDeviceByGBIDs(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Manage.QueryGBDeviceByGBIDsResponse QueryGBDeviceByGBIDs(global::Manage.QueryGBDeviceByGBIDsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_QueryGBDeviceByGBIDs, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.QueryGBDeviceByGBIDsResponse> QueryGBDeviceByGBIDsAsync(global::Manage.QueryGBDeviceByGBIDsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return QueryGBDeviceByGBIDsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Manage.QueryGBDeviceByGBIDsResponse> QueryGBDeviceByGBIDsAsync(global::Manage.QueryGBDeviceByGBIDsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_QueryGBDeviceByGBIDs, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ManageClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -555,7 +675,11 @@ namespace Manage {
           .AddMethod(__Method_QueryChannelDevices, serviceImpl.QueryChannelDevices)
           .AddMethod(__Method_QueryParentDeviceByChildID, serviceImpl.QueryParentDeviceByChildID)
           .AddMethod(__Method_UpdateViewName, serviceImpl.UpdateViewName)
-          .AddMethod(__Method_QueryDevicesByProtoTypes, serviceImpl.QueryDevicesByProtoTypes).Build();
+          .AddMethod(__Method_QueryDevicesByProtoTypes, serviceImpl.QueryDevicesByProtoTypes)
+          .AddMethod(__Method_QueryDeviceProfile, serviceImpl.QueryDeviceProfile)
+          .AddMethod(__Method_RefreshDeviceProfile, serviceImpl.RefreshDeviceProfile)
+          .AddMethod(__Method_SearchGlobalDevices, serviceImpl.SearchGlobalDevices)
+          .AddMethod(__Method_QueryGBDeviceByGBIDs, serviceImpl.QueryGBDeviceByGBIDs).Build();
     }
 
   }

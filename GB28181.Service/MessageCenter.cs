@@ -9,6 +9,11 @@ using System.Diagnostics;
 using SIPSorcery.GB28181.Sys;
 using System.Text;
 using Logger4Net;
+using Newtonsoft.Json;
+using Google.Protobuf;
+using SIPSorcery.GB28181.SIP.App;
+using Manage;
+using Grpc.Core;
 
 namespace GB28181Service
 {
@@ -18,11 +23,17 @@ namespace GB28181Service
         private DateTime _keepaliveTime;
         private Queue<HeartBeatEndPoint> _keepAliveQueue = new Queue<HeartBeatEndPoint>();
         private Queue<Catalog> _catalogQueue = new Queue<Catalog>();
+        private List<string> _deviceAlarmSubscribed = new List<string>();
         private ISipMessageCore _sipCoreMessageService;
+        private ISIPMonitorCore _sIPMonitorCore;
+        private ISIPRegistrarCore _registrarCore;
 
-        public MessageCenter(ISipMessageCore sipCoreMessageService)
+        public MessageCenter(ISipMessageCore sipCoreMessageService, ISIPMonitorCore sIPMonitorCore, ISIPRegistrarCore sipRegistrarCore)
         {
             _sipCoreMessageService = sipCoreMessageService;
+            _sIPMonitorCore = sIPMonitorCore;
+            _registrarCore = sipRegistrarCore;
+            _registrarCore.DeviceAlarmSubscribe += OnDeviceAlarmSubscribeReceived;
         }
 
         internal void OnKeepaliveReceived(SIPEndPoint remoteEP, KeepAlive keapalive, string devId)
@@ -68,7 +79,7 @@ namespace GB28181Service
         private void DeviceStatusReceived(SIPEndPoint remoteEP, DeviceStatus device)
         {
         }
-        
+
         ///// <summary>
         ///// 录像查询回调
         ///// </summary>
@@ -99,32 +110,98 @@ namespace GB28181Service
         //    }).BeginInvoke(null, null);
         //}
 
+        /// <summary>
+        /// 报警订阅
+        /// </summary>
+        /// <param name="sIPTransaction"></param>
+        /// <param name="sIPAccount"></param>
+        internal void OnDeviceAlarmSubscribeReceived(SIPTransaction sIPTransaction)
+        {
+            try
+            {
+                string keyDeviceAlarmSubscribe = sIPTransaction.RemoteEndPoint.ToString() + " - " + sIPTransaction.TransactionRequestFrom.URI.User;
+                //if (!_deviceAlarmSubscribed.Contains(keyDeviceAlarmSubscribe))
+                //{
+                    //_sIPMonitorCore.DeviceControlResetAlarm(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
+                    //logger.Debug("Device Alarm Reset: " + keyDeviceAlarmSubscribe);
+                    _sIPMonitorCore.DeviceAlarmSubscribe(sIPTransaction.RemoteEndPoint, sIPTransaction.TransactionRequestFrom.URI.User);
+                    logger.Debug("Device Alarm Subscribe: " + keyDeviceAlarmSubscribe);
+                    //_deviceAlarmSubscribed.Add(keyDeviceAlarmSubscribe);
+                //}
+            }
+            catch (Exception ex)
+            {
+                logger.Error("OnDeviceAlarmSubscribeReceived: " + ex.Message);
+            }
+        }
+        /// <summary>
+        /// 设备报警
+        /// </summary>
+        /// <param name="alarm"></param>
         internal void OnAlarmReceived(Alarm alarm)
         {
             try
             {
-                var msg = "DeviceID:" + alarm.DeviceID +
-                   "\r\nSN:" + alarm.SN +
-                   "\r\nCmdType:" + alarm.CmdType +
-                   "\r\nAlarmPriority:" + alarm.AlarmPriority +
-                   "\r\nAlarmMethod:" + alarm.AlarmMethod +
-                   "\r\nAlarmTime:" + alarm.AlarmTime +
-                   "\r\nAlarmDescription:" + alarm.AlarmDescription;
+                Event.Alarm alm = new Event.Alarm();
+                alm.AlarmType = alm.AlarmType = Event.Alarm.Types.AlarmType.CrossingLine ;
+                //switch (alarm.AlarmMethod)
+                //{
+                //    case "1":
+                //        break;
+                //    case "2":
+                //        alm.AlarmType = Event.Alarm.Types.AlarmType.AlarmOutput;
+                //        break;
+                //}
+                alm.Detail = alarm.AlarmDescription ?? string.Empty;
+                //alm.DeviceID = alarm.DeviceID;//dms deviceid
+                //alm.DeviceName = alarm.DeviceID;//dms name
+                string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
+                logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
+                Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
+                var client = new Manage.Manage.ManageClient(channel);
+                QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
+                QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                logger.Debug("OnAlarmReceived Alarm: " + JsonConvert.SerializeObject(alarm));
+                req.GbIds.Add(alarm.DeviceID);
+                _rep = client.QueryGBDeviceByGBIDs(req);
+                if (_rep.Devices != null && _rep.Devices.Count > 0)
+                {
+                    alm.DeviceID = _rep.Devices[0].GBID;
+                    alm.DeviceName = _rep.Devices[0].Name;
+                }
+                else
+                {
+                    logger.Debug("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
+                }
+                logger.Debug("QueryGBDeviceByGBIDsRequest .Devices: " + _rep.Devices[0].ToString());
+                UInt64 timeStamp = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
+                alm.EndTime = timeStamp;
+                alm.StartTime = timeStamp;
 
+                Message message = new Message();
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                dic.Add("Content-Type", "application/octet-stream");
+                message.Header = dic;
+                message.Body = alm.ToByteArray();
+
+                byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                string subject = Event.AlarmTopic.OriginalAlarmTopic.ToString();//"OriginalAlarmTopic"
                 #region
-                string subject = "GB28181-Alarm";
-                byte[] payload = Encoding.UTF8.GetBytes(msg);
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
+                logger.Debug("GB Nats Channel Address: " + opts.Url);
                 using (IConnection c = new ConnectionFactory().CreateConnection(opts))
                 {
                     c.Publish(subject, payload);
                     c.Flush();
+                    logger.Debug("Alarming created connection and published.");
                 }
                 #endregion
 
                 new Action(() =>
                 {
+                    logger.Debug("OnAlarmReceived AlarmResponse: " + alm.ToString());
+
                     _sipCoreMessageService.NodeMonitorService[alarm.DeviceID].AlarmResponse(alarm);
                 }).Invoke();
             }
@@ -180,5 +257,11 @@ namespace GB28181Service
         /// 心跳周期
         /// </summary>
         public KeepAlive Heart { get; set; }
+    }
+
+    public class Message
+    {
+        public Dictionary<string, string> Header { get; set; }
+        public byte[] Body { get; set; }
     }
 }

@@ -137,7 +137,7 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             try
             {
-                var stopProcessResult = _sipServiceDirector.Stop(string.IsNullOrEmpty(request.Gbid) ? "42010000001310000184" : request.Gbid, request.Hdr.Sessionid);
+                var stopProcessResult = _sipServiceDirector.Stop(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid);
                 
                 var stopReply = new StopReply()
                 {

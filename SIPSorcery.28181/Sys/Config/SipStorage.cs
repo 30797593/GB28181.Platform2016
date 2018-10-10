@@ -43,7 +43,6 @@ namespace SIPSorcery.GB28181.Sys.Config
                     if (lstSIPAccount != null && lstSIPAccount.Count > 0)
                     {
                         _sipAccountsCache = lstSIPAccount;
-                        logger.Debug("GB server config received from " + (EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080"));
                         _haveGBConfig = true;
                     }
                     else if (_sipAccountsCache == null)

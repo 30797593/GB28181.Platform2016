@@ -26,7 +26,9 @@ using GrpcDeviceFeature;
 using Consul;
 using System.Net;
 using GrpcVideoOnDemand;
-using Manage;
+//using Manage;
+using Newtonsoft.Json;
+using SystemConfig;
 
 namespace GB28181Service
 {
@@ -228,41 +230,76 @@ namespace GB28181Service
         {
             try
             {
-                string GBServerChannelAddress = EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080";//devicemanagementservice
-                Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
-                var client = new ManageGbService.ManageGbServiceClient(channel);
-                //GbConfigRequest _GbConfigRequest = new GbConfigRequest();
-                QueryGb28181ConfigReply _GbConfigReply = new QueryGb28181ConfigReply();
-                _GbConfigReply = client.GetGb28181ServiceConfig(new QueryGb28181ConfigRequest() { });
+                //string GBServerChannelAddress = EnvironmentVariables.GBServerChannelAddress ?? "devicemanagementservice:8080";
+                //logger.Debug("GB Server Channel Address: " + GBServerChannelAddress);
+                //Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
+                //var client = new ManageGbService.ManageGbServiceClient(channel);
+                ////GbConfigRequest _GbConfigRequest = new GbConfigRequest();
+                //QueryGb28181ConfigReply _GbConfigReply = new QueryGb28181ConfigReply();
+                ////logger.Debug("Start GetGb28181ServiceConfig...");
+                //_GbConfigReply = client.GetGb28181ServiceConfig(new QueryGb28181ConfigRequest() { });
+                //List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
+                //foreach (SIPAccount item in _GbConfigReply.Sipaccount)
+                //{
+                //    SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
+                //    obj.Id = Guid.NewGuid();
+                //    //obj.Owner = item.Name;
+                //    obj.GbVersion = string.IsNullOrEmpty(item.GbVersion) ? "GB-2016" : item.GbVersion;
+                //    obj.LocalID = string.IsNullOrEmpty(item.LocalID) ? "42010000002100000002" : item.LocalID;
+                //    obj.LocalIP = System.Net.IPAddress.Parse(GetIPAddress());
+                //    obj.LocalPort = string.IsNullOrEmpty(item.LocalPort) ? Convert.ToUInt16(5061) : Convert.ToUInt16(item.LocalPort);
+                //    obj.RemotePort = string.IsNullOrEmpty(item.RemotePort) ? Convert.ToUInt16(5060) : Convert.ToUInt16(item.RemotePort);
+                //    obj.Authentication = string.IsNullOrEmpty(item.Authentication) ? false : Boolean.Parse(item.Authentication);
+                //    obj.SIPUsername = string.IsNullOrEmpty(item.SIPUsername) ? "admin" : item.SIPUsername;
+                //    obj.SIPPassword = string.IsNullOrEmpty(item.SIPPassword) ? "123456" : item.SIPPassword;
+                //    obj.MsgProtocol = System.Net.Sockets.ProtocolType.Udp;
+                //    obj.StreamProtocol = System.Net.Sockets.ProtocolType.Udp;
+                //    obj.TcpMode = SIPSorcery.GB28181.Net.RTP.TcpConnectMode.passive;
+                //    obj.MsgEncode = string.IsNullOrEmpty(item.MsgEncode) ? "GB2312" : item.MsgEncode;
+                //    obj.PacketOutOrder = string.IsNullOrEmpty(item.PacketOutOrder) ? true : Boolean.Parse(item.PacketOutOrder);
+                //    obj.KeepaliveInterval = string.IsNullOrEmpty(item.KeepaliveInterval) ? Convert.ToUInt16(5000) : Convert.ToUInt16(item.KeepaliveInterval);
+                //    obj.KeepaliveNumber = string.IsNullOrEmpty(item.KeepaliveNumber) ? Convert.ToByte(3) : Convert.ToByte(item.KeepaliveNumber);
+                //    _lstSIPAccount.Add(obj);
+                //    logger.Debug("Gb28181ServiceConfig: " + _GbConfigReply.Sipaccount.ToString());
+                //}
+                //return _lstSIPAccount;
 
+                string SystemConfigurationServiceAddress = EnvironmentVariables.SystemConfigurationServiceAddress ?? "systemconfigurationservice:8080";
+                logger.Debug("System Configuration Service Address: " + SystemConfigurationServiceAddress);
+                Channel channel = new Channel(SystemConfigurationServiceAddress, ChannelCredentials.Insecure);
+                var client = new SystemConfig.Manage.ManageClient(channel);
+                GetIntegratedPlatformConfigRequest req = new GetIntegratedPlatformConfigRequest();
+                GetIntegratedPlatformConfigResponse rep = client.GetIntegratedPlatformConfig(req);
+                logger.Debug("GetIntegratedPlatformConfigResponse: " + rep.Config.ToString());
+                GBPlatformConfig item = rep.Config;
                 List<SIPSorcery.GB28181.SIP.App.SIPAccount> _lstSIPAccount = new List<SIPSorcery.GB28181.SIP.App.SIPAccount>();
-                foreach (SIPAccount item in _GbConfigReply.Sipaccount)
-                {
-                    SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
-                    obj.Id = Guid.NewGuid();
-                    //obj.Owner = item.Name;
-                    obj.GbVersion = string.IsNullOrEmpty(item.GbVersion) ? "GB-2016" : item.GbVersion;
-                    obj.LocalID = string.IsNullOrEmpty(item.LocalID) ? "42010000002100000002" : item.LocalID;
-                    obj.LocalIP = System.Net.IPAddress.Parse(GetIPAddress());
-                    obj.LocalPort = string.IsNullOrEmpty(item.LocalPort) ? Convert.ToUInt16(5061) : Convert.ToUInt16(item.LocalPort);
-                    obj.RemotePort = string.IsNullOrEmpty(item.RemotePort) ? Convert.ToUInt16(5060) : Convert.ToUInt16(item.RemotePort);
-                    obj.Authentication = string.IsNullOrEmpty(item.Authentication) ? false : Boolean.Parse(item.Authentication);
-                    obj.SIPUsername = string.IsNullOrEmpty(item.SIPUsername) ? "admin" : item.SIPUsername;
-                    obj.SIPPassword = string.IsNullOrEmpty(item.SIPPassword) ? "123456" : item.SIPPassword;
-                    obj.MsgProtocol = System.Net.Sockets.ProtocolType.Udp;
-                    obj.StreamProtocol = System.Net.Sockets.ProtocolType.Udp;
-                    obj.TcpMode = SIPSorcery.GB28181.Net.RTP.TcpConnectMode.passive;
-                    obj.MsgEncode = string.IsNullOrEmpty(item.MsgEncode) ? "GB2312" : item.MsgEncode;
-                    obj.PacketOutOrder = string.IsNullOrEmpty(item.PacketOutOrder) ? true : Boolean.Parse(item.PacketOutOrder);
-                    obj.KeepaliveInterval = string.IsNullOrEmpty(item.KeepaliveInterval) ? Convert.ToUInt16(5000) : Convert.ToUInt16(item.KeepaliveInterval);
-                    obj.KeepaliveNumber = string.IsNullOrEmpty(item.KeepaliveNumber) ? Convert.ToByte(3) : Convert.ToByte(item.KeepaliveNumber);
-                    _lstSIPAccount.Add(obj);
-                }
+                SIPSorcery.GB28181.SIP.App.SIPAccount obj = new SIPSorcery.GB28181.SIP.App.SIPAccount();
+                obj.Id = Guid.NewGuid();
+                //obj.Owner = item.Name;
+                obj.GbVersion = string.IsNullOrEmpty(item.GbVersion) ? "GB-2016" : item.GbVersion;
+                obj.LocalID = string.IsNullOrEmpty(item.LocalID) ? "42010000002100000002" : item.LocalID;
+                obj.LocalIP = System.Net.IPAddress.Parse(GetIPAddress());
+                obj.LocalPort = string.IsNullOrEmpty(item.LocalPort) ? Convert.ToUInt16(5061) : Convert.ToUInt16(item.LocalPort);
+                obj.RemotePort = string.IsNullOrEmpty(item.RemotePort) ? Convert.ToUInt16(5060) : Convert.ToUInt16(item.RemotePort);
+                obj.Authentication = string.IsNullOrEmpty(item.Authentication) ? false : Boolean.Parse(item.Authentication);
+                obj.SIPUsername = string.IsNullOrEmpty(item.SIPUsername) ? "admin" : item.SIPUsername;
+                obj.SIPPassword = string.IsNullOrEmpty(item.SIPPassword) ? "123456" : item.SIPPassword;
+                obj.MsgProtocol = System.Net.Sockets.ProtocolType.Udp;
+                obj.StreamProtocol = System.Net.Sockets.ProtocolType.Udp;
+                obj.TcpMode = SIPSorcery.GB28181.Net.RTP.TcpConnectMode.passive;
+                obj.MsgEncode = string.IsNullOrEmpty(item.MsgEncode) ? "GB2312" : item.MsgEncode;
+                obj.PacketOutOrder = string.IsNullOrEmpty(item.PacketOutOrder) ? true : Boolean.Parse(item.PacketOutOrder);
+                obj.KeepaliveInterval = string.IsNullOrEmpty(item.KeepaliveInterval) ? Convert.ToUInt16(5000) : Convert.ToUInt16(item.KeepaliveInterval);
+                obj.KeepaliveNumber = string.IsNullOrEmpty(item.KeepaliveNumber) ? Convert.ToByte(3) : Convert.ToByte(item.KeepaliveNumber);
+                _lstSIPAccount.Add(obj);
+                logger.Debug("GetIntegratedPlatformConfigResponse SIPAccount: {LocalID:" + obj.LocalID + ", LocalIP:" + obj.LocalIP + ", LocalPort:" + obj.LocalPort + ", RemotePort:"
+                    + obj.RemotePort + ", SIPUsername:" + obj.SIPUsername + ", SIPPassword:" + obj.SIPPassword + ", KeepaliveInterval:" + obj.KeepaliveInterval + "}");
                 return _lstSIPAccount;
             }
             catch (Exception ex)
             {
-                logger.Debug("Can't get gb info from device-mgr, it will get gb info from config.");
+                logger.Debug("GetIntegratedPlatformConfigRequest: " + ex.Message);
+                //logger.Debug("Can't get gb info from device-mgr, it will get gb info from config.");
                 return null;
             }
         }
@@ -306,7 +343,7 @@ namespace GB28181Service
         //                 case ConsoleKey.I:
         //                     {
         //                         var mockCaller = _serviceProvider.GetService<ISIPServiceDirector>();
-        //                         mockCaller.MakeVideoRequest("42010000001310000184", new int[] { 5060 }, EnvironmentVariables.LocalIp);
+        //                         mockCaller.MakeVideoRequest("42010000001180000184", new int[] { 5060 }, EnvironmentVariables.LocalIp);
         //                     }
         //                     break;
         //                 case ConsoleKey.E:
@@ -351,8 +388,8 @@ namespace GB28181Service
                 localaddr = obj;
             }
             localip = localaddr.ToString();
-            localip = "10.78.115.182";
-            logger.Debug("Local machine Dns: " + localip);
+            localip = EnvironmentVariables.GbServiceLocalIp ?? "10.78.115.182";
+            logger.Debug("Gb Service Local Ip: " + localip);
             return localip;
         }
         /// <summary>
@@ -367,13 +404,12 @@ namespace GB28181Service
                 _AgentServiceRegistration = new AgentServiceRegistration()
                 {
                     Address = GetIPAddress(),
-                    ID = "gb28181" + Dns.GetHostName(),
-                    Name = "gb28181",
+                    ID = "gbdeviceservice",//"gb28181" + Dns.GetHostName(),
+                    Name = "gbdeviceservice",
                     Port = EnvironmentVariables.GBServerGrpcPort,
                     Tags = new[] { "gb28181" }
                 };
                 var result = clients.Agent.ServiceRegister(_AgentServiceRegistration).Result;
-                logger.Debug("GB server registering consul[" + _AgentServiceRegistration.Address + "] completed.");
             }
             catch (Exception ex)
             {
@@ -383,6 +419,7 @@ namespace GB28181Service
         private void ConfigurationOverview(ConsulClientConfiguration obj)
         {
             obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? "10.78.115.182:8500"));
+            logger.Debug("Consul Client: " + obj.Address);
             obj.Datacenter = "dc1";
         }
         #endregion

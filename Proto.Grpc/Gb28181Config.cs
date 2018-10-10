@@ -334,6 +334,9 @@ namespace Manage {
     /// <summary>Field number for the "Id" field.</summary>
     public const int IdFieldNumber = 1;
     private string id_ = "";
+    /// <summary>
+    ///标识符
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Id {
       get { return id_; }
@@ -345,6 +348,9 @@ namespace Manage {
     /// <summary>Field number for the "Name" field.</summary>
     public const int NameFieldNumber = 2;
     private string name_ = "";
+    /// <summary>
+    ///名称
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Name {
       get { return name_; }
@@ -356,6 +362,9 @@ namespace Manage {
     /// <summary>Field number for the "GbVersion" field.</summary>
     public const int GbVersionFieldNumber = 3;
     private string gbVersion_ = "";
+    /// <summary>
+    ///版本
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string GbVersion {
       get { return gbVersion_; }
@@ -367,6 +376,9 @@ namespace Manage {
     /// <summary>Field number for the "LocalID" field.</summary>
     public const int LocalIDFieldNumber = 4;
     private string localID_ = "";
+    /// <summary>
+    ///SIP服务器编号*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string LocalID {
       get { return localID_; }
@@ -378,6 +390,9 @@ namespace Manage {
     /// <summary>Field number for the "LocalIP" field.</summary>
     public const int LocalIPFieldNumber = 5;
     private string localIP_ = "";
+    /// <summary>
+    ///SIP服务器IP*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string LocalIP {
       get { return localIP_; }
@@ -389,6 +404,9 @@ namespace Manage {
     /// <summary>Field number for the "LocalPort" field.</summary>
     public const int LocalPortFieldNumber = 6;
     private string localPort_ = "";
+    /// <summary>
+    ///SIP服务器端口号*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string LocalPort {
       get { return localPort_; }
@@ -400,6 +418,9 @@ namespace Manage {
     /// <summary>Field number for the "RemotePort" field.</summary>
     public const int RemotePortFieldNumber = 7;
     private string remotePort_ = "";
+    /// <summary>
+    ///Device本地端口*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string RemotePort {
       get { return remotePort_; }
@@ -411,6 +432,9 @@ namespace Manage {
     /// <summary>Field number for the "Authentication" field.</summary>
     public const int AuthenticationFieldNumber = 8;
     private string authentication_ = "";
+    /// <summary>
+    ///授权
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Authentication {
       get { return authentication_; }
@@ -422,6 +446,9 @@ namespace Manage {
     /// <summary>Field number for the "SIPUsername" field.</summary>
     public const int SIPUsernameFieldNumber = 9;
     private string sIPUsername_ = "";
+    /// <summary>
+    ///帐号*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string SIPUsername {
       get { return sIPUsername_; }
@@ -433,6 +460,9 @@ namespace Manage {
     /// <summary>Field number for the "SIPPassword" field.</summary>
     public const int SIPPasswordFieldNumber = 10;
     private string sIPPassword_ = "";
+    /// <summary>
+    ///密码*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string SIPPassword {
       get { return sIPPassword_; }
@@ -444,6 +474,9 @@ namespace Manage {
     /// <summary>Field number for the "MsgProtocol" field.</summary>
     public const int MsgProtocolFieldNumber = 11;
     private string msgProtocol_ = "";
+    /// <summary>
+    ///协议类型*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string MsgProtocol {
       get { return msgProtocol_; }
@@ -455,6 +488,9 @@ namespace Manage {
     /// <summary>Field number for the "StreamProtocol" field.</summary>
     public const int StreamProtocolFieldNumber = 12;
     private string streamProtocol_ = "";
+    /// <summary>
+    ///协议流类型*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string StreamProtocol {
       get { return streamProtocol_; }
@@ -466,6 +502,9 @@ namespace Manage {
     /// <summary>Field number for the "TcpMode" field.</summary>
     public const int TcpModeFieldNumber = 13;
     private string tcpMode_ = "";
+    /// <summary>
+    ///协议连接模式
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string TcpMode {
       get { return tcpMode_; }
@@ -477,6 +516,9 @@ namespace Manage {
     /// <summary>Field number for the "MsgEncode" field.</summary>
     public const int MsgEncodeFieldNumber = 14;
     private string msgEncode_ = "";
+    /// <summary>
+    ///编码格式
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string MsgEncode {
       get { return msgEncode_; }
@@ -488,6 +530,9 @@ namespace Manage {
     /// <summary>Field number for the "PacketOutOrder" field.</summary>
     public const int PacketOutOrderFieldNumber = 15;
     private string packetOutOrder_ = "";
+    /// <summary>
+    ///输出序
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string PacketOutOrder {
       get { return packetOutOrder_; }
@@ -499,6 +544,9 @@ namespace Manage {
     /// <summary>Field number for the "KeepaliveInterval" field.</summary>
     public const int KeepaliveIntervalFieldNumber = 16;
     private string keepaliveInterval_ = "";
+    /// <summary>
+    ///心跳周期（秒）*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string KeepaliveInterval {
       get { return keepaliveInterval_; }
@@ -510,6 +558,9 @@ namespace Manage {
     /// <summary>Field number for the "KeepaliveNumber" field.</summary>
     public const int KeepaliveNumberFieldNumber = 17;
     private string keepaliveNumber_ = "";
+    /// <summary>
+    ///最大心跳超时次数*
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string KeepaliveNumber {
       get { return keepaliveNumber_; }

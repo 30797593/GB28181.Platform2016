@@ -1406,6 +1406,30 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             eventSubscribeReq.Body = xmlBody;
             _sipMsgCoreService.SendRequest(RemoteEndPoint, eventSubscribeReq);
         }
+        /// <summary>
+        /// 报警订阅
+        /// </summary>
+        /// <param name="remoteEndPoint"></param>
+        /// <param name="deviceid"></param>
+        public void DeviceAlarmSubscribe(SIPEndPoint remoteEndPoint, string deviceid)
+        {
+            SIPRequest eventSubscribeReq = QueryItemsSubscribe(remoteEndPoint, deviceid);
+            eventSubscribeReq.Method = SIPMethodsEnum.SUBSCRIBE;
+            CatalogQuery catalog = new CatalogQuery()
+            {
+                CommandType = CommandType.Alarm,
+                DeviceID = deviceid,
+                SN = new Random().Next(1, ushort.MaxValue),
+                StartAlarmPriority = "1",
+                EndAlarmPriority = "4",
+                AlarmMethod = "0",
+                StartTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
+                EndTime = DateTime.Now.AddHours(10).ToString("yyyy-MM-ddTHH:mm:ss")
+            };
+            string xmlBody = CatalogQuery.Instance.Save<CatalogQuery>(catalog);
+            eventSubscribeReq.Body = xmlBody;
+            _sipMsgCoreService.SendRequest(remoteEndPoint, eventSubscribeReq);
+        }
 
         /// <summary>
         /// 目录订阅
@@ -1489,6 +1513,25 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             catalogReq.Body = xmlBody;
             _sipMsgCoreService.SendRequest(RemoteEndPoint, catalogReq);
         }
+        /// <summary>
+        /// 报警复位
+        /// </summary>
+        /// <param name="remoteEndPoint"></param>
+        /// <param name="deviceid"></param>
+        public void DeviceControlResetAlarm(SIPEndPoint remoteEndPoint, string deviceid)
+        {
+            SIPRequest catalogReq = QueryItems(remoteEndPoint, deviceid);
+            Control catalog = new Control()
+            {
+                CommandType = CommandType.DeviceControl,
+                DeviceID = DeviceId,
+                SN = new Random().Next(1, ushort.MaxValue),
+                AlarmCmd = "ResetAlarm"
+            };
+            string xmlBody = Control.Instance.Save<Control>(catalog);
+            catalogReq.Body = xmlBody;
+            _sipMsgCoreService.SendRequest(remoteEndPoint, catalogReq);
+        }
 
         /// <summary>
         /// 查询请求
@@ -1513,6 +1556,40 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             queryReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
             queryReq.Header.CSeq = cSeq;
             queryReq.Header.CallId = callId;//_reqSession.Header.CallId; //
+            queryReq.Header.ContentType = "Application/MANSCDP+xml";
+
+            return queryReq;
+        }
+        /// <summary>
+        /// 订阅请求
+        /// </summary>
+        /// <param name="remoteEndPoint"></param>
+        /// <param name="remoteSIPId"></param>
+        /// <returns></returns>
+        private SIPRequest QueryItemsSubscribe(SIPEndPoint remoteEndPoint, string remoteSIPId)
+        {
+            string fromTag = CallProperties.CreateNewTag();
+            string toTag = CallProperties.CreateNewTag();
+            int cSeq = CallProperties.CreateNewCSeq();
+            string callId = CallProperties.CreateNewCallId();
+
+            SIPURI remoteUri = new SIPURI(remoteSIPId, remoteEndPoint.ToHost(), "");
+            SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
+            SIPFromHeader from = new SIPFromHeader(null, localUri, fromTag);
+            SIPToHeader to = new SIPToHeader(null, remoteUri, null);
+            SIPRequest queryReq = _sipTransport.GetRequest(SIPMethodsEnum.SUBSCRIBE, remoteUri);
+            queryReq.Header.From = from;
+            queryReq.Header.Contact = new List<SIPContactHeader>
+            {
+                new SIPContactHeader(null, localUri)
+            };
+            queryReq.Header.Allow = null;
+            queryReq.Header.To = to;
+            queryReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
+            queryReq.Header.CSeq = cSeq;
+            queryReq.Header.Expires = 90;
+            queryReq.Header.Event = "presence";
+            queryReq.Header.CallId = callId;
             queryReq.Header.ContentType = "Application/MANSCDP+xml";
 
             return queryReq;
