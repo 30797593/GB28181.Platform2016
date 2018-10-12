@@ -17,7 +17,7 @@ namespace SIPSorcery.GB28181.Servers
 
         //ip/port/protocol/ 
         Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> RealVideoReq(string gbid, int[] mediaPort, string receiveIP);
-        Task<Tuple<string, int, ProtocolType>> BackVideoReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
+        Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
 
         //Stop 
         Task<Tuple<string, int, ProtocolType>> Stop(string gbid, string sessionid);
@@ -41,5 +41,6 @@ namespace SIPSorcery.GB28181.Servers
         void PtzControl(SIPMonitor.PTZCommand ptzCommand, int speed, string deviceid);
         void DeviceStateQuery(string deviceid);
         int RecordFileQuery(string deviceId, DateTime startTime, DateTime endTime, string type);
+        Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> VideoDownloadReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
     }
 }

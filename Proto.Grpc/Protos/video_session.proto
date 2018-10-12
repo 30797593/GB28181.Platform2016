@@ -9,10 +9,12 @@ service VideoSession {
   //LivePlay
   rpc StartLive (StartLiveRequest) returns (StartLiveReply) {}
   rpc StartHistory (StartHistoryRequest) returns (StartHistoryReply) {}
-  //Start playback or Dowload
+  //Start playback
   rpc StartPlayback (StartPlaybackRequest) returns (StartPlaybackReply) {}
   //Stop Video
   rpc Stop (StopRequest) returns (StopReply) {}
+  //file download
+  rpc VideoDownload (VideoDownloadRequest) returns (VideoDownloadReply) {}
 
   //keepalive between two point
   rpc KeepAlive (KeepAliveRequest) returns (KeepAliveReply) {}
@@ -76,7 +78,7 @@ message StartHistoryReply {
 	int32 port = 4;
 }
 
-// The request message containing StartPlaybackRequest/download.
+// The request message containing StartPlaybackRequest.
 message StartPlaybackRequest {
 	Header hdr =1;
 	TransportProtocol trans_proto = 2;
@@ -86,8 +88,26 @@ message StartPlaybackRequest {
 	string gbid = 6;
 }
 
-// The response message containing the StartPlaybackReply/download.
+// The response message containing the StartPlaybackReply.
 message StartPlaybackReply {
+	Header hdr = 1;
+	Status status = 2;
+	string ipaddr = 3;
+	int32 port = 4;
+}
+
+// The request message containing VideoDownloadRequest.
+message VideoDownloadRequest {
+	Header hdr =1;
+	TransportProtocol trans_proto = 2;
+	string gbid = 3;
+	string ipaddr = 4;
+	int32 port = 5;
+	string begin_time = 6;
+	string end_time = 7;
+}
+// The response message containing the VideoDownloadReply.
+message VideoDownloadReply {
 	Header hdr = 1;
 	Status status = 2;
 	string ipaddr = 3;

@@ -100,7 +100,7 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="mediaPort"></param>
         /// <param name="receiveIP"></param>
         /// <returns></returns>
-        async public Task<Tuple<string, int, ProtocolType>> BackVideoReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP)
+        async public Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP)
         {
             logger.Debug("History video request started.");
             var target = GetTargetMonitorService(gbid);
@@ -116,7 +116,8 @@ namespace SIPSorcery.GB28181.Servers
             });
             var ipaddress = _sipCoreMessageService.GetReceiveIP(taskResult.Item2.Body);
             var port = _sipCoreMessageService.GetReceivePort(taskResult.Item2.Body, SDPMediaTypesEnum.video);
-            return Tuple.Create(ipaddress, port, ProtocolType.Udp);
+            var header = taskResult.Item1.Header;
+            return Tuple.Create(ipaddress, port, header, ProtocolType.Udp);
         }
         /// <summary>
         /// stop real Request
@@ -258,6 +259,26 @@ namespace SIPSorcery.GB28181.Servers
         public int RecordFileQuery(string deviceId, DateTime startTime, DateTime endTime, string type)
         {
             return _sipCoreMessageService.RecordFileQuery(deviceId, startTime, endTime, type);
+        }
+
+        async public Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> VideoDownloadReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP)
+        {
+            logger.Debug("Video Download Request started.");
+            var target = GetTargetMonitorService(gbid);
+            if (target == null)
+            {
+                return null;
+            }
+            var taskResult = await Task.Factory.StartNew(() =>
+            {
+                var cSeq = target.VideoDownloadReq(beginTime, endTime, mediaPort, receiveIP, true);
+                var result = target.WaitRequestResult();
+                return result;
+            });
+            var ipaddress = _sipCoreMessageService.GetReceiveIP(taskResult.Item2.Body);
+            var port = _sipCoreMessageService.GetReceivePort(taskResult.Item2.Body, SDPMediaTypesEnum.video);
+            var header = taskResult.Item1.Header;
+            return Tuple.Create(ipaddress, port, header, ProtocolType.Udp);
         }
         #endregion
     }

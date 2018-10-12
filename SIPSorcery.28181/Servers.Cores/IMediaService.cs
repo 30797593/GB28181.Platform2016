@@ -62,6 +62,7 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="beginTime">开始时间</param>
         /// <param name="endTime">结束时间</param>
         void VideoDownloadReq(DateTime beginTime, DateTime endTime);
+        int VideoDownloadReq(DateTime beginTime, DateTime endTime, int[] mediaPort, string receiveIP, bool needResult = false);
 
         /// <summary>
         /// 录像点播视频播放速度控制请求

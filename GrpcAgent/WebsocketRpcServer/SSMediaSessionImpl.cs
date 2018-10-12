@@ -44,7 +44,7 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             try
             {
-                _eventSource?.FireLivePlayRequestEvent(request, context);
+                _eventSource?.FileLivePlayRequestEvent(request, context);
                 var reqeustProcessResult = _sipServiceDirector.RealVideoReq(request.Gbid, new int[] { request.Port }, request.Ipaddr);
 
                 reqeustProcessResult?.Wait(System.TimeSpan.FromSeconds(1));
@@ -62,9 +62,9 @@ namespace GrpcAgent.WebsocketRpcServer
                     }
                 };
                 //add Video Session Alive
-                Dictionary<string, DateTime> _VideoSessionAlive = new Dictionary<string, DateTime>();
-                _VideoSessionAlive.Add(request.Gbid + ',' + resReply.Hdr.Sessionid, DateTime.Now);
-                _sipServiceDirector.VideoSessionAlive.Add(_VideoSessionAlive);
+                Dictionary<string, DateTime> _Dictionary = new Dictionary<string, DateTime>();
+                _Dictionary.Add(request.Gbid + ',' + resReply.Hdr.Sessionid, DateTime.Now);
+                _sipServiceDirector.VideoSessionAlive.Add(_Dictionary);
 
                 return Task.FromResult(resReply);
             }
@@ -85,7 +85,7 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             try
             {
-                _eventSource?.FireHistoryPlayRequestEvent(request, context);
+                _eventSource?.FileHistoryPlayRequestEvent(request, context);
                 var reqeustProcessResult = _sipServiceDirector.BackVideoReq(Convert.ToDateTime(request.BeginTime), Convert.ToDateTime(request.EndTime), request.Gbid, new int[] { request.Port }, request.Ipaddr);
 
                 reqeustProcessResult?.Wait(System.TimeSpan.FromSeconds(1));
@@ -95,14 +95,18 @@ namespace GrpcAgent.WebsocketRpcServer
                 {
                     Ipaddr = reqeustProcessResult.Result.Item1,
                     Port = reqeustProcessResult.Result.Item2,
-                    Hdr = request.Hdr,
-
+                    Hdr = GetHeaderBySipHeader(reqeustProcessResult.Result.Item3),
                     Status = new MediaContract.Status()
                     {
                         Code = 200,
                         Msg = "Request Successful!"
                     }
                 };
+                //add Video Session Alive
+                Dictionary<string, DateTime> _Dictionary = new Dictionary<string, DateTime>();
+                _Dictionary.Add(request.Gbid + ',' + resReply.Hdr.Sessionid, DateTime.Now);
+                _sipServiceDirector.VideoSessionAlive.Add(_Dictionary);
+
                 return Task.FromResult(resReply);
             }
             catch (Exception ex)
@@ -123,14 +127,52 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             if (request.IsDownload)
             {
-                _eventSource?.FireDownloadRequestEvent(request, context);
-            }
-            else
-            {
-                _eventSource?.FirePlaybackRequestEvent(request, context);
+                _eventSource?.FilePlaybackRequestEvent(request, context);
             }
 
             return base.StartPlayback(request, context);
+        }
+
+        public override Task<VideoDownloadReply> VideoDownload(VideoDownloadRequest request, ServerCallContext context)
+        {
+            try
+            {
+                _eventSource?.VideoDownloadRequestEvent(request, context);
+                var reqeustProcessResult = _sipServiceDirector.VideoDownloadReq(Convert.ToDateTime(request.BeginTime), Convert.ToDateTime(request.EndTime), request.Gbid, new int[] { request.Port }, request.Ipaddr);
+
+                reqeustProcessResult?.Wait(System.TimeSpan.FromSeconds(1));
+
+                //get the response .
+                var resReply = new VideoDownloadReply()
+                {
+                    Ipaddr = reqeustProcessResult.Result.Item1,
+                    Port = reqeustProcessResult.Result.Item2,
+                    Hdr = GetHeaderBySipHeader(reqeustProcessResult.Result.Item3),
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 200,
+                        Msg = "Request Successful!"
+                    }
+                };
+                //add Video Session Alive
+                Dictionary<string, DateTime> _Dictionary = new Dictionary<string, DateTime>();
+                _Dictionary.Add(request.Gbid + ',' + resReply.Hdr.Sessionid, DateTime.Now);
+                _sipServiceDirector.VideoSessionAlive.Add(_Dictionary);
+
+                return Task.FromResult(resReply);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception GRPC VideoDownloadReply: " + ex.Message);
+                var resReply = new VideoDownloadReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Msg = ex.Message
+                    }
+                };
+                return Task.FromResult(resReply);
+            }
         }
 
         public override Task<StopReply> Stop(StopRequest request, ServerCallContext context)
