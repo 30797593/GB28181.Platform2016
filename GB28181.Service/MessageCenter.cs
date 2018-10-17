@@ -27,6 +27,10 @@ namespace GB28181Service
         private ISipMessageCore _sipCoreMessageService;
         private ISIPMonitorCore _sIPMonitorCore;
         private ISIPRegistrarCore _registrarCore;
+        private Dictionary<string, HeartBeatEndPoint> _HeartBeatStatuses = new Dictionary<string, HeartBeatEndPoint>();
+        public Dictionary<string, HeartBeatEndPoint> HeartBeatStatuses => _HeartBeatStatuses;
+        private Dictionary<string, DeviceStatus> _DeviceStatuses = new Dictionary<string, DeviceStatus>();
+        public Dictionary<string, DeviceStatus> DeviceStatuses => _DeviceStatuses;
 
         public MessageCenter(ISipMessageCore sipCoreMessageService, ISIPMonitorCore sIPMonitorCore, ISIPRegistrarCore sipRegistrarCore)
         {
@@ -34,6 +38,15 @@ namespace GB28181Service
             _sIPMonitorCore = sIPMonitorCore;
             _registrarCore = sipRegistrarCore;
             _registrarCore.DeviceAlarmSubscribe += OnDeviceAlarmSubscribeReceived;
+            _sipCoreMessageService.OnDeviceStatusReceived += _sipCoreMessageService_OnDeviceStatusReceived;
+        }
+
+        private void _sipCoreMessageService_OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
+        {
+            if (!DeviceStatuses.ContainsKey(arg2.DeviceID))
+            {
+                DeviceStatuses.Add(arg2.DeviceID, arg2);
+            }
         }
 
         internal void OnKeepaliveReceived(SIPEndPoint remoteEP, KeepAlive keapalive, string devId)
@@ -42,9 +55,13 @@ namespace GB28181Service
             var hbPoint = new HeartBeatEndPoint()
             {
                 RemoteEP = remoteEP,
-                Heart = keapalive
+                Heart = keapalive,
+                KeepaliveTime = _keepaliveTime
             };
             _keepAliveQueue.Enqueue(hbPoint);
+
+            HeartBeatStatuses.Remove(devId);
+            HeartBeatStatuses.Add(devId, hbPoint);
         }
 
         internal void OnServiceChanged(string msg, ServiceStatus state)
@@ -211,6 +228,98 @@ namespace GB28181Service
             }
         }
 
+        /// <summary>
+        /// 设备状态上报
+        /// </summary>
+        internal void DeviceStatusReport()
+        {
+            TimeSpan pre = new TimeSpan(DateTime.Now.Ticks);
+            while (true)
+            {
+                TimeSpan suf = new TimeSpan(DateTime.Now.Ticks);
+                //report status every 30 seconds 
+                if (suf.Subtract(pre).Duration().Seconds > 30)
+                {
+                    try
+                    {
+                        foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
+                        {
+                            Event.Status stat = new Event.Status();
+                            stat.Status_ = false;
+                            stat.OccurredTime = (UInt64)DateTime.Now.Ticks;
+                            #region waiting DeviceStatuses add in for 500 Milliseconds
+                            _sipCoreMessageService.DeviceStateQuery(obj.Heart.DeviceID);
+                            TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
+                            while (true)
+                            {
+                                TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
+                                if (DeviceStatuses.ContainsKey(obj.Heart.DeviceID))
+                                {
+                                    //on line
+                                    stat.Status_ = DeviceStatuses[obj.Heart.DeviceID].Status.Equals("ON") ? true : false;
+                                    logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: " + DeviceStatuses[obj.Heart.DeviceID].Status);
+                                    DeviceStatuses.Remove(obj.Heart.DeviceID);
+                                    break;
+                                }
+                                else if (t2.Subtract(t1).Duration().Milliseconds > 500)
+                                {
+                                    //off line
+                                    logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: OFF");
+                                    break;
+                                }
+                            }
+                            #endregion
+                            string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
+                            //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
+                            Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
+                            var client = new Manage.Manage.ManageClient(channel);
+                            QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
+                            QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                            //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
+                            req.GbIds.Add(obj.Heart.DeviceID);
+                            _rep = client.QueryGBDeviceByGBIDs(req);
+                            if (_rep.Devices != null && _rep.Devices.Count > 0)
+                            {
+                                stat.DeviceID = _rep.Devices[0].GBID;
+                                stat.DeviceName = _rep.Devices[0].Name;
+                            }
+                            //else
+                            //{
+                            //    logger.Debug("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
+                            //}
+                            //logger.Debug("QueryGBDeviceByGBIDsRequest .Devices: " + _rep.Devices[0].ToString());
+
+                            Message message = new Message();
+                            Dictionary<string, string> dic = new Dictionary<string, string>();
+                            dic.Add("Content-Type", "application/octet-stream");
+                            message.Header = dic;
+                            message.Body = stat.ToByteArray();
+
+                            byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                            string subject = Event.StatusTopic.OriginalStatusTopic.ToString();//"OriginalStatusTopic"
+                            #region
+                            Options opts = ConnectionFactory.GetDefaultOptions();
+                            opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
+                            //logger.Debug("GB Nats Channel Address: " + opts.Url);
+                            using (IConnection c = new ConnectionFactory().CreateConnection(opts))
+                            {
+                                c.Publish(subject, payload);
+                                c.Flush();
+                                logger.Debug("Status created connection and published.");
+                            }
+                            #endregion
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("DeviceStatusReport Exception: " + ex.Message);
+                    }
+                    //recover
+                    pre = new TimeSpan(DateTime.Now.Ticks);
+                }
+            }
+        }
+
         //internal void OnDeviceStatusReceived(SIPEndPoint remoteEP, DeviceStatus device)
         //{
         //    var msg = "DeviceID:" + device.DeviceID +
@@ -257,6 +366,8 @@ namespace GB28181Service
         /// 心跳周期
         /// </summary>
         public KeepAlive Heart { get; set; }
+
+        public DateTime KeepaliveTime { get; set; }
     }
 
     public class Message

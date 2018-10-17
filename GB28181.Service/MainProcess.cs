@@ -50,6 +50,7 @@ namespace GB28181Service
         private Task _mainTask = null;
         private Task _sipTask = null;
         private Task _registerTask = null;
+        private Task _deviceStatusTask = null;
 
         private Task _mainWebSocketRpcTask = null;
 
@@ -199,6 +200,12 @@ namespace GB28181Service
                     _mainWebSocketRpcServer.AddIPAdress("0.0.0.0");
                     _mainWebSocketRpcServer.AddPort(EnvironmentVariables.GBServerGrpcPort);//50051
                     _mainWebSocketRpcServer.Run();
+                });
+
+                //Device Status Report
+                _deviceStatusTask = Task.Factory.StartNew(() =>
+                {
+                    messageHandler.DeviceStatusReport();
                 });
 
                 //video session alive
