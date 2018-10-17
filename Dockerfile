@@ -1,5 +1,5 @@
 
-FROM microsoft/dotnet:2.1-runtime
+FROM microsoft/dotnet:latest
 
 WORKDIR /opt/bin
 
