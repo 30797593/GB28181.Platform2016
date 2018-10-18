@@ -159,6 +159,7 @@ namespace GB28181Service
         {
             try
             {
+                logger.Debug("OnAlarmReceived started.");
                 Event.Alarm alm = new Event.Alarm();
                 alm.AlarmType = alm.AlarmType = Event.Alarm.Types.AlarmType.CrossingLine ;
                 //switch (alarm.AlarmMethod)

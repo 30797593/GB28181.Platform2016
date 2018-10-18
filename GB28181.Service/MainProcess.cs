@@ -271,7 +271,7 @@ namespace GB28181Service
             }
             catch (Exception ex)
             {
-                logger.Debug("GetIntegratedPlatformConfigRequest: " + ex.Message);
+                logger.Warn("GetIntegratedPlatformConfigRequest: " + ex.Message);
                 //logger.Debug("Can't get gb info from device-mgr, it will get gb info from config.");
                 return null;
             }
