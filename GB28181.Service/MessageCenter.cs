@@ -211,7 +211,7 @@ namespace GB28181Service
                 {
                     c.Publish(subject, payload);
                     c.Flush();
-                    logger.Debug("Alarming created connection and published.");
+                    logger.Debug("Device alarm created connection and published.");
                 }
                 #endregion
 
@@ -306,13 +306,14 @@ namespace GB28181Service
                             {
                                 c.Publish(subject, payload);
                                 c.Flush();
-                                logger.Debug("Status created connection and published.");
+                                logger.Debug("Device status created connection and published.");
                             }
                             #endregion
                         }
                     }
                     catch (Exception ex)
                     {
+                        logger.Warn("Device counts from HeartBeatStatuses queue: " + HeartBeatStatuses.Count);
                         logger.Error("DeviceStatusReport Exception: " + ex.Message);
                     }
                     //recover
