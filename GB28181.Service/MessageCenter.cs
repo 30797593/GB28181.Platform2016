@@ -238,90 +238,84 @@ namespace GB28181Service
             TimeSpan pre = new TimeSpan(DateTime.Now.Ticks);
             while (true)
             {
-                TimeSpan suf = new TimeSpan(DateTime.Now.AddSeconds(1).Ticks);
                 //report status every 30 seconds 
-                if (suf.Subtract(pre).Duration().Seconds > 30)
+                System.Threading.Thread.Sleep(30000);
+                try
                 {
-                    try
+                    foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
                     {
-                        foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
+                        Event.Status stat = new Event.Status();
+                        stat.Status_ = false;
+                        stat.OccurredTime = (UInt64)DateTime.Now.Ticks;
+                        #region waiting DeviceStatuses add in for 500 Milliseconds
+                        _sipCoreMessageService.DeviceStateQuery(obj.Heart.DeviceID);
+                        TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
+                        while (true)
                         {
-                            Event.Status stat = new Event.Status();
-                            stat.Status_ = false;
-                            stat.OccurredTime = (UInt64)DateTime.Now.Ticks;
-                            #region waiting DeviceStatuses add in for 500 Milliseconds
-                            _sipCoreMessageService.DeviceStateQuery(obj.Heart.DeviceID);
-                            TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
-                            while (true)
+                            System.Threading.Thread.Sleep(1);
+                            TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
+                            if (DeviceStatuses.ContainsKey(obj.Heart.DeviceID))
                             {
-                                System.Threading.Thread.Sleep(1);
-                                TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
-                                logger.Debug("suf.Subtract(pre).Duration(): " + suf.Subtract(pre).Duration());
-                                if (DeviceStatuses.ContainsKey(obj.Heart.DeviceID))
-                                {
-                                    //on line
-                                    stat.Status_ = DeviceStatuses[obj.Heart.DeviceID].Status.Equals("ON") ? true : false;
-                                    logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: " + DeviceStatuses[obj.Heart.DeviceID].Status);
-                                    DeviceStatuses.Remove(obj.Heart.DeviceID);
-                                    break;
-                                }
-                                else if (t2.Subtract(t1).Duration().Milliseconds > 500)
-                                {
-                                    //off line
-                                    logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: OFF");
-                                    break;
-                                }
+                                //on line
+                                stat.Status_ = DeviceStatuses[obj.Heart.DeviceID].Status.Equals("ON") ? true : false;
+                                logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: " + DeviceStatuses[obj.Heart.DeviceID].Status);
+                                DeviceStatuses.Remove(obj.Heart.DeviceID);
+                                break;
                             }
-                            #endregion
-                            string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
-                            //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
-                            Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
-                            var client = new Manage.Manage.ManageClient(channel);
-                            QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
-                            QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
-                            //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
-                            req.GbIds.Add(obj.Heart.DeviceID);
-                            //logger.Debug("QueryGBDeviceByGBIDs: " + obj.Heart.DeviceID);
-                            _rep = client.QueryGBDeviceByGBIDs(req);
-                            if (_rep.Devices != null && _rep.Devices.Count > 0)
+                            else if (t2.Subtract(t1).Duration().Milliseconds > 500)
                             {
-                                stat.DeviceID = _rep.Devices[0].GBID;
-                                stat.DeviceName = _rep.Devices[0].Name;
+                                //off line
+                                logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: OFF");
+                                break;
                             }
-                            else
-                            {
-                                logger.Warn("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
-                                continue;
-                            }
-                            logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + _rep.Devices[0].ToString());
-
-                            Message message = new Message();
-                            Dictionary<string, string> dic = new Dictionary<string, string>();
-                            dic.Add("Content-Type", "application/octet-stream");
-                            message.Header = dic;
-                            message.Body = stat.ToByteArray();
-
-                            byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-                            string subject = Event.StatusTopic.OriginalStatusTopic.ToString();//"OriginalStatusTopic"
-                            #region
-                            Options opts = ConnectionFactory.GetDefaultOptions();
-                            opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
-                            //logger.Debug("GB Nats Channel Address: " + opts.Url);
-                            using (IConnection c = new ConnectionFactory().CreateConnection(opts))
-                            {
-                                c.Publish(subject, payload);
-                                c.Flush();
-                                logger.Debug("Device status created connection and published.");
-                            }
-                            #endregion
                         }
+                        #endregion
+                        string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
+                        //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
+                        Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
+                        var client = new Manage.Manage.ManageClient(channel);
+                        QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
+                        QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                        //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
+                        req.GbIds.Add(obj.Heart.DeviceID);
+                        //logger.Debug("QueryGBDeviceByGBIDs: " + obj.Heart.DeviceID);
+                        _rep = client.QueryGBDeviceByGBIDs(req);
+                        if (_rep.Devices != null && _rep.Devices.Count > 0)
+                        {
+                            stat.DeviceID = _rep.Devices[0].GBID;
+                            stat.DeviceName = _rep.Devices[0].Name;
+                        }
+                        else
+                        {
+                            logger.Warn("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
+                            continue;
+                        }
+                        logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + _rep.Devices[0].ToString());
+
+                        Message message = new Message();
+                        Dictionary<string, string> dic = new Dictionary<string, string>();
+                        dic.Add("Content-Type", "application/octet-stream");
+                        message.Header = dic;
+                        message.Body = stat.ToByteArray();
+
+                        byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                        string subject = Event.StatusTopic.OriginalStatusTopic.ToString();//"OriginalStatusTopic"
+                        #region
+                        Options opts = ConnectionFactory.GetDefaultOptions();
+                        opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
+                        //logger.Debug("GB Nats Channel Address: " + opts.Url);
+                        using (IConnection c = new ConnectionFactory().CreateConnection(opts))
+                        {
+                            c.Publish(subject, payload);
+                            c.Flush();
+                            logger.Debug("Device status created connection and published.");
+                        }
+                        #endregion
                     }
-                    catch (Exception ex)
-                    {
-                        logger.Error("DeviceStatusReport Exception: " + ex.Message);
-                    }
-                    //recover
-                    pre = new TimeSpan(DateTime.Now.Ticks);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("DeviceStatusReport Exception: " + ex.Message);
                 }
             }
         }
