@@ -246,6 +246,7 @@ namespace GB28181Service
                     {
                         foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
                         {
+                            logger.Debug("HeartBeatEndPoint: " + obj.Heart.DeviceID);
                             Event.Status stat = new Event.Status();
                             stat.Status_ = false;
                             stat.OccurredTime = (UInt64)DateTime.Now.Ticks;
@@ -272,9 +273,8 @@ namespace GB28181Service
                             }
                             #endregion
                             string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
-                            logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
+                            //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
                             Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
-                            logger.Debug("GBServerChannelAddress: " + channel.ToString());
                             var client = new Manage.Manage.ManageClient(channel);
                             QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
                             QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
