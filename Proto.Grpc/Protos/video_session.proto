@@ -8,13 +8,10 @@ package MediaContract;
 service VideoSession {
   //LivePlay
   rpc StartLive (StartLiveRequest) returns (StartLiveReply) {}
-  rpc StartHistory (StartHistoryRequest) returns (StartHistoryReply) {}
-  //Start playback
+  
   rpc StartPlayback (StartPlaybackRequest) returns (StartPlaybackReply) {}
   //Stop Video
   rpc Stop (StopRequest) returns (StopReply) {}
-  //file download
-  rpc VideoDownload (VideoDownloadRequest) returns (VideoDownloadReply) {}
 
   //keepalive between two point
   rpc KeepAlive (KeepAliveRequest) returns (KeepAliveReply) {}
@@ -60,54 +57,20 @@ message StartLiveReply {
 	int32 port = 4;
 }
 
-// The request message containing StartHistoryRequest.
-message StartHistoryRequest {
-	Header hdr =1;
-	TransportProtocol trans_proto = 2;
-	string gbid = 3;
-	string ipaddr = 4;
-	int32 port = 5;
-	string begin_time = 6;
-	string end_time = 7;
-}
-// The response message containing the StartHistoryReply.
-message StartHistoryReply {
-	Header hdr = 1;
-	Status status = 2;
-	string ipaddr = 3;
-	int32 port = 4;
-}
-
-// The request message containing StartPlaybackRequest.
+// The request message containing StartPlaybackRequest/download.
 message StartPlaybackRequest {
 	Header hdr =1;
 	TransportProtocol trans_proto = 2;
-	bool is_download = 3;
-	int32 port = 4;
-	string ipaddr = 5;
-	string gbid = 6;
-}
-
-// The response message containing the StartPlaybackReply.
-message StartPlaybackReply {
-	Header hdr = 1;
-	Status status = 2;
-	string ipaddr = 3;
-	int32 port = 4;
-}
-
-// The request message containing VideoDownloadRequest.
-message VideoDownloadRequest {
-	Header hdr =1;
-	TransportProtocol trans_proto = 2;
-	string gbid = 3;
+	int32 port = 3;
 	string ipaddr = 4;
-	int32 port = 5;
-	string begin_time = 6;
-	string end_time = 7;
+	string gbid = 5;
+	float scale = 6;
+	string begin_time = 7;
+	string end_time = 8;
 }
-// The response message containing the VideoDownloadReply.
-message VideoDownloadReply {
+
+// The response message containing the StartPlaybackReply/download.
+message StartPlaybackReply {
 	Header hdr = 1;
 	Status status = 2;
 	string ipaddr = 3;

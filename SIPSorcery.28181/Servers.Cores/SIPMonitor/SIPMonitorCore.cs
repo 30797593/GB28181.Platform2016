@@ -419,12 +419,12 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             _sipMsgCoreService.SendRequest(RemoteEndPoint, backReq);
             _reqSession = backReq;
         }
-        public int BackVideoReq(DateTime beginTime, DateTime endTime, int[] mediaPort, string receiveIP, bool needResult = false)
+        public int BackVideoReq(ulong beginTime, ulong endTime, int[] mediaPort, string receiveIP, bool needResult = false)
         {
             //_mediaPort = _sipMsgCoreService.SetMediaPort();
 
-            uint startTime = TimeConvert.DateToTimeStamp(beginTime);
-            uint stopTime = TimeConvert.DateToTimeStamp(endTime);
+            ulong startTime = beginTime;
+            ulong stopTime = endTime;
 
             //string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
             string fromTag = CallProperties.CreateNewTag();
@@ -560,7 +560,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         /// <param name="startTime">录像开始时间</param>
         /// <param name="stopTime">录像结束数据</param>
         /// <returns></returns>
-        private string SetMediaReq(string localIp, int[] mediaPort, uint startTime, uint stopTime)
+        private string SetMediaReq(string localIp, int[] mediaPort, ulong startTime, ulong stopTime)
         {
 
             var sdpConn = new SDPConnectionInformation(localIp);
@@ -767,10 +767,16 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         /// <returns></returns>
         private string SetMediaControlReq(string localIp, int[] mediaPort, string scale, int cseq)
         {
-            string str =
-                "PLAY MANSRTSP/1.0\r\n" +
-                "CSeq: 3\r\n" +
-                "Scale: " + scale + "\r\n";
+            //string str =
+            //    "PLAY MANSRTSP/1.0\r\n" +
+            //    "CSeq: 3\r\n" +
+            //    "Scale: " + scale + "\r\n";
+            //return str;
+            string str = string.Empty;
+            str += "PALY MANSRTSP/1.0" + "\r\n";
+            str += "CSeq: 2" + "\r\n";
+            str += "Scal: 2" + "\r\n";
+            str += "Range: npt=now-" + "\r\n";
             return str;
         }
 

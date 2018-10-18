@@ -17,14 +17,10 @@ namespace MediaContract {
 
     static readonly grpc::Marshaller<global::MediaContract.StartLiveRequest> __Marshaller_StartLiveRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StartLiveRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.StartLiveReply> __Marshaller_StartLiveReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StartLiveReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::MediaContract.StartHistoryRequest> __Marshaller_StartHistoryRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StartHistoryRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::MediaContract.StartHistoryReply> __Marshaller_StartHistoryReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StartHistoryReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.StartPlaybackRequest> __Marshaller_StartPlaybackRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StartPlaybackRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.StartPlaybackReply> __Marshaller_StartPlaybackReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StartPlaybackReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.StopRequest> __Marshaller_StopRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StopRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.StopReply> __Marshaller_StopReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StopReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::MediaContract.VideoDownloadRequest> __Marshaller_VideoDownloadRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.VideoDownloadRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::MediaContract.VideoDownloadReply> __Marshaller_VideoDownloadReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.VideoDownloadReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.KeepAliveRequest> __Marshaller_KeepAliveRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.KeepAliveRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.KeepAliveReply> __Marshaller_KeepAliveReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.KeepAliveReply.Parser.ParseFrom);
 
@@ -34,13 +30,6 @@ namespace MediaContract {
         "StartLive",
         __Marshaller_StartLiveRequest,
         __Marshaller_StartLiveReply);
-
-    static readonly grpc::Method<global::MediaContract.StartHistoryRequest, global::MediaContract.StartHistoryReply> __Method_StartHistory = new grpc::Method<global::MediaContract.StartHistoryRequest, global::MediaContract.StartHistoryReply>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "StartHistory",
-        __Marshaller_StartHistoryRequest,
-        __Marshaller_StartHistoryReply);
 
     static readonly grpc::Method<global::MediaContract.StartPlaybackRequest, global::MediaContract.StartPlaybackReply> __Method_StartPlayback = new grpc::Method<global::MediaContract.StartPlaybackRequest, global::MediaContract.StartPlaybackReply>(
         grpc::MethodType.Unary,
@@ -55,13 +44,6 @@ namespace MediaContract {
         "Stop",
         __Marshaller_StopRequest,
         __Marshaller_StopReply);
-
-    static readonly grpc::Method<global::MediaContract.VideoDownloadRequest, global::MediaContract.VideoDownloadReply> __Method_VideoDownload = new grpc::Method<global::MediaContract.VideoDownloadRequest, global::MediaContract.VideoDownloadReply>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "VideoDownload",
-        __Marshaller_VideoDownloadRequest,
-        __Marshaller_VideoDownloadReply);
 
     static readonly grpc::Method<global::MediaContract.KeepAliveRequest, global::MediaContract.KeepAliveReply> __Method_KeepAlive = new grpc::Method<global::MediaContract.KeepAliveRequest, global::MediaContract.KeepAliveReply>(
         grpc::MethodType.Unary,
@@ -90,17 +72,6 @@ namespace MediaContract {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::MediaContract.StartHistoryReply> StartHistory(global::MediaContract.StartHistoryRequest request, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-      /// <summary>
-      ///Start playback
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::MediaContract.StartPlaybackReply> StartPlayback(global::MediaContract.StartPlaybackRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -113,17 +84,6 @@ namespace MediaContract {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::MediaContract.StopReply> Stop(global::MediaContract.StopRequest request, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-      /// <summary>
-      ///file download
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::MediaContract.VideoDownloadReply> VideoDownload(global::MediaContract.VideoDownloadRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -208,62 +168,18 @@ namespace MediaContract {
       {
         return CallInvoker.AsyncUnaryCall(__Method_StartLive, null, options, request);
       }
-      public virtual global::MediaContract.StartHistoryReply StartHistory(global::MediaContract.StartHistoryRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return StartHistory(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual global::MediaContract.StartHistoryReply StartHistory(global::MediaContract.StartHistoryRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_StartHistory, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::MediaContract.StartHistoryReply> StartHistoryAsync(global::MediaContract.StartHistoryRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return StartHistoryAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::MediaContract.StartHistoryReply> StartHistoryAsync(global::MediaContract.StartHistoryRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_StartHistory, null, options, request);
-      }
-      /// <summary>
-      ///Start playback
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::MediaContract.StartPlaybackReply StartPlayback(global::MediaContract.StartPlaybackRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return StartPlayback(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      ///Start playback
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::MediaContract.StartPlaybackReply StartPlayback(global::MediaContract.StartPlaybackRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_StartPlayback, null, options, request);
       }
-      /// <summary>
-      ///Start playback
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::MediaContract.StartPlaybackReply> StartPlaybackAsync(global::MediaContract.StartPlaybackRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return StartPlaybackAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      ///Start playback
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::MediaContract.StartPlaybackReply> StartPlaybackAsync(global::MediaContract.StartPlaybackRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_StartPlayback, null, options, request);
@@ -311,50 +227,6 @@ namespace MediaContract {
       public virtual grpc::AsyncUnaryCall<global::MediaContract.StopReply> StopAsync(global::MediaContract.StopRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Stop, null, options, request);
-      }
-      /// <summary>
-      ///file download
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::MediaContract.VideoDownloadReply VideoDownload(global::MediaContract.VideoDownloadRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return VideoDownload(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      ///file download
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::MediaContract.VideoDownloadReply VideoDownload(global::MediaContract.VideoDownloadRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_VideoDownload, null, options, request);
-      }
-      /// <summary>
-      ///file download
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::MediaContract.VideoDownloadReply> VideoDownloadAsync(global::MediaContract.VideoDownloadRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return VideoDownloadAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      ///file download
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::MediaContract.VideoDownloadReply> VideoDownloadAsync(global::MediaContract.VideoDownloadRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_VideoDownload, null, options, request);
       }
       /// <summary>
       ///keepalive between two point
@@ -413,10 +285,8 @@ namespace MediaContract {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_StartLive, serviceImpl.StartLive)
-          .AddMethod(__Method_StartHistory, serviceImpl.StartHistory)
           .AddMethod(__Method_StartPlayback, serviceImpl.StartPlayback)
           .AddMethod(__Method_Stop, serviceImpl.Stop)
-          .AddMethod(__Method_VideoDownload, serviceImpl.VideoDownload)
           .AddMethod(__Method_KeepAlive, serviceImpl.KeepAlive).Build();
     }
 

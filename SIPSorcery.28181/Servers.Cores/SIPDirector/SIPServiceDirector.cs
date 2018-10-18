@@ -100,9 +100,9 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="mediaPort"></param>
         /// <param name="receiveIP"></param>
         /// <returns></returns>
-        async public Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP)
+        async public Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(ulong beginTime, ulong endTime, string gbid, int[] mediaPort, string receiveIP)
         {
-            logger.Debug("History video request started.");
+            logger.Debug("BackVideoReq started.");
             var target = GetTargetMonitorService(gbid);
             if (target == null)
             {

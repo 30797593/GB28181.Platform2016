@@ -17,7 +17,7 @@ namespace SIPSorcery.GB28181.Servers
 
         //ip/port/protocol/ 
         Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> RealVideoReq(string gbid, int[] mediaPort, string receiveIP);
-        Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
+        Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(ulong beginTime, ulong endTime, string gbid, int[] mediaPort, string receiveIP);
 
         //Stop 
         Task<Tuple<string, int, ProtocolType>> Stop(string gbid, string sessionid);
