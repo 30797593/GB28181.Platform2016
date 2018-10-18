@@ -244,9 +244,9 @@ namespace GB28181Service
                 {
                     try
                     {
+                        logger.Debug("HeartBeatEndPoint: " + HeartBeatStatuses);
                         foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
                         {
-                            logger.Debug("HeartBeatEndPoint: " + obj);
                             Event.Status stat = new Event.Status();
                             stat.Status_ = false;
                             stat.OccurredTime = (UInt64)DateTime.Now.Ticks;
