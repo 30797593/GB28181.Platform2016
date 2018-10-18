@@ -701,6 +701,39 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             this.Stop();
             _sipMsgCoreService.SendRequest(RemoteEndPoint, byeReq);
         }
+        public void BackVideoStopPlayingControlReq(string sessionid)
+        {
+            try
+            {
+                if (!_syncRequestContext.Keys.Contains(sessionid)) return;
+                SIPRequest reqSession = _syncRequestContext[sessionid];
+                if (reqSession == null)
+                {
+                    return;
+                }
+                SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
+                SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
+                SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
+                SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
+                SIPRequest byeReq = _sipTransport.GetRequest(SIPMethodsEnum.BYE, remoteUri);
+                SIPHeader header = new SIPHeader(from, to, reqSession.Header.CSeq, reqSession.Header.CallId)
+                {
+                    CSeqMethod = byeReq.Header.CSeqMethod,
+                    Vias = byeReq.Header.Vias,
+                    MaxForwards = byeReq.Header.MaxForwards,
+                    UserAgent = SIPConstants.SIP_USERAGENT_STRING
+                };
+                byeReq.Header.From = from;
+                byeReq.Header = header;
+                this.Stop();
+                _sipMsgCoreService.SendRequest(RemoteEndPoint, byeReq);
+                _syncRequestContext.TryRemove(sessionid, out reqSession);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("BackVideoStopPlayingControlReq: " + ex.Message);
+            }
+        }
 
         /// <summary>
         /// 控制录像点播播放速度

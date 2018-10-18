@@ -92,7 +92,7 @@ namespace SIPSorcery.GB28181.Servers
             return Tuple.Create(ipaddress, port, header, ProtocolType.Udp);
         }
         /// <summary>
-        /// history video request
+        /// StartPlayback
         /// </summary>
         /// <param name="beginTime"></param>
         /// <param name="endTime"></param>
@@ -279,6 +279,25 @@ namespace SIPSorcery.GB28181.Servers
             var port = _sipCoreMessageService.GetReceivePort(taskResult.Item2.Body, SDPMediaTypesEnum.video);
             var header = taskResult.Item1.Header;
             return Tuple.Create(ipaddress, port, header, ProtocolType.Udp);
+        }
+
+        /// <summary>
+        /// stop StartPlayback
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <returns></returns>
+        async public Task<Tuple<string, int, ProtocolType>> BackVideoStopPlayingControlReq(string gbid, string sessionid)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return null;
+            }
+            target.BackVideoStopPlayingControlReq(sessionid);
+            logger.Debug("BackVideoStopPlayingControlReq stopped.");
+            return null;
         }
         #endregion
     }

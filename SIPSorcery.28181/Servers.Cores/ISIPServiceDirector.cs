@@ -42,5 +42,6 @@ namespace SIPSorcery.GB28181.Servers
         void DeviceStateQuery(string deviceid);
         int RecordFileQuery(string deviceId, DateTime startTime, DateTime endTime, string type);
         Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> VideoDownloadReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
+        Task<Tuple<string, int, ProtocolType>> BackVideoStopPlayingControlReq(string gbid, string sessionid);
     }
 }

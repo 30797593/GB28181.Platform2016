@@ -88,6 +88,7 @@ namespace SIPSorcery.GB28181.Servers
         /// 录像点播视频停止播放控制请求
         /// </summary>
         void BackVideoStopPlayingControlReq();
+        void BackVideoStopPlayingControlReq(string sessionid);
         #endregion
 
 
