@@ -246,7 +246,7 @@ namespace GB28181Service
                     {
                         foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
                         {
-                            logger.Debug("HeartBeatEndPoint: " + obj.Heart.DeviceID);
+                            logger.Debug("HeartBeatEndPoint: " + obj);
                             Event.Status stat = new Event.Status();
                             stat.Status_ = false;
                             stat.OccurredTime = (UInt64)DateTime.Now.Ticks;
