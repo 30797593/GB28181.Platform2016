@@ -238,7 +238,7 @@ namespace GB28181Service
             TimeSpan pre = new TimeSpan(DateTime.Now.Ticks);
             while (true)
             {
-                TimeSpan suf = new TimeSpan(DateTime.Now.AddMilliseconds(1).Ticks);
+                TimeSpan suf = new TimeSpan(DateTime.Now.AddSeconds(1).Ticks);
                 //report status every 30 seconds 
                 if (suf.Subtract(pre).Duration().Seconds > 30)
                 {
