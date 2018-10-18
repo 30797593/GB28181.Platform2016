@@ -242,12 +242,8 @@ namespace GB28181Service
                 //report status every 30 seconds 
                 if (suf.Subtract(pre).Duration().Seconds > 30)
                 {
-                    logger.Debug("pre: " + pre);
-                    logger.Debug("suf: " + suf);
-                    logger.Debug("suf.Subtract(pre).Duration(): " + suf.Subtract(pre).Duration());
                     try
                     {
-                        logger.Debug("HeartBeatEndPoint: " + HeartBeatStatuses.Count);
                         foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
                         {
                             Event.Status stat = new Event.Status();
@@ -258,7 +254,7 @@ namespace GB28181Service
                             TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
                             while (true)
                             {
-                                TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
+                                TimeSpan t2 = new TimeSpan(DateTime.Now.AddMilliseconds(1).Ticks);
                                 if (DeviceStatuses.ContainsKey(obj.Heart.DeviceID))
                                 {
                                     //on line
