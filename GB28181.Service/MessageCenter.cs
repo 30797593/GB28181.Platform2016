@@ -274,8 +274,8 @@ namespace GB28181Service
                             string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
                             //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
                             Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
+                            logger.Debug("GBServerChannelAddress: " + channel.ToString());
                             var client = new Manage.Manage.ManageClient(channel);
-                            logger.Debug("GBServerChannelAddress: " + client.ToString());
                             QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
                             QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
                             //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
