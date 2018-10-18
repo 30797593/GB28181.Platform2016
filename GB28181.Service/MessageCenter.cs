@@ -239,10 +239,12 @@ namespace GB28181Service
             while (true)
             {
                 TimeSpan suf = new TimeSpan(DateTime.Now.Ticks);
-                logger.Debug("suf: " + suf);
                 //report status every 30 seconds 
                 if (suf.Subtract(pre).Duration().Seconds > 30)
                 {
+                    logger.Debug("pre: " + pre);
+                    logger.Debug("suf: " + suf);
+                    logger.Debug("suf.Subtract(pre).Duration(): " + suf.Subtract(pre).Duration());
                     try
                     {
                         logger.Debug("HeartBeatEndPoint: " + HeartBeatStatuses.Count);
