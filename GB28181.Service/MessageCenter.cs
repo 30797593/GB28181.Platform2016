@@ -279,6 +279,7 @@ namespace GB28181Service
                             QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
                             //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
                             req.GbIds.Add(obj.Heart.DeviceID);
+                            logger.Debug("QueryGBDeviceByGBIDs: " + obj.Heart.DeviceID);
                             _rep = client.QueryGBDeviceByGBIDs(req);
                             if (_rep.Devices != null && _rep.Devices.Count > 0)
                             {
