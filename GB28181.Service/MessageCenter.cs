@@ -159,7 +159,7 @@ namespace GB28181Service
         {
             try
             {
-                logger.Debug("OnAlarmReceived started.");
+                //logger.Debug("OnAlarmReceived started.");
                 Event.Alarm alm = new Event.Alarm();
                 alm.AlarmType = alm.AlarmType = Event.Alarm.Types.AlarmType.CrossingLine ;
                 //switch (alarm.AlarmMethod)
@@ -234,7 +234,7 @@ namespace GB28181Service
         /// </summary>
         internal void DeviceStatusReport()
         {
-            logger.Debug("DeviceStatusReport started.");
+            //logger.Debug("DeviceStatusReport started.");
             TimeSpan pre = new TimeSpan(DateTime.Now.Ticks);
             while (true)
             {
@@ -285,10 +285,11 @@ namespace GB28181Service
                                 stat.DeviceID = _rep.Devices[0].GBID;
                                 stat.DeviceName = _rep.Devices[0].Name;
                             }
-                            //else
-                            //{
-                            //    logger.Debug("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
-                            //}
+                            else
+                            {
+                                logger.Warn("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
+                                continue;
+                            }
                             logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + _rep.Devices[0].ToString());
 
                             Message message = new Message();
@@ -314,7 +315,6 @@ namespace GB28181Service
                     }
                     catch (Exception ex)
                     {
-                        logger.Warn("Device counts from HeartBeatStatuses queue: " + HeartBeatStatuses.Count);
                         logger.Error("DeviceStatusReport Exception: " + ex.Message);
                     }
                     //recover
