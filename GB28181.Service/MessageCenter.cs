@@ -272,7 +272,7 @@ namespace GB28181Service
                             }
                             #endregion
                             string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
-                            //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
+                            logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
                             Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                             logger.Debug("GBServerChannelAddress: " + channel.ToString());
                             var client = new Manage.Manage.ManageClient(channel);
