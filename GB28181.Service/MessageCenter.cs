@@ -275,11 +275,12 @@ namespace GB28181Service
                             //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
                             Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                             var client = new Manage.Manage.ManageClient(channel);
+                            logger.Debug("GBServerChannelAddress: " + client.ToString());
                             QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
                             QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
                             //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
                             req.GbIds.Add(obj.Heart.DeviceID);
-                            logger.Debug("QueryGBDeviceByGBIDs: " + obj.Heart.DeviceID);
+                            //logger.Debug("QueryGBDeviceByGBIDs: " + obj.Heart.DeviceID);
                             _rep = client.QueryGBDeviceByGBIDs(req);
                             if (_rep.Devices != null && _rep.Devices.Count > 0)
                             {
