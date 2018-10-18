@@ -254,7 +254,9 @@ namespace GB28181Service
                             TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
                             while (true)
                             {
-                                TimeSpan t2 = new TimeSpan(DateTime.Now.AddMilliseconds(1).Ticks);
+                                System.Threading.Thread.Sleep(1);
+                                TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
+                                logger.Debug("suf.Subtract(pre).Duration(): " + suf.Subtract(pre).Duration());
                                 if (DeviceStatuses.ContainsKey(obj.Heart.DeviceID))
                                 {
                                     //on line
