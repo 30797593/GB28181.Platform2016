@@ -70,6 +70,7 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="scale">播放快进比例</param>
         /// <param name="range">视频播放时间段</param>
         bool BackVideoPlaySpeedControlReq(string range);
+        bool BackVideoPlaySpeedControlReq(string scale, DateTime range, int[] mediaPort, string receiveIP);
 
         /// <summary>
         /// 控制录像随机拖拽

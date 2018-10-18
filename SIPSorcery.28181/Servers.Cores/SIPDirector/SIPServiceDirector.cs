@@ -299,6 +299,29 @@ namespace SIPSorcery.GB28181.Servers
             logger.Debug("BackVideoStopPlayingControlReq stopped.");
             return null;
         }
+        /// <summary>
+        /// BackVideoPlay SpeedControl Req
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="scale"></param>
+        /// <param name="range"></param>
+        /// <param name="mediaPort"></param>
+        /// <param name="receiveIP"></param>
+        /// <returns></returns>
+        async public Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string scale, DateTime range, int[] mediaPort, string receiveIP)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return null;
+            }
+
+            target.BackVideoPlaySpeedControlReq(scale, range, mediaPort, receiveIP);
+
+            logger.Debug("BackVideoStopPlayingControlReq stopped.");
+            return null;
+        }
         #endregion
     }
 }
