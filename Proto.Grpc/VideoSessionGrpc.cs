@@ -21,6 +21,16 @@ namespace MediaContract {
     static readonly grpc::Marshaller<global::MediaContract.StartPlaybackReply> __Marshaller_StartPlaybackReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StartPlaybackReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.StopRequest> __Marshaller_StopRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StopRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.StopReply> __Marshaller_StopReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.StopReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoStopRequest> __Marshaller_BackVideoStopRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoStopRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoStopReply> __Marshaller_BackVideoStopReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoStopReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoSpeedRequest> __Marshaller_BackVideoSpeedRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoSpeedRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoSpeedReply> __Marshaller_BackVideoSpeedReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoSpeedReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoPauseRequest> __Marshaller_BackVideoPauseRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoPauseRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoPauseReply> __Marshaller_BackVideoPauseReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoPauseReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoContinueRequest> __Marshaller_BackVideoContinueRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoContinueRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoContinueReply> __Marshaller_BackVideoContinueReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoContinueReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoPositionRequest> __Marshaller_BackVideoPositionRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoPositionRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::MediaContract.BackVideoPositionReply> __Marshaller_BackVideoPositionReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.BackVideoPositionReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.KeepAliveRequest> __Marshaller_KeepAliveRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.KeepAliveRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::MediaContract.KeepAliveReply> __Marshaller_KeepAliveReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::MediaContract.KeepAliveReply.Parser.ParseFrom);
 
@@ -44,6 +54,41 @@ namespace MediaContract {
         "Stop",
         __Marshaller_StopRequest,
         __Marshaller_StopReply);
+
+    static readonly grpc::Method<global::MediaContract.BackVideoStopRequest, global::MediaContract.BackVideoStopReply> __Method_BackVideoStop = new grpc::Method<global::MediaContract.BackVideoStopRequest, global::MediaContract.BackVideoStopReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "BackVideoStop",
+        __Marshaller_BackVideoStopRequest,
+        __Marshaller_BackVideoStopReply);
+
+    static readonly grpc::Method<global::MediaContract.BackVideoSpeedRequest, global::MediaContract.BackVideoSpeedReply> __Method_BackVideoSpeed = new grpc::Method<global::MediaContract.BackVideoSpeedRequest, global::MediaContract.BackVideoSpeedReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "BackVideoSpeed",
+        __Marshaller_BackVideoSpeedRequest,
+        __Marshaller_BackVideoSpeedReply);
+
+    static readonly grpc::Method<global::MediaContract.BackVideoPauseRequest, global::MediaContract.BackVideoPauseReply> __Method_BackVideoPause = new grpc::Method<global::MediaContract.BackVideoPauseRequest, global::MediaContract.BackVideoPauseReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "BackVideoPause",
+        __Marshaller_BackVideoPauseRequest,
+        __Marshaller_BackVideoPauseReply);
+
+    static readonly grpc::Method<global::MediaContract.BackVideoContinueRequest, global::MediaContract.BackVideoContinueReply> __Method_BackVideoContinue = new grpc::Method<global::MediaContract.BackVideoContinueRequest, global::MediaContract.BackVideoContinueReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "BackVideoContinue",
+        __Marshaller_BackVideoContinueRequest,
+        __Marshaller_BackVideoContinueReply);
+
+    static readonly grpc::Method<global::MediaContract.BackVideoPositionRequest, global::MediaContract.BackVideoPositionReply> __Method_BackVideoPosition = new grpc::Method<global::MediaContract.BackVideoPositionRequest, global::MediaContract.BackVideoPositionReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "BackVideoPosition",
+        __Marshaller_BackVideoPositionRequest,
+        __Marshaller_BackVideoPositionReply);
 
     static readonly grpc::Method<global::MediaContract.KeepAliveRequest, global::MediaContract.KeepAliveReply> __Method_KeepAlive = new grpc::Method<global::MediaContract.KeepAliveRequest, global::MediaContract.KeepAliveReply>(
         grpc::MethodType.Unary,
@@ -72,6 +117,12 @@ namespace MediaContract {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      /// <summary>
+      ///Playback
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::MediaContract.StartPlaybackReply> StartPlayback(global::MediaContract.StartPlaybackRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -84,6 +135,61 @@ namespace MediaContract {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::MediaContract.StopReply> Stop(global::MediaContract.StopRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///Stop BackVideo
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::MediaContract.BackVideoStopReply> BackVideoStop(global::MediaContract.BackVideoStopRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///Speed BackVideo
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::MediaContract.BackVideoSpeedReply> BackVideoSpeed(global::MediaContract.BackVideoSpeedRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///Pause BackVideo
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::MediaContract.BackVideoPauseReply> BackVideoPause(global::MediaContract.BackVideoPauseRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///Continue BackVideo
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::MediaContract.BackVideoContinueReply> BackVideoContinue(global::MediaContract.BackVideoContinueRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///Position BackVideo
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::MediaContract.BackVideoPositionReply> BackVideoPosition(global::MediaContract.BackVideoPositionRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -168,18 +274,46 @@ namespace MediaContract {
       {
         return CallInvoker.AsyncUnaryCall(__Method_StartLive, null, options, request);
       }
+      /// <summary>
+      ///Playback
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::MediaContract.StartPlaybackReply StartPlayback(global::MediaContract.StartPlaybackRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return StartPlayback(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///Playback
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::MediaContract.StartPlaybackReply StartPlayback(global::MediaContract.StartPlaybackRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_StartPlayback, null, options, request);
       }
+      /// <summary>
+      ///Playback
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::MediaContract.StartPlaybackReply> StartPlaybackAsync(global::MediaContract.StartPlaybackRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return StartPlaybackAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///Playback
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::MediaContract.StartPlaybackReply> StartPlaybackAsync(global::MediaContract.StartPlaybackRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_StartPlayback, null, options, request);
@@ -227,6 +361,226 @@ namespace MediaContract {
       public virtual grpc::AsyncUnaryCall<global::MediaContract.StopReply> StopAsync(global::MediaContract.StopRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Stop, null, options, request);
+      }
+      /// <summary>
+      ///Stop BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoStopReply BackVideoStop(global::MediaContract.BackVideoStopRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoStop(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Stop BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoStopReply BackVideoStop(global::MediaContract.BackVideoStopRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_BackVideoStop, null, options, request);
+      }
+      /// <summary>
+      ///Stop BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoStopReply> BackVideoStopAsync(global::MediaContract.BackVideoStopRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoStopAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Stop BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoStopReply> BackVideoStopAsync(global::MediaContract.BackVideoStopRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_BackVideoStop, null, options, request);
+      }
+      /// <summary>
+      ///Speed BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoSpeedReply BackVideoSpeed(global::MediaContract.BackVideoSpeedRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoSpeed(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Speed BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoSpeedReply BackVideoSpeed(global::MediaContract.BackVideoSpeedRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_BackVideoSpeed, null, options, request);
+      }
+      /// <summary>
+      ///Speed BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoSpeedReply> BackVideoSpeedAsync(global::MediaContract.BackVideoSpeedRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoSpeedAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Speed BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoSpeedReply> BackVideoSpeedAsync(global::MediaContract.BackVideoSpeedRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_BackVideoSpeed, null, options, request);
+      }
+      /// <summary>
+      ///Pause BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoPauseReply BackVideoPause(global::MediaContract.BackVideoPauseRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoPause(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Pause BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoPauseReply BackVideoPause(global::MediaContract.BackVideoPauseRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_BackVideoPause, null, options, request);
+      }
+      /// <summary>
+      ///Pause BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoPauseReply> BackVideoPauseAsync(global::MediaContract.BackVideoPauseRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoPauseAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Pause BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoPauseReply> BackVideoPauseAsync(global::MediaContract.BackVideoPauseRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_BackVideoPause, null, options, request);
+      }
+      /// <summary>
+      ///Continue BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoContinueReply BackVideoContinue(global::MediaContract.BackVideoContinueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoContinue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Continue BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoContinueReply BackVideoContinue(global::MediaContract.BackVideoContinueRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_BackVideoContinue, null, options, request);
+      }
+      /// <summary>
+      ///Continue BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoContinueReply> BackVideoContinueAsync(global::MediaContract.BackVideoContinueRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoContinueAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Continue BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoContinueReply> BackVideoContinueAsync(global::MediaContract.BackVideoContinueRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_BackVideoContinue, null, options, request);
+      }
+      /// <summary>
+      ///Position BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoPositionReply BackVideoPosition(global::MediaContract.BackVideoPositionRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoPosition(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Position BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::MediaContract.BackVideoPositionReply BackVideoPosition(global::MediaContract.BackVideoPositionRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_BackVideoPosition, null, options, request);
+      }
+      /// <summary>
+      ///Position BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoPositionReply> BackVideoPositionAsync(global::MediaContract.BackVideoPositionRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackVideoPositionAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///Position BackVideo
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::MediaContract.BackVideoPositionReply> BackVideoPositionAsync(global::MediaContract.BackVideoPositionRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_BackVideoPosition, null, options, request);
       }
       /// <summary>
       ///keepalive between two point
@@ -287,6 +641,11 @@ namespace MediaContract {
           .AddMethod(__Method_StartLive, serviceImpl.StartLive)
           .AddMethod(__Method_StartPlayback, serviceImpl.StartPlayback)
           .AddMethod(__Method_Stop, serviceImpl.Stop)
+          .AddMethod(__Method_BackVideoStop, serviceImpl.BackVideoStop)
+          .AddMethod(__Method_BackVideoSpeed, serviceImpl.BackVideoSpeed)
+          .AddMethod(__Method_BackVideoPause, serviceImpl.BackVideoPause)
+          .AddMethod(__Method_BackVideoContinue, serviceImpl.BackVideoContinue)
+          .AddMethod(__Method_BackVideoPosition, serviceImpl.BackVideoPosition)
           .AddMethod(__Method_KeepAlive, serviceImpl.KeepAlive).Build();
     }
 

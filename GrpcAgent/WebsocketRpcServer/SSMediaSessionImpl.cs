@@ -17,7 +17,7 @@ namespace GrpcAgent.WebsocketRpcServer
         public SSMediaSessionImpl(MediaEventSource eventSource, ISIPServiceDirector sipServiceDirector)
         {
             _eventSource = eventSource;
-            _sipServiceDirector = sipServiceDirector;   
+            _sipServiceDirector = sipServiceDirector;
         }
 
         public override Task<KeepAliveReply> KeepAlive(KeepAliveRequest request, ServerCallContext context)
@@ -148,7 +148,6 @@ namespace GrpcAgent.WebsocketRpcServer
         //        Dictionary<string, DateTime> _Dictionary = new Dictionary<string, DateTime>();
         //        _Dictionary.Add(request.Gbid + ',' + resReply.Hdr.Sessionid, DateTime.Now);
         //        _sipServiceDirector.VideoSessionAlive.Add(_Dictionary);
-
         //        return Task.FromResult(resReply);
         //    }
         //    catch (Exception ex)
@@ -169,9 +168,9 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             try
             {
-                var stopProcessResult = _sipServiceDirector.Stop(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid);
-                
-                var stopReply = new StopReply()
+                var processResult = _sipServiceDirector.Stop(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid);
+
+                var reply = new StopReply()
                 {
                     Status = new MediaContract.Status()
                     {
@@ -179,19 +178,20 @@ namespace GrpcAgent.WebsocketRpcServer
                         Msg = "Stop Successful!"
                     }
                 };
-                return Task.FromResult(stopReply);
+                return Task.FromResult(reply);
             }
             catch (Exception ex)
             {
                 logger.Error("Exception GRPC StopVideo: " + ex.Message);
-                var stopReply = new StopReply()
+                var reply = new StopReply()
                 {
                     Status = new MediaContract.Status()
                     {
+                        Code = 400,
                         Msg = ex.Message
                     }
                 };
-                return Task.FromResult(stopReply);
+                return Task.FromResult(reply);
             }
         }
 
@@ -202,6 +202,191 @@ namespace GrpcAgent.WebsocketRpcServer
             header.Sessionid = sipHeader.CallId;
             //header.Version = sipHeader.CSeq + sipHeader.CallId;
             return header;
+        }
+
+        /// <summary>
+        /// BackVideoStop
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public override Task<BackVideoStopReply> BackVideoStop(BackVideoStopRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var processResult = _sipServiceDirector.BackVideoStopPlayingControlReq(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid);
+
+                var reply = new BackVideoStopReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 200,
+                        Msg = "Stop Successful!"
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception GRPC BackVideoStop: " + ex.Message);
+                var reply = new BackVideoStopReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 400,
+                        Msg = ex.Message
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+        }
+
+        /// <summary>
+        /// BackVideoSpeed
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public override Task<BackVideoSpeedReply> BackVideoSpeed(BackVideoSpeedRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var processResult = _sipServiceDirector.BackVideoPlaySpeedControlReq(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid, request.Scale);
+
+                var reply = new BackVideoSpeedReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 200,
+                        Msg = "Stop Successful!"
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception GRPC BackVideoSpeed: " + ex.Message);
+                var reply = new BackVideoSpeedReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 400,
+                        Msg = ex.Message
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+        }
+
+        /// <summary>
+        /// BackVideoPause
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public override Task<BackVideoPauseReply> BackVideoPause(BackVideoPauseRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var processResult = _sipServiceDirector.BackVideoPauseControlReq(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid);
+
+                var reply = new BackVideoPauseReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 200,
+                        Msg = "Stop Successful!"
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception GRPC BackVideoStop: " + ex.Message);
+                var reply = new BackVideoPauseReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 400,
+                        Msg = ex.Message
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+        }
+
+        /// <summary>
+        /// BackVideoContinue
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public override Task<BackVideoContinueReply> BackVideoContinue(BackVideoContinueRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var processResult = _sipServiceDirector.BackVideoContinuePlayingControlReq(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid);
+
+                var reply = new BackVideoContinueReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 200,
+                        Msg = "Stop Successful!"
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception GRPC BackVideoStop: " + ex.Message);
+                var reply = new BackVideoContinueReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 400,
+                        Msg = ex.Message
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+        }
+
+        /// <summary>
+        /// BackVideoPosition
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public override Task<BackVideoPositionReply> BackVideoPosition(BackVideoPositionRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var processResult = _sipServiceDirector.BackVideoPlayPositionControlReq(string.IsNullOrEmpty(request.Gbid) ? "42010000001180000184" : request.Gbid, request.Hdr.Sessionid, request.Range);
+
+                var reply = new BackVideoPositionReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 200,
+                        Msg = "Stop Successful!"
+                    }
+                };
+                return Task.FromResult(reply);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception GRPC BackVideoStop: " + ex.Message);
+                var reply = new BackVideoPositionReply()
+                {
+                    Status = new MediaContract.Status()
+                    {
+                        Code = 400,
+                        Msg = ex.Message
+                    }
+                };
+                return Task.FromResult(reply);
+            }
         }
     }
 }

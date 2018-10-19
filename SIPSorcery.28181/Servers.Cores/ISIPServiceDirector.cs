@@ -44,6 +44,7 @@ namespace SIPSorcery.GB28181.Servers
         Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> VideoDownloadReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
         bool BackVideoStopPlayingControlReq(string gbid, string sessionid);
         bool BackVideoPlaySpeedControlReq(string gbid, string sessionid, float scale);
+        bool BackVideoPauseControlReq(string gbid, string sessionid);
         bool BackVideoContinuePlayingControlReq(string gbid, string sessionid);
         bool BackVideoPlayPositionControlReq(string gbid, string sessionid, int range);
     }
