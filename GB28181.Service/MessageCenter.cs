@@ -184,7 +184,7 @@ namespace GB28181Service
                 _rep = client.QueryGBDeviceByGBIDs(req);
                 if (_rep.Devices != null && _rep.Devices.Count > 0)
                 {
-                    alm.DeviceID = _rep.Devices[0].GBID;
+                    alm.DeviceID = _rep.Devices[0].Guid;
                     alm.DeviceName = _rep.Devices[0].Name;
                 }
                 else
@@ -282,7 +282,7 @@ namespace GB28181Service
                         _rep = client.QueryGBDeviceByGBIDs(req);
                         if (_rep.Devices != null && _rep.Devices.Count > 0)
                         {
-                            stat.DeviceID = _rep.Devices[0].GBID;
+                            stat.DeviceID = _rep.Devices[0].Guid;
                             stat.DeviceName = _rep.Devices[0].Name;
                         }
                         else
