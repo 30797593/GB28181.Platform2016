@@ -308,7 +308,7 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="mediaPort"></param>
         /// <param name="receiveIP"></param>
         /// <returns></returns>
-        async public Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string sessionid, string scale, DateTime range, int[] mediaPort, string receiveIP)
+        async public Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string sessionid, float scale)
         {
             var target = GetTargetMonitorService(gbid);
 
@@ -316,10 +316,62 @@ namespace SIPSorcery.GB28181.Servers
             {
                 return null;
             }
-
-            target.BackVideoPlaySpeedControlReq(sessionid, scale, range, mediaPort, receiveIP);
-
+            target.BackVideoPlaySpeedControlReq(sessionid, scale);
             logger.Debug("BackVideoStopPlayingControlReq stopped.");
+            return null;
+        }
+        /// <summary>
+        /// BackVideo PauseControl Req
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <returns></returns>
+        async public Task<Tuple<string, int, ProtocolType>> BackVideoPauseControlReq(string gbid, string sessionid)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return null;
+            }
+            target.BackVideoPauseControlReq(sessionid);
+            logger.Debug("BackVideoPauseControlReq stopped.");
+            return null;
+        }
+        /// <summary>
+        /// BackVideo ContinuePlayingControl Req
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <returns></returns>
+        async public Task<Tuple<string, int, ProtocolType>> BackVideoContinuePlayingControlReq(string gbid, string sessionid)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return null;
+            }
+            target.BackVideoContinuePlayingControlReq(sessionid);
+            logger.Debug("BackVideoContinuePlayingControlReq stopped.");
+            return null;
+        }
+        /// <summary>
+        /// BackVideo PlayPositionControl Req
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <returns></returns>
+        async public Task<Tuple<string, int, ProtocolType>> BackVideoPlayPositionControlReq(string gbid, string sessionid, int range)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return null;
+            }
+            target.BackVideoPlayPositionControlReq(sessionid, range);
+            logger.Debug("BackVideoPlayPositionControlReq stopped.");
             return null;
         }
         #endregion

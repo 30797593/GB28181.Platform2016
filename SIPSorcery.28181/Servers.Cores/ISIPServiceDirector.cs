@@ -43,6 +43,8 @@ namespace SIPSorcery.GB28181.Servers
         int RecordFileQuery(string deviceId, DateTime startTime, DateTime endTime, string type);
         Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> VideoDownloadReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
         Task<Tuple<string, int, ProtocolType>> BackVideoStopPlayingControlReq(string gbid, string sessionid);
-        Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string sessionid, string scale, DateTime range, int[] mediaPort, string receiveIP);
+        Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string sessionid, float scale);
+        Task<Tuple<string, int, ProtocolType>> BackVideoContinuePlayingControlReq(string gbid, string sessionid);
+        Task<Tuple<string, int, ProtocolType>> BackVideoPlayPositionControlReq(string gbid, string sessionid, int range);
     }
 }

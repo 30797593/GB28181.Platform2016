@@ -70,21 +70,24 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="scale">播放快进比例</param>
         /// <param name="range">视频播放时间段</param>
         bool BackVideoPlaySpeedControlReq(string range);
-        bool BackVideoPlaySpeedControlReq(string sessionid, string scale, DateTime range, int[] mediaPort, string receiveIP);
+        bool BackVideoPlaySpeedControlReq(string sessionid, float scale);
 
         /// <summary>
         /// 控制录像随机拖拽
         /// </summary>
         /// <param name="range">时间范围</param>
         bool BackVideoPlayPositionControlReq(int range);
+        bool BackVideoPlayPositionControlReq(string sessionid, int range);
         /// <summary>
         /// 录像点播视频继续播放控制请求
         /// </summary>
         void BackVideoContinuePlayingControlReq();
+        void BackVideoContinuePlayingControlReq(string sessionid);
         /// <summary>
         /// 录像点播视频暂停控制请求
         /// </summary>
         void BackVideoPauseControlReq();
+        void BackVideoPauseControlReq(string sessionid);
         /// <summary>
         /// 录像点播视频停止播放控制请求
         /// </summary>
