@@ -304,7 +304,7 @@ namespace SIPSorcery.GB28181.Servers
                 return false;
             }
             target.BackVideoPlaySpeedControlReq(sessionid, scale);
-            logger.Debug("BackVideoStopPlayingControlReq stopped.");
+            logger.Debug("BackVideoPlaySpeedControlReq stopped.");
             return true;
         }
         /// <summary>
