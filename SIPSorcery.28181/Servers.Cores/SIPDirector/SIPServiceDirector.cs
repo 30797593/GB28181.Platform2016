@@ -308,7 +308,7 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="mediaPort"></param>
         /// <param name="receiveIP"></param>
         /// <returns></returns>
-        async public Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string scale, DateTime range, int[] mediaPort, string receiveIP)
+        async public Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string sessionid, string scale, DateTime range, int[] mediaPort, string receiveIP)
         {
             var target = GetTargetMonitorService(gbid);
 
@@ -317,7 +317,7 @@ namespace SIPSorcery.GB28181.Servers
                 return null;
             }
 
-            target.BackVideoPlaySpeedControlReq(scale, range, mediaPort, receiveIP);
+            target.BackVideoPlaySpeedControlReq(sessionid, scale, range, mediaPort, receiveIP);
 
             logger.Debug("BackVideoStopPlayingControlReq stopped.");
             return null;
