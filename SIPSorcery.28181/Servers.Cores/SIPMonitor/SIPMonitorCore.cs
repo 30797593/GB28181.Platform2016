@@ -700,15 +700,15 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             this.Stop();
             _sipMsgCoreService.SendRequest(RemoteEndPoint, byeReq);
         }
-        public void BackVideoStopPlayingControlReq(string sessionid)
+        public bool BackVideoStopPlayingControlReq(string sessionid)
         {
             try
             {
-                if (!_syncRequestContext.Keys.Contains(sessionid)) return;
+                if (!_syncRequestContext.Keys.Contains(sessionid)) return false;
                 SIPRequest reqSession = _syncRequestContext[sessionid];
                 if (reqSession == null)
                 {
-                    return;
+                    return false;
                 }
                 SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
                 SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
@@ -727,10 +727,12 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
                 this.Stop();
                 _sipMsgCoreService.SendRequest(RemoteEndPoint, byeReq);
                 _syncRequestContext.TryRemove(sessionid, out reqSession);
+                return true;
             }
             catch (Exception ex)
             {
                 logger.Error("BackVideoStopPlayingControlReq: " + ex.Message);
+                return false;
             }
         }
 
@@ -754,16 +756,23 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         }
         public bool BackVideoPlaySpeedControlReq(string sessionid, float scale)
         {
-            //_mediaPort = _sipMsgCoreService.SetMediaPort();
-
-            //uint time = TimeConvert.DateToTimeStamp(range);
-            //string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
-            string fromTag = CallProperties.CreateNewTag();
-            int cSeq = CallProperties.CreateNewCSeq();
-            string callId = CallProperties.CreateNewCallId();
-            SIPRequest realReq = BackVideoPlaySpeedControlReq(sessionid, scale, fromTag, cSeq, callId);
-            _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
-            return true;
+            try
+            {
+                //_mediaPort = _sipMsgCoreService.SetMediaPort();
+                //uint time = TimeConvert.DateToTimeStamp(range);
+                //string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
+                string fromTag = CallProperties.CreateNewTag();
+                int cSeq = CallProperties.CreateNewCSeq();
+                string callId = CallProperties.CreateNewCallId();
+                SIPRequest realReq = BackVideoPlaySpeedControlReq(sessionid, scale, fromTag, cSeq, callId);
+                _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("BackVideoPlaySpeedControlReq: " + ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
@@ -804,39 +813,31 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         }
         private SIPRequest BackVideoPlaySpeedControlReq(string sessionid, float scale, string fromTag, int cSeq, string callId)
         {
-            try
+            if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
+            SIPRequest reqSession = _syncRequestContext[sessionid];
+            if (reqSession == null)
             {
-                if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
-                SIPRequest reqSession = _syncRequestContext[sessionid];
-                if (reqSession == null)
-                {
-                    return null;
-                }
-                SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
-                SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
-                SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
-                SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
-                SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
-                SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
-                backReq.Header.Contact.Clear();
-                backReq.Header.Contact.Add(contactHeader);
-                backReq.Header.Allow = null;
-                backReq.Header.From = from;
-                backReq.Header.To = to;
-                backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
-                backReq.Header.CSeq = cSeq;
-                backReq.Header.CallId = callId;
-                backReq.Header.Subject = SetSubject();
-                backReq.Header.ContentType = "Application/MANSRTSP";
-                backReq.Body = SetMediaSpeedReq(scale, cSeq);
-                _reqSession = backReq;
-                return backReq;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("BackVideoPlaySpeedControlReq: " + ex.Message);
                 return null;
             }
+            SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
+            SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
+            SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
+            SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
+            SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
+            SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
+            backReq.Header.Contact.Clear();
+            backReq.Header.Contact.Add(contactHeader);
+            backReq.Header.Allow = null;
+            backReq.Header.From = from;
+            backReq.Header.To = to;
+            backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
+            backReq.Header.CSeq = cSeq;
+            backReq.Header.CallId = callId;
+            backReq.Header.Subject = SetSubject();
+            backReq.Header.ContentType = "Application/MANSRTSP";
+            backReq.Body = SetMediaSpeedReq(scale, cSeq);
+            _reqSession = backReq;
+            return backReq;
         }
         /// <summary>
         /// 设置媒体参数请求(快放/慢放)
@@ -906,19 +907,28 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             SIPRequest realReq = BackVideoContinuePlayingControlReq(localIp, _mediaPort, fromTag, cSeq, callId);
             _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
         }
-        public void BackVideoContinuePlayingControlReq(string sessionid)
+        public bool BackVideoContinuePlayingControlReq(string sessionid)
         {
-            //if (_mediaPort == null)
-            //{
-            //    _mediaPort = _sipMsgCoreService.SetMediaPort();
-            //}
-            string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
-            string fromTag = CallProperties.CreateNewTag();
-            int cSeq = CallProperties.CreateNewCSeq();
-            string callId = CallProperties.CreateNewCallId();
-            //this.Stop();
-            SIPRequest realReq = BackVideoContinuePlayingControlReq(sessionid, fromTag, cSeq, callId);
-            _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
+            try
+            {
+                //if (_mediaPort == null)
+                //{
+                //    _mediaPort = _sipMsgCoreService.SetMediaPort();
+                //}
+                string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
+                string fromTag = CallProperties.CreateNewTag();
+                int cSeq = CallProperties.CreateNewCSeq();
+                string callId = CallProperties.CreateNewCallId();
+                //this.Stop();
+                SIPRequest realReq = BackVideoContinuePlayingControlReq(sessionid, fromTag, cSeq, callId);
+                _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("BackVideoContinuePlayingControlReq: " + ex.Message);
+                return true;
+            }
         }
         /// <summary>
         /// 恢复录像播放
@@ -955,39 +965,31 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         }
         public SIPRequest BackVideoContinuePlayingControlReq(string sessionid, string fromTag, int cSeq, string callId)
         {
-            try
+            if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
+            SIPRequest reqSession = _syncRequestContext[sessionid];
+            if (reqSession == null)
             {
-                if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
-                SIPRequest reqSession = _syncRequestContext[sessionid];
-                if (reqSession == null)
-                {
-                    return null;
-                }
-                SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
-                SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
-                SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
-                SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
-                SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
-                SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
-                backReq.Header.Contact.Clear();
-                backReq.Header.Contact.Add(contactHeader);
-                backReq.Header.Allow = null;
-                backReq.Header.From = from;
-                backReq.Header.To = to;
-                backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
-                backReq.Header.CSeq = reqSession.Header.CSeq + 1;
-                backReq.Header.CallId = reqSession.Header.CallId;
-                //backReq.Header.Subject = SetSubject();
-                backReq.Header.ContentType = "Application/MANSRTSP";
-                backReq.Body = SetMediaResumeReq(cSeq);
-                _reqSession = backReq;
-                return backReq;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("BackVideoContinuePlayingControlReq: " + ex.Message);
                 return null;
             }
+            SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
+            SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
+            SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
+            SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
+            SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
+            SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
+            backReq.Header.Contact.Clear();
+            backReq.Header.Contact.Add(contactHeader);
+            backReq.Header.Allow = null;
+            backReq.Header.From = from;
+            backReq.Header.To = to;
+            backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
+            backReq.Header.CSeq = reqSession.Header.CSeq + 1;
+            backReq.Header.CallId = reqSession.Header.CallId;
+            //backReq.Header.Subject = SetSubject();
+            backReq.Header.ContentType = "Application/MANSRTSP";
+            backReq.Body = SetMediaResumeReq(cSeq);
+            _reqSession = backReq;
+            return backReq;
         }
         /// <summary>
         /// 设置录像恢复播放包体信息
@@ -1020,18 +1022,27 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             SIPRequest realReq = BackVideoPauseControlReq(localIp, _mediaPort, fromTag, cSeq, callId);
             _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
         }
-        public void BackVideoPauseControlReq(string sessionid)
+        public bool BackVideoPauseControlReq(string sessionid)
         {
-            //if (_mediaPort == null)
-            //{
-            //    _mediaPort = _sipMsgCoreService.SetMediaPort();
-            //}
-            //string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
-            string fromTag = CallProperties.CreateNewTag();
-            int cSeq = CallProperties.CreateNewCSeq();
-            string callId = CallProperties.CreateNewCallId();
-            SIPRequest realReq = BackVideoPauseControlReq(sessionid, fromTag, cSeq, callId);
-            _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
+            try
+            {
+                //if (_mediaPort == null)
+                //{
+                //    _mediaPort = _sipMsgCoreService.SetMediaPort();
+                //}
+                //string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
+                string fromTag = CallProperties.CreateNewTag();
+                int cSeq = CallProperties.CreateNewCSeq();
+                string callId = CallProperties.CreateNewCallId();
+                SIPRequest realReq = BackVideoPauseControlReq(sessionid, fromTag, cSeq, callId);
+                _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("BackVideoPauseControlReq: " + ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
@@ -1070,40 +1081,32 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         }
         public SIPRequest BackVideoPauseControlReq(string sessionid, string fromTag, int cSeq, string callId)
         {
-            try
+            if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
+            SIPRequest reqSession = _syncRequestContext[sessionid];
+            if (reqSession == null)
             {
-                if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
-                SIPRequest reqSession = _syncRequestContext[sessionid];
-                if (reqSession == null)
-                {
-                    return null;
-                }
-                SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
-                SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
-                SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
-                SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
-                SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
-                SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
-                backReq.Header.Contact.Clear();
-                backReq.Header.Contact.Add(contactHeader);
-                backReq.Header.Allow = null;
-                backReq.Header.From = from;
-                backReq.Header.To = to;
-                backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
-                //backReq.Header.Vias = _reqSession.Header.Vias;
-                backReq.Header.CSeq = _reqSession.Header.CSeq + 1;
-                backReq.Header.CallId = _reqSession.Header.CallId;
-                //backReq.Header.Subject = SetSubject();
-                backReq.Header.ContentType = "Application/MANSRTSP";
-                backReq.Body = SetMediaPauseReq(reqSession.Header.CSeq);
-                _reqSession = backReq;
-                return backReq;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("BackVideoPauseControlReq: " + ex.Message);
                 return null;
             }
+            SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
+            SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
+            SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
+            SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
+            SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
+            SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
+            backReq.Header.Contact.Clear();
+            backReq.Header.Contact.Add(contactHeader);
+            backReq.Header.Allow = null;
+            backReq.Header.From = from;
+            backReq.Header.To = to;
+            backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
+            //backReq.Header.Vias = _reqSession.Header.Vias;
+            backReq.Header.CSeq = _reqSession.Header.CSeq + 1;
+            backReq.Header.CallId = _reqSession.Header.CallId;
+            //backReq.Header.Subject = SetSubject();
+            backReq.Header.ContentType = "Application/MANSRTSP";
+            backReq.Body = SetMediaPauseReq(reqSession.Header.CSeq);
+            _reqSession = backReq;
+            return backReq;
         }
 
         /// <summary>
@@ -1159,16 +1162,24 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         }
         public bool BackVideoPlayPositionControlReq(string sessionid, int range)
         {
-            //_mediaPort = _sipMsgCoreService.SetMediaPort();
-            //uint time = TimeConvert.DateToTimeStamp(range);
-            string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
-            string fromTag = CallProperties.CreateNewTag();
-            int cSeq = CallProperties.CreateNewCSeq();
-            string callId = CallProperties.CreateNewCallId();
+            try
+            {
+                //_mediaPort = _sipMsgCoreService.SetMediaPort();
+                //uint time = TimeConvert.DateToTimeStamp(range);
+                string localIp = _sipMsgCoreService.LocalEP.Address.ToString();
+                string fromTag = CallProperties.CreateNewTag();
+                int cSeq = CallProperties.CreateNewCSeq();
+                string callId = CallProperties.CreateNewCallId();
 
-            SIPRequest realReq = BackVideoPlayPositionControlReq(sessionid, range, fromTag, cSeq, callId);
-            _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
-            return true;
+                SIPRequest realReq = BackVideoPlayPositionControlReq(sessionid, range, fromTag, cSeq, callId);
+                _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("BackVideoPlayPositionControlReq: " + ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
@@ -1208,41 +1219,31 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
         }
         private SIPRequest BackVideoPlayPositionControlReq(string sessionid, int Time, string fromTag, int cSeq, string callId)
         {
-            try
+            if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
+            SIPRequest reqSession = _syncRequestContext[sessionid];
+            if (reqSession == null)
             {
-                if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
-                SIPRequest reqSession = _syncRequestContext[sessionid];
-                if (reqSession == null)
-                {
-                    return null;
-                }
-                SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
-                SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
-                SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
-                SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
-                SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
-                SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
-                backReq.Header.Contact.Clear();
-                backReq.Header.Contact.Add(contactHeader);
-
-                backReq.Header.Allow = null;
-                backReq.Header.From = from;
-                backReq.Header.To = to;
-                backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
-                backReq.Header.CSeq = reqSession.Header.CSeq + 1;
-                backReq.Header.CallId = reqSession.Header.CallId;
-                backReq.Header.Subject = SetSubject();
-                backReq.Header.ContentType = SIPHeader.ContentTypes.Application_MANSRTSP;
-
-                backReq.Body = SetMediaPositionReq(Time, cSeq);
-                _reqSession = backReq;
-                return backReq;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("BackVideoPlayPositionControlReq: " + ex.Message);
                 return null;
             }
+            SIPURI remoteUri = new SIPURI(DeviceId, RemoteEndPoint.ToHost(), "");
+            SIPURI localUri = new SIPURI(_sipMsgCoreService.LocalSIPId, _sipMsgCoreService.LocalEP.ToHost(), "");
+            SIPFromHeader from = new SIPFromHeader(null, localUri, reqSession.Header.From.FromTag);
+            SIPToHeader to = new SIPToHeader(null, remoteUri, reqSession.Header.To.ToTag);
+            SIPRequest backReq = _sipTransport.GetRequest(SIPMethodsEnum.INFO, remoteUri);
+            SIPContactHeader contactHeader = new SIPContactHeader(null, localUri);
+            backReq.Header.Contact.Clear();
+            backReq.Header.Contact.Add(contactHeader);
+            backReq.Header.Allow = null;
+            backReq.Header.From = from;
+            backReq.Header.To = to;
+            backReq.Header.UserAgent = SIPConstants.SIP_USERAGENT_STRING;
+            backReq.Header.CSeq = reqSession.Header.CSeq + 1;
+            backReq.Header.CallId = reqSession.Header.CallId;
+            backReq.Header.Subject = SetSubject();
+            backReq.Header.ContentType = SIPHeader.ContentTypes.Application_MANSRTSP;
+            backReq.Body = SetMediaPositionReq(Time, cSeq);
+            _reqSession = backReq;
+            return backReq;
         }
 
         /// <summary>

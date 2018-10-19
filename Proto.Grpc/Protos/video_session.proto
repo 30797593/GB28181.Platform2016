@@ -8,7 +8,7 @@ package MediaContract;
 service VideoSession {
   //LivePlay
   rpc StartLive (StartLiveRequest) returns (StartLiveReply) {}
-  
+  //Playback
   rpc StartPlayback (StartPlaybackRequest) returns (StartPlaybackReply) {}
   //Stop Video
   rpc Stop (StopRequest) returns (StopReply) {}

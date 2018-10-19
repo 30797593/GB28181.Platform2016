@@ -17,10 +17,10 @@ namespace SIPSorcery.GB28181.Servers
 
         //ip/port/protocol/ 
         Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> RealVideoReq(string gbid, int[] mediaPort, string receiveIP);
-        Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(ulong beginTime, ulong endTime, string gbid, int[] mediaPort, string receiveIP);
+        Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(string gbid, int[] mediaPort, string receiveIP, ulong beginTime, ulong endTime);
 
         //Stop 
-        Task<Tuple<string, int, ProtocolType>> Stop(string gbid, string sessionid);
+        bool Stop(string gbid, string sessionid);
 
         /// <summary>
         /// Device Catalog Query
@@ -42,9 +42,9 @@ namespace SIPSorcery.GB28181.Servers
         void DeviceStateQuery(string deviceid);
         int RecordFileQuery(string deviceId, DateTime startTime, DateTime endTime, string type);
         Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> VideoDownloadReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP);
-        Task<Tuple<string, int, ProtocolType>> BackVideoStopPlayingControlReq(string gbid, string sessionid);
-        Task<Tuple<string, int, ProtocolType>> BackVideoPlaySpeedControlReq(string gbid, string sessionid, float scale);
-        Task<Tuple<string, int, ProtocolType>> BackVideoContinuePlayingControlReq(string gbid, string sessionid);
-        Task<Tuple<string, int, ProtocolType>> BackVideoPlayPositionControlReq(string gbid, string sessionid, int range);
+        bool BackVideoStopPlayingControlReq(string gbid, string sessionid);
+        bool BackVideoPlaySpeedControlReq(string gbid, string sessionid, float scale);
+        bool BackVideoContinuePlayingControlReq(string gbid, string sessionid);
+        bool BackVideoPlayPositionControlReq(string gbid, string sessionid, int range);
     }
 }

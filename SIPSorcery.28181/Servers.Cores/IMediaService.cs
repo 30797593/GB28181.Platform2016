@@ -82,17 +82,17 @@ namespace SIPSorcery.GB28181.Servers
         /// 录像点播视频继续播放控制请求
         /// </summary>
         void BackVideoContinuePlayingControlReq();
-        void BackVideoContinuePlayingControlReq(string sessionid);
+        bool BackVideoContinuePlayingControlReq(string sessionid);
         /// <summary>
         /// 录像点播视频暂停控制请求
         /// </summary>
         void BackVideoPauseControlReq();
-        void BackVideoPauseControlReq(string sessionid);
+        bool BackVideoPauseControlReq(string sessionid);
         /// <summary>
         /// 录像点播视频停止播放控制请求
         /// </summary>
         void BackVideoStopPlayingControlReq();
-        void BackVideoStopPlayingControlReq(string sessionid);
+        bool BackVideoStopPlayingControlReq(string sessionid);
         #endregion
 
 

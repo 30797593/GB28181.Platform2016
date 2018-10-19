@@ -87,7 +87,7 @@ namespace GrpcAgent.WebsocketRpcServer
             try
             {
                 _eventSource?.FilePlaybackRequestEvent(request, context);
-                var reqeustProcessResult = _sipServiceDirector.BackVideoReq(Convert.ToUInt64(request.BeginTime), Convert.ToUInt64(request.EndTime), request.Gbid, new int[] { request.Port }, request.Ipaddr);
+                var reqeustProcessResult = _sipServiceDirector.BackVideoReq(request.Gbid, new int[] { request.Port }, request.Ipaddr, Convert.ToUInt64(request.BeginTime), Convert.ToUInt64(request.EndTime));
                 reqeustProcessResult?.Wait(System.TimeSpan.FromSeconds(1));
 
                 //get the response .
