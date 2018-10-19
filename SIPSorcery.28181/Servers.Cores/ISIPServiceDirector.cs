@@ -46,6 +46,6 @@ namespace SIPSorcery.GB28181.Servers
         bool BackVideoPlaySpeedControlReq(string gbid, string sessionid, float scale);
         bool BackVideoPauseControlReq(string gbid, string sessionid);
         bool BackVideoContinuePlayingControlReq(string gbid, string sessionid);
-        bool BackVideoPlayPositionControlReq(string gbid, string sessionid, int range);
+        bool BackVideoPlayPositionControlReq(string gbid, string sessionid, long time);
     }
 }

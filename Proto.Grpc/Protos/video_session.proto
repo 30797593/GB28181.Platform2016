@@ -12,16 +12,8 @@ service VideoSession {
   rpc StartPlayback (StartPlaybackRequest) returns (StartPlaybackReply) {}
   //Stop Video
   rpc Stop (StopRequest) returns (StopReply) {}
-  //Stop BackVideo
-  rpc BackVideoStop (BackVideoStopRequest) returns (BackVideoStopReply) {}
-  //Speed BackVideo
-  rpc BackVideoSpeed (BackVideoSpeedRequest) returns (BackVideoSpeedReply) {}
-  //Pause BackVideo
-  rpc BackVideoPause (BackVideoPauseRequest) returns (BackVideoPauseReply) {}
-  //Continue BackVideo
-  rpc BackVideoContinue (BackVideoContinueRequest) returns (BackVideoContinueReply) {}
-  //Position BackVideo
-  rpc BackVideoPosition (BackVideoPositionRequest) returns (BackVideoPositionReply) {}
+  //PlaybackControl
+  rpc PlaybackControl (PlaybackControlRequest) returns (PlaybackControlReply) {}
 
   //keepalive between two point
   rpc KeepAlive (KeepAliveRequest) returns (KeepAliveReply) {}
@@ -100,49 +92,20 @@ message KeepAliveReply {
 	Status status = 2;
 }
 
-message BackVideoStopRequest {
+enum PlaybackControlType {
+	Pause = 0;
+	Resume = 1;
+	Moveto = 2;
+	Scale = 3;
+}
+message PlaybackControlRequest {
 	Header hdr =1;
 	string gbid = 2;
+	PlaybackControlType playback_type = 3;
+	float scale = 4;
+	int64 start_time = 5;
 }
-message BackVideoStopReply {
-	Header hdr = 1;
-	Status status = 2;
-}
-
-message BackVideoSpeedRequest {
-	Header hdr =1;
-	string gbid = 2;
-	float scale = 3;
-}
-message BackVideoSpeedReply {
-	Header hdr = 1;
-	Status status = 2;
-}
-
-message BackVideoPauseRequest {
-	Header hdr =1;
-	string gbid = 2;
-}
-message BackVideoPauseReply {
-	Header hdr = 1;
-	Status status = 2;
-}
-
-message BackVideoContinueRequest {
-	Header hdr =1;
-	string gbid = 2;
-}
-message BackVideoContinueReply {
-	Header hdr = 1;
-	Status status = 2;
-}
-
-message BackVideoPositionRequest {
-	Header hdr =1;
-	string gbid = 2;
-	int32 range = 3;
-}
-message BackVideoPositionReply {
+message PlaybackControlReply {
 	Header hdr = 1;
 	Status status = 2;
 }

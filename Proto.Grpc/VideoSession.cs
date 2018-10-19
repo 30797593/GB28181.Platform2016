@@ -48,52 +48,30 @@ namespace MediaContract {
             "cyJEChBLZWVwQWxpdmVSZXF1ZXN0EiIKA2hkchgBIAEoCzIVLk1lZGlhQ29u",
             "dHJhY3QuSGVhZGVyEgwKBGdiaWQYAiABKAkiWwoOS2VlcEFsaXZlUmVwbHkS",
             "IgoDaGRyGAEgASgLMhUuTWVkaWFDb250cmFjdC5IZWFkZXISJQoGc3RhdHVz",
-            "GAIgASgLMhUuTWVkaWFDb250cmFjdC5TdGF0dXMiSAoUQmFja1ZpZGVvU3Rv",
-            "cFJlcXVlc3QSIgoDaGRyGAEgASgLMhUuTWVkaWFDb250cmFjdC5IZWFkZXIS",
-            "DAoEZ2JpZBgCIAEoCSJfChJCYWNrVmlkZW9TdG9wUmVwbHkSIgoDaGRyGAEg",
-            "ASgLMhUuTWVkaWFDb250cmFjdC5IZWFkZXISJQoGc3RhdHVzGAIgASgLMhUu",
-            "TWVkaWFDb250cmFjdC5TdGF0dXMiWAoVQmFja1ZpZGVvU3BlZWRSZXF1ZXN0",
-            "EiIKA2hkchgBIAEoCzIVLk1lZGlhQ29udHJhY3QuSGVhZGVyEgwKBGdiaWQY",
-            "AiABKAkSDQoFc2NhbGUYAyABKAIiYAoTQmFja1ZpZGVvU3BlZWRSZXBseRIi",
-            "CgNoZHIYASABKAsyFS5NZWRpYUNvbnRyYWN0LkhlYWRlchIlCgZzdGF0dXMY",
-            "AiABKAsyFS5NZWRpYUNvbnRyYWN0LlN0YXR1cyJJChVCYWNrVmlkZW9QYXVz",
-            "ZVJlcXVlc3QSIgoDaGRyGAEgASgLMhUuTWVkaWFDb250cmFjdC5IZWFkZXIS",
-            "DAoEZ2JpZBgCIAEoCSJgChNCYWNrVmlkZW9QYXVzZVJlcGx5EiIKA2hkchgB",
-            "IAEoCzIVLk1lZGlhQ29udHJhY3QuSGVhZGVyEiUKBnN0YXR1cxgCIAEoCzIV",
-            "Lk1lZGlhQ29udHJhY3QuU3RhdHVzIkwKGEJhY2tWaWRlb0NvbnRpbnVlUmVx",
-            "dWVzdBIiCgNoZHIYASABKAsyFS5NZWRpYUNvbnRyYWN0LkhlYWRlchIMCgRn",
-            "YmlkGAIgASgJImMKFkJhY2tWaWRlb0NvbnRpbnVlUmVwbHkSIgoDaGRyGAEg",
-            "ASgLMhUuTWVkaWFDb250cmFjdC5IZWFkZXISJQoGc3RhdHVzGAIgASgLMhUu",
-            "TWVkaWFDb250cmFjdC5TdGF0dXMiWwoYQmFja1ZpZGVvUG9zaXRpb25SZXF1",
-            "ZXN0EiIKA2hkchgBIAEoCzIVLk1lZGlhQ29udHJhY3QuSGVhZGVyEgwKBGdi",
-            "aWQYAiABKAkSDQoFcmFuZ2UYAyABKAUiYwoWQmFja1ZpZGVvUG9zaXRpb25S",
-            "ZXBseRIiCgNoZHIYASABKAsyFS5NZWRpYUNvbnRyYWN0LkhlYWRlchIlCgZz",
-            "dGF0dXMYAiABKAsyFS5NZWRpYUNvbnRyYWN0LlN0YXR1cypNCgxCdXNpbmVz",
-            "c1R5cGUSDwoLQlRfTElWRVBMQVkQABIPCgtCVF9QTEFZQkFDSxABEg8KC0JU",
-            "X0RPV05MT0FEEAISCgoGQlRfTUFYEAMqLgoRVHJhbnNwb3J0UHJvdG9jb2wS",
-            "BwoDVENQEAASBwoDVURQEAESBwoDTUFYEAIyrAYKDFZpZGVvU2Vzc2lvbhJN",
-            "CglTdGFydExpdmUSHy5NZWRpYUNvbnRyYWN0LlN0YXJ0TGl2ZVJlcXVlc3Qa",
-            "HS5NZWRpYUNvbnRyYWN0LlN0YXJ0TGl2ZVJlcGx5IgASWQoNU3RhcnRQbGF5",
-            "YmFjaxIjLk1lZGlhQ29udHJhY3QuU3RhcnRQbGF5YmFja1JlcXVlc3QaIS5N",
-            "ZWRpYUNvbnRyYWN0LlN0YXJ0UGxheWJhY2tSZXBseSIAEj4KBFN0b3ASGi5N",
-            "ZWRpYUNvbnRyYWN0LlN0b3BSZXF1ZXN0GhguTWVkaWFDb250cmFjdC5TdG9w",
-            "UmVwbHkiABJZCg1CYWNrVmlkZW9TdG9wEiMuTWVkaWFDb250cmFjdC5CYWNr",
-            "VmlkZW9TdG9wUmVxdWVzdBohLk1lZGlhQ29udHJhY3QuQmFja1ZpZGVvU3Rv",
-            "cFJlcGx5IgASXAoOQmFja1ZpZGVvU3BlZWQSJC5NZWRpYUNvbnRyYWN0LkJh",
-            "Y2tWaWRlb1NwZWVkUmVxdWVzdBoiLk1lZGlhQ29udHJhY3QuQmFja1ZpZGVv",
-            "U3BlZWRSZXBseSIAElwKDkJhY2tWaWRlb1BhdXNlEiQuTWVkaWFDb250cmFj",
-            "dC5CYWNrVmlkZW9QYXVzZVJlcXVlc3QaIi5NZWRpYUNvbnRyYWN0LkJhY2tW",
-            "aWRlb1BhdXNlUmVwbHkiABJlChFCYWNrVmlkZW9Db250aW51ZRInLk1lZGlh",
-            "Q29udHJhY3QuQmFja1ZpZGVvQ29udGludWVSZXF1ZXN0GiUuTWVkaWFDb250",
-            "cmFjdC5CYWNrVmlkZW9Db250aW51ZVJlcGx5IgASZQoRQmFja1ZpZGVvUG9z",
-            "aXRpb24SJy5NZWRpYUNvbnRyYWN0LkJhY2tWaWRlb1Bvc2l0aW9uUmVxdWVz",
-            "dBolLk1lZGlhQ29udHJhY3QuQmFja1ZpZGVvUG9zaXRpb25SZXBseSIAEk0K",
-            "CUtlZXBBbGl2ZRIfLk1lZGlhQ29udHJhY3QuS2VlcEFsaXZlUmVxdWVzdBod",
-            "Lk1lZGlhQ29udHJhY3QuS2VlcEFsaXZlUmVwbHkiAEIFogICbXNiBnByb3Rv",
-            "Mw=="));
+            "GAIgASgLMhUuTWVkaWFDb250cmFjdC5TdGF0dXMiqAEKFlBsYXliYWNrQ29u",
+            "dHJvbFJlcXVlc3QSIgoDaGRyGAEgASgLMhUuTWVkaWFDb250cmFjdC5IZWFk",
+            "ZXISDAoEZ2JpZBgCIAEoCRI5Cg1wbGF5YmFja190eXBlGAMgASgOMiIuTWVk",
+            "aWFDb250cmFjdC5QbGF5YmFja0NvbnRyb2xUeXBlEg0KBXNjYWxlGAQgASgC",
+            "EhIKCnN0YXJ0X3RpbWUYBSABKAMiYQoUUGxheWJhY2tDb250cm9sUmVwbHkS",
+            "IgoDaGRyGAEgASgLMhUuTWVkaWFDb250cmFjdC5IZWFkZXISJQoGc3RhdHVz",
+            "GAIgASgLMhUuTWVkaWFDb250cmFjdC5TdGF0dXMqTQoMQnVzaW5lc3NUeXBl",
+            "Eg8KC0JUX0xJVkVQTEFZEAASDwoLQlRfUExBWUJBQ0sQARIPCgtCVF9ET1dO",
+            "TE9BRBACEgoKBkJUX01BWBADKi4KEVRyYW5zcG9ydFByb3RvY29sEgcKA1RD",
+            "UBAAEgcKA1VEUBABEgcKA01BWBACKkMKE1BsYXliYWNrQ29udHJvbFR5cGUS",
+            "CQoFUGF1c2UQABIKCgZSZXN1bWUQARIKCgZNb3ZldG8QAhIJCgVTY2FsZRAD",
+            "MqgDCgxWaWRlb1Nlc3Npb24STQoJU3RhcnRMaXZlEh8uTWVkaWFDb250cmFj",
+            "dC5TdGFydExpdmVSZXF1ZXN0Gh0uTWVkaWFDb250cmFjdC5TdGFydExpdmVS",
+            "ZXBseSIAElkKDVN0YXJ0UGxheWJhY2sSIy5NZWRpYUNvbnRyYWN0LlN0YXJ0",
+            "UGxheWJhY2tSZXF1ZXN0GiEuTWVkaWFDb250cmFjdC5TdGFydFBsYXliYWNr",
+            "UmVwbHkiABI+CgRTdG9wEhouTWVkaWFDb250cmFjdC5TdG9wUmVxdWVzdBoY",
+            "Lk1lZGlhQ29udHJhY3QuU3RvcFJlcGx5IgASXwoPUGxheWJhY2tDb250cm9s",
+            "EiUuTWVkaWFDb250cmFjdC5QbGF5YmFja0NvbnRyb2xSZXF1ZXN0GiMuTWVk",
+            "aWFDb250cmFjdC5QbGF5YmFja0NvbnRyb2xSZXBseSIAEk0KCUtlZXBBbGl2",
+            "ZRIfLk1lZGlhQ29udHJhY3QuS2VlcEFsaXZlUmVxdWVzdBodLk1lZGlhQ29u",
+            "dHJhY3QuS2VlcEFsaXZlUmVwbHkiAEIFogICbXNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::MediaContract.BusinessType), typeof(global::MediaContract.TransportProtocol), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::MediaContract.BusinessType), typeof(global::MediaContract.TransportProtocol), typeof(global::MediaContract.PlaybackControlType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.Header), global::MediaContract.Header.Parser, new[]{ "Version", "Sequence", "Sessionid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.Status), global::MediaContract.Status.Parser, new[]{ "Code", "Msg" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.StartLiveRequest), global::MediaContract.StartLiveRequest.Parser, new[]{ "Hdr", "TransProto", "Gbid", "Ipaddr", "Port" }, null, null, null),
@@ -104,16 +82,8 @@ namespace MediaContract {
             new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.StopReply), global::MediaContract.StopReply.Parser, new[]{ "Hdr", "Status" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.KeepAliveRequest), global::MediaContract.KeepAliveRequest.Parser, new[]{ "Hdr", "Gbid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.KeepAliveReply), global::MediaContract.KeepAliveReply.Parser, new[]{ "Hdr", "Status" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoStopRequest), global::MediaContract.BackVideoStopRequest.Parser, new[]{ "Hdr", "Gbid" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoStopReply), global::MediaContract.BackVideoStopReply.Parser, new[]{ "Hdr", "Status" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoSpeedRequest), global::MediaContract.BackVideoSpeedRequest.Parser, new[]{ "Hdr", "Gbid", "Scale" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoSpeedReply), global::MediaContract.BackVideoSpeedReply.Parser, new[]{ "Hdr", "Status" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoPauseRequest), global::MediaContract.BackVideoPauseRequest.Parser, new[]{ "Hdr", "Gbid" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoPauseReply), global::MediaContract.BackVideoPauseReply.Parser, new[]{ "Hdr", "Status" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoContinueRequest), global::MediaContract.BackVideoContinueRequest.Parser, new[]{ "Hdr", "Gbid" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoContinueReply), global::MediaContract.BackVideoContinueReply.Parser, new[]{ "Hdr", "Status" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoPositionRequest), global::MediaContract.BackVideoPositionRequest.Parser, new[]{ "Hdr", "Gbid", "Range" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.BackVideoPositionReply), global::MediaContract.BackVideoPositionReply.Parser, new[]{ "Hdr", "Status" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.PlaybackControlRequest), global::MediaContract.PlaybackControlRequest.Parser, new[]{ "Hdr", "Gbid", "PlaybackType", "Scale", "StartTime" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MediaContract.PlaybackControlReply), global::MediaContract.PlaybackControlReply.Parser, new[]{ "Hdr", "Status" }, null, null, null)
           }));
     }
     #endregion
@@ -131,6 +101,13 @@ namespace MediaContract {
     [pbr::OriginalName("TCP")] Tcp = 0,
     [pbr::OriginalName("UDP")] Udp = 1,
     [pbr::OriginalName("MAX")] Max = 2,
+  }
+
+  public enum PlaybackControlType {
+    [pbr::OriginalName("Pause")] Pause = 0,
+    [pbr::OriginalName("Resume")] Resume = 1,
+    [pbr::OriginalName("Moveto")] Moveto = 2,
+    [pbr::OriginalName("Scale")] Scale = 3,
   }
 
   #endregion
@@ -2170,11 +2147,11 @@ namespace MediaContract {
 
   }
 
-  public sealed partial class BackVideoStopRequest : pb::IMessage<BackVideoStopRequest> {
-    private static readonly pb::MessageParser<BackVideoStopRequest> _parser = new pb::MessageParser<BackVideoStopRequest>(() => new BackVideoStopRequest());
+  public sealed partial class PlaybackControlRequest : pb::IMessage<PlaybackControlRequest> {
+    private static readonly pb::MessageParser<PlaybackControlRequest> _parser = new pb::MessageParser<PlaybackControlRequest>(() => new PlaybackControlRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoStopRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<PlaybackControlRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2187,355 +2164,25 @@ namespace MediaContract {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoStopRequest() {
+    public PlaybackControlRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoStopRequest(BackVideoStopRequest other) : this() {
+    public PlaybackControlRequest(PlaybackControlRequest other) : this() {
       Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
       gbid_ = other.gbid_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoStopRequest Clone() {
-      return new BackVideoStopRequest(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "gbid" field.</summary>
-    public const int GbidFieldNumber = 2;
-    private string gbid_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Gbid {
-      get { return gbid_; }
-      set {
-        gbid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoStopRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoStopRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (Gbid != other.Gbid) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (Gbid.Length != 0) hash ^= Gbid.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Gbid);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Gbid);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoStopRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.Gbid.Length != 0) {
-        Gbid = other.Gbid;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            Gbid = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoStopReply : pb::IMessage<BackVideoStopReply> {
-    private static readonly pb::MessageParser<BackVideoStopReply> _parser = new pb::MessageParser<BackVideoStopReply>(() => new BackVideoStopReply());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoStopReply> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[11]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoStopReply() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoStopReply(BackVideoStopReply other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      Status = other.status_ != null ? other.Status.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoStopReply Clone() {
-      return new BackVideoStopReply(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 2;
-    private global::MediaContract.Status status_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Status Status {
-      get { return status_; }
-      set {
-        status_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoStopReply);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoStopReply other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (!object.Equals(Status, other.Status)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (status_ != null) hash ^= Status.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (status_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Status);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (status_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Status);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoStopReply other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.status_ != null) {
-        if (status_ == null) {
-          status_ = new global::MediaContract.Status();
-        }
-        Status.MergeFrom(other.Status);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            if (status_ == null) {
-              status_ = new global::MediaContract.Status();
-            }
-            input.ReadMessage(status_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoSpeedRequest : pb::IMessage<BackVideoSpeedRequest> {
-    private static readonly pb::MessageParser<BackVideoSpeedRequest> _parser = new pb::MessageParser<BackVideoSpeedRequest>(() => new BackVideoSpeedRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoSpeedRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[12]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoSpeedRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoSpeedRequest(BackVideoSpeedRequest other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      gbid_ = other.gbid_;
+      playbackType_ = other.playbackType_;
       scale_ = other.scale_;
+      startTime_ = other.startTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoSpeedRequest Clone() {
-      return new BackVideoSpeedRequest(this);
+    public PlaybackControlRequest Clone() {
+      return new PlaybackControlRequest(this);
     }
 
     /// <summary>Field number for the "hdr" field.</summary>
@@ -2557,11 +2204,22 @@ namespace MediaContract {
       get { return gbid_; }
       set {
         gbid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "playback_type" field.</summary>
+    public const int PlaybackTypeFieldNumber = 3;
+    private global::MediaContract.PlaybackControlType playbackType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::MediaContract.PlaybackControlType PlaybackType {
+      get { return playbackType_; }
+      set {
+        playbackType_ = value;
       }
     }
 
     /// <summary>Field number for the "scale" field.</summary>
-    public const int ScaleFieldNumber = 3;
+    public const int ScaleFieldNumber = 4;
     private float scale_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public float Scale {
@@ -2571,13 +2229,24 @@ namespace MediaContract {
       }
     }
 
+    /// <summary>Field number for the "start_time" field.</summary>
+    public const int StartTimeFieldNumber = 5;
+    private long startTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoSpeedRequest);
+    public long StartTime {
+      get { return startTime_; }
+      set {
+        startTime_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoSpeedRequest other) {
+    public override bool Equals(object other) {
+      return Equals(other as PlaybackControlRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PlaybackControlRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2586,7 +2255,9 @@ namespace MediaContract {
       }
       if (!object.Equals(Hdr, other.Hdr)) return false;
       if (Gbid != other.Gbid) return false;
+      if (PlaybackType != other.PlaybackType) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Scale, other.Scale)) return false;
+      if (StartTime != other.StartTime) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2595,7 +2266,9 @@ namespace MediaContract {
       int hash = 1;
       if (hdr_ != null) hash ^= Hdr.GetHashCode();
       if (Gbid.Length != 0) hash ^= Gbid.GetHashCode();
+      if (PlaybackType != 0) hash ^= PlaybackType.GetHashCode();
       if (Scale != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Scale);
+      if (StartTime != 0L) hash ^= StartTime.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2617,9 +2290,17 @@ namespace MediaContract {
         output.WriteRawTag(18);
         output.WriteString(Gbid);
       }
+      if (PlaybackType != 0) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) PlaybackType);
+      }
       if (Scale != 0F) {
-        output.WriteRawTag(29);
+        output.WriteRawTag(37);
         output.WriteFloat(Scale);
+      }
+      if (StartTime != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(StartTime);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2634,10 +2315,16 @@ namespace MediaContract {
       }
       if (Gbid.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Gbid);
+      }
+      if (PlaybackType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PlaybackType);
       }
       if (Scale != 0F) {
         size += 1 + 4;
       }
+      if (StartTime != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(StartTime);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2645,7 +2332,7 @@ namespace MediaContract {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoSpeedRequest other) {
+    public void MergeFrom(PlaybackControlRequest other) {
       if (other == null) {
         return;
       }
@@ -2657,1033 +2344,15 @@ namespace MediaContract {
       }
       if (other.Gbid.Length != 0) {
         Gbid = other.Gbid;
+      }
+      if (other.PlaybackType != 0) {
+        PlaybackType = other.PlaybackType;
       }
       if (other.Scale != 0F) {
         Scale = other.Scale;
       }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            Gbid = input.ReadString();
-            break;
-          }
-          case 29: {
-            Scale = input.ReadFloat();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoSpeedReply : pb::IMessage<BackVideoSpeedReply> {
-    private static readonly pb::MessageParser<BackVideoSpeedReply> _parser = new pb::MessageParser<BackVideoSpeedReply>(() => new BackVideoSpeedReply());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoSpeedReply> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[13]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoSpeedReply() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoSpeedReply(BackVideoSpeedReply other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      Status = other.status_ != null ? other.Status.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoSpeedReply Clone() {
-      return new BackVideoSpeedReply(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 2;
-    private global::MediaContract.Status status_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Status Status {
-      get { return status_; }
-      set {
-        status_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoSpeedReply);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoSpeedReply other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (!object.Equals(Status, other.Status)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (status_ != null) hash ^= Status.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (status_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Status);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (status_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Status);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoSpeedReply other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.status_ != null) {
-        if (status_ == null) {
-          status_ = new global::MediaContract.Status();
-        }
-        Status.MergeFrom(other.Status);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            if (status_ == null) {
-              status_ = new global::MediaContract.Status();
-            }
-            input.ReadMessage(status_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoPauseRequest : pb::IMessage<BackVideoPauseRequest> {
-    private static readonly pb::MessageParser<BackVideoPauseRequest> _parser = new pb::MessageParser<BackVideoPauseRequest>(() => new BackVideoPauseRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoPauseRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[14]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPauseRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPauseRequest(BackVideoPauseRequest other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      gbid_ = other.gbid_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPauseRequest Clone() {
-      return new BackVideoPauseRequest(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "gbid" field.</summary>
-    public const int GbidFieldNumber = 2;
-    private string gbid_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Gbid {
-      get { return gbid_; }
-      set {
-        gbid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoPauseRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoPauseRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (Gbid != other.Gbid) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (Gbid.Length != 0) hash ^= Gbid.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Gbid);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Gbid);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoPauseRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.Gbid.Length != 0) {
-        Gbid = other.Gbid;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            Gbid = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoPauseReply : pb::IMessage<BackVideoPauseReply> {
-    private static readonly pb::MessageParser<BackVideoPauseReply> _parser = new pb::MessageParser<BackVideoPauseReply>(() => new BackVideoPauseReply());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoPauseReply> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[15]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPauseReply() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPauseReply(BackVideoPauseReply other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      Status = other.status_ != null ? other.Status.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPauseReply Clone() {
-      return new BackVideoPauseReply(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 2;
-    private global::MediaContract.Status status_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Status Status {
-      get { return status_; }
-      set {
-        status_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoPauseReply);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoPauseReply other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (!object.Equals(Status, other.Status)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (status_ != null) hash ^= Status.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (status_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Status);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (status_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Status);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoPauseReply other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.status_ != null) {
-        if (status_ == null) {
-          status_ = new global::MediaContract.Status();
-        }
-        Status.MergeFrom(other.Status);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            if (status_ == null) {
-              status_ = new global::MediaContract.Status();
-            }
-            input.ReadMessage(status_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoContinueRequest : pb::IMessage<BackVideoContinueRequest> {
-    private static readonly pb::MessageParser<BackVideoContinueRequest> _parser = new pb::MessageParser<BackVideoContinueRequest>(() => new BackVideoContinueRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoContinueRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[16]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoContinueRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoContinueRequest(BackVideoContinueRequest other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      gbid_ = other.gbid_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoContinueRequest Clone() {
-      return new BackVideoContinueRequest(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "gbid" field.</summary>
-    public const int GbidFieldNumber = 2;
-    private string gbid_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Gbid {
-      get { return gbid_; }
-      set {
-        gbid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoContinueRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoContinueRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (Gbid != other.Gbid) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (Gbid.Length != 0) hash ^= Gbid.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Gbid);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Gbid);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoContinueRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.Gbid.Length != 0) {
-        Gbid = other.Gbid;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            Gbid = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoContinueReply : pb::IMessage<BackVideoContinueReply> {
-    private static readonly pb::MessageParser<BackVideoContinueReply> _parser = new pb::MessageParser<BackVideoContinueReply>(() => new BackVideoContinueReply());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoContinueReply> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[17]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoContinueReply() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoContinueReply(BackVideoContinueReply other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      Status = other.status_ != null ? other.Status.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoContinueReply Clone() {
-      return new BackVideoContinueReply(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 2;
-    private global::MediaContract.Status status_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Status Status {
-      get { return status_; }
-      set {
-        status_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoContinueReply);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoContinueReply other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (!object.Equals(Status, other.Status)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (status_ != null) hash ^= Status.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (status_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Status);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (status_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Status);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoContinueReply other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.status_ != null) {
-        if (status_ == null) {
-          status_ = new global::MediaContract.Status();
-        }
-        Status.MergeFrom(other.Status);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (hdr_ == null) {
-              hdr_ = new global::MediaContract.Header();
-            }
-            input.ReadMessage(hdr_);
-            break;
-          }
-          case 18: {
-            if (status_ == null) {
-              status_ = new global::MediaContract.Status();
-            }
-            input.ReadMessage(status_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class BackVideoPositionRequest : pb::IMessage<BackVideoPositionRequest> {
-    private static readonly pb::MessageParser<BackVideoPositionRequest> _parser = new pb::MessageParser<BackVideoPositionRequest>(() => new BackVideoPositionRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoPositionRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[18]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPositionRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPositionRequest(BackVideoPositionRequest other) : this() {
-      Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
-      gbid_ = other.gbid_;
-      range_ = other.range_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPositionRequest Clone() {
-      return new BackVideoPositionRequest(this);
-    }
-
-    /// <summary>Field number for the "hdr" field.</summary>
-    public const int HdrFieldNumber = 1;
-    private global::MediaContract.Header hdr_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MediaContract.Header Hdr {
-      get { return hdr_; }
-      set {
-        hdr_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "gbid" field.</summary>
-    public const int GbidFieldNumber = 2;
-    private string gbid_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Gbid {
-      get { return gbid_; }
-      set {
-        gbid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "range" field.</summary>
-    public const int RangeFieldNumber = 3;
-    private int range_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Range {
-      get { return range_; }
-      set {
-        range_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BackVideoPositionRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoPositionRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Hdr, other.Hdr)) return false;
-      if (Gbid != other.Gbid) return false;
-      if (Range != other.Range) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (hdr_ != null) hash ^= Hdr.GetHashCode();
-      if (Gbid.Length != 0) hash ^= Gbid.GetHashCode();
-      if (Range != 0) hash ^= Range.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (hdr_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Gbid);
-      }
-      if (Range != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Range);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (hdr_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Hdr);
-      }
-      if (Gbid.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Gbid);
-      }
-      if (Range != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Range);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoPositionRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.hdr_ != null) {
-        if (hdr_ == null) {
-          hdr_ = new global::MediaContract.Header();
-        }
-        Hdr.MergeFrom(other.Hdr);
-      }
-      if (other.Gbid.Length != 0) {
-        Gbid = other.Gbid;
-      }
-      if (other.Range != 0) {
-        Range = other.Range;
+      if (other.StartTime != 0L) {
+        StartTime = other.StartTime;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3708,7 +2377,15 @@ namespace MediaContract {
             break;
           }
           case 24: {
-            Range = input.ReadInt32();
+            playbackType_ = (global::MediaContract.PlaybackControlType) input.ReadEnum();
+            break;
+          }
+          case 37: {
+            Scale = input.ReadFloat();
+            break;
+          }
+          case 40: {
+            StartTime = input.ReadInt64();
             break;
           }
         }
@@ -3717,15 +2394,15 @@ namespace MediaContract {
 
   }
 
-  public sealed partial class BackVideoPositionReply : pb::IMessage<BackVideoPositionReply> {
-    private static readonly pb::MessageParser<BackVideoPositionReply> _parser = new pb::MessageParser<BackVideoPositionReply>(() => new BackVideoPositionReply());
+  public sealed partial class PlaybackControlReply : pb::IMessage<PlaybackControlReply> {
+    private static readonly pb::MessageParser<PlaybackControlReply> _parser = new pb::MessageParser<PlaybackControlReply>(() => new PlaybackControlReply());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BackVideoPositionReply> Parser { get { return _parser; } }
+    public static pb::MessageParser<PlaybackControlReply> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[19]; }
+      get { return global::MediaContract.VideoSessionReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3734,22 +2411,22 @@ namespace MediaContract {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPositionReply() {
+    public PlaybackControlReply() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPositionReply(BackVideoPositionReply other) : this() {
+    public PlaybackControlReply(PlaybackControlReply other) : this() {
       Hdr = other.hdr_ != null ? other.Hdr.Clone() : null;
       Status = other.status_ != null ? other.Status.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BackVideoPositionReply Clone() {
-      return new BackVideoPositionReply(this);
+    public PlaybackControlReply Clone() {
+      return new PlaybackControlReply(this);
     }
 
     /// <summary>Field number for the "hdr" field.</summary>
@@ -3776,11 +2453,11 @@ namespace MediaContract {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as BackVideoPositionReply);
+      return Equals(other as PlaybackControlReply);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BackVideoPositionReply other) {
+    public bool Equals(PlaybackControlReply other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -3839,7 +2516,7 @@ namespace MediaContract {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BackVideoPositionReply other) {
+    public void MergeFrom(PlaybackControlReply other) {
       if (other == null) {
         return;
       }

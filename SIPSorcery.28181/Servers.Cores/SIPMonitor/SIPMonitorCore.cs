@@ -1160,7 +1160,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
             return true;
         }
-        public bool BackVideoPlayPositionControlReq(string sessionid, int range)
+        public bool BackVideoPlayPositionControlReq(string sessionid, long time)
         {
             try
             {
@@ -1171,7 +1171,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
                 int cSeq = CallProperties.CreateNewCSeq();
                 string callId = CallProperties.CreateNewCallId();
 
-                SIPRequest realReq = BackVideoPlayPositionControlReq(sessionid, range, fromTag, cSeq, callId);
+                SIPRequest realReq = BackVideoPlayPositionControlReq(sessionid, time, fromTag, cSeq, callId);
                 _sipMsgCoreService.SendRequest(RemoteEndPoint, realReq);
                 return true;
             }
@@ -1217,7 +1217,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             _reqSession = backReq;
             return backReq;
         }
-        private SIPRequest BackVideoPlayPositionControlReq(string sessionid, int Time, string fromTag, int cSeq, string callId)
+        private SIPRequest BackVideoPlayPositionControlReq(string sessionid, long time, string fromTag, int cSeq, string callId)
         {
             if (!_syncRequestContext.Keys.Contains(sessionid)) return null;
             SIPRequest reqSession = _syncRequestContext[sessionid];
@@ -1241,7 +1241,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             backReq.Header.CallId = reqSession.Header.CallId;
             backReq.Header.Subject = SetSubject();
             backReq.Header.ContentType = SIPHeader.ContentTypes.Application_MANSRTSP;
-            backReq.Body = SetMediaPositionReq(Time, cSeq);
+            backReq.Body = SetMediaPositionReq(time, cSeq);
             _reqSession = backReq;
             return backReq;
         }
@@ -1261,12 +1261,12 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
                 "Range: npt=" + Time + "-\r\n";
             return str;
         }
-        private string SetMediaPositionReq(int Time, int cseq)
+        private string SetMediaPositionReq(long time, int cseq)
         {
             string str =
                 "PLAY MANSRTSP/1.0\r\n" +
                 "CSeq: " + cseq + "\r\n" +
-                "Range: npt=" + Time + "-\r\n";
+                "Range: npt=" + time + "-\r\n";
             return str;
         }
 

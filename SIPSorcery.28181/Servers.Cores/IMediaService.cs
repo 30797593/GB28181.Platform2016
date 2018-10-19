@@ -77,7 +77,7 @@ namespace SIPSorcery.GB28181.Servers
         /// </summary>
         /// <param name="range">时间范围</param>
         bool BackVideoPlayPositionControlReq(int range);
-        bool BackVideoPlayPositionControlReq(string sessionid, int range);
+        bool BackVideoPlayPositionControlReq(string sessionid, long time);
         /// <summary>
         /// 录像点播视频继续播放控制请求
         /// </summary>

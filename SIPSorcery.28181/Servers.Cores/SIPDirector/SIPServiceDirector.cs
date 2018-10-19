@@ -350,7 +350,7 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="sessionid"></param>
         /// <param name="range"></param>
         /// <returns></returns>
-        public bool BackVideoPlayPositionControlReq(string gbid, string sessionid, int range)
+        public bool BackVideoPlayPositionControlReq(string gbid, string sessionid, long time)
         {
             var target = GetTargetMonitorService(gbid);
 
@@ -358,7 +358,7 @@ namespace SIPSorcery.GB28181.Servers
             {
                 return false;
             }
-            target.BackVideoPlayPositionControlReq(sessionid, range);
+            target.BackVideoPlayPositionControlReq(sessionid, time);
             logger.Debug("BackVideoPlayPositionControlReq stopped.");
             return true;
         }
