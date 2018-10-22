@@ -60,7 +60,7 @@ namespace GrpcAgent.WebsocketRpcServer
                 //}
                 _device.Guid = Guid.NewGuid().ToString();
                 _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//IPC
-                _device.Name = "GB" + _device.IP;
+                _device.Name = "gb" + _device.IP;
                 _device.LoginUser.Add(new LoginUser() { LoginName = sIPAccount.SIPUsername ?? "admin", LoginPwd = sIPAccount.SIPPassword ?? "123456" });
                 _device.Port = Convert.ToUInt32(sipTransaction.TransactionRequest.RemoteSIPEndPoint.Port);//5060
                 _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001180000184
