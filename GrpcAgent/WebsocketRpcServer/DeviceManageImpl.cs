@@ -29,35 +29,6 @@ namespace GrpcAgent.WebsocketRpcServer
             {
                 Device _device = new Device();
                 SIPRequest sipRequest = sipTransaction.TransactionRequest;
-                //{
-                //    "_id": ObjectID("5b8f8b0aba6730933a2bdaf5"),
-                //    "uuid": "005199cd-7d06-43dc-a9cc-a2d9cf42a118",
-                //    "name": "testgbname",
-                //    "users": [
-                //        {
-                //            "loginname": "admin",
-                //            "loginpwd": "123456"
-                //        }
-                //    ],
-                //    "tag": [],
-                //    "ptztype": 0,
-                //    "description": "",
-                //    "protocoltype": 0,
-                //    "ip": "",
-                //    "port": 0,
-                //    "gbid": "42010000001180000184",
-                //    "gbparentid": "",
-                //    "mediasrctype": [],
-                //    "mediainfo": null,
-                //    "longitude": 0,
-                //    "latitude": 0,
-                //    "parentid": "",
-                //    "did": "",
-                //    "cid": "",
-                //    "pid": "",
-                //    "sid": "",
-                //    "shapetype": 2
-                //}
                 _device.Guid = Guid.NewGuid().ToString();
                 _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//IPC
                 _device.Name = "gb" + _device.IP;
