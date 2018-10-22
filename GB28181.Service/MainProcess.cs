@@ -182,6 +182,7 @@ namespace GB28181Service
                     _mainSipService.OnMediaStatusReceived += messageHandler.OnMediaStatusReceived;
                     _mainSipService.OnPresetQueryReceived += messageHandler.OnPresetQueryReceived;
                     _mainSipService.OnDeviceConfigDownloadReceived += messageHandler.OnDeviceConfigDownloadReceived;
+                    _mainSipService.OnResponseCodeReceived += messageHandler.OnResponseCodeReceived;
                     _mainSipService.Start();
 
                 });

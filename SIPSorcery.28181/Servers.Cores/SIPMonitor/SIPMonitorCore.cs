@@ -584,10 +584,10 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             {
                 IsStandardAttribute = false
             };
-            SDPMediaFormat mpeg4Format = new SDPMediaFormat(SDPMediaFormatsEnum.MPEG4)
-            {
-                IsStandardAttribute = false
-            };
+            //SDPMediaFormat mpeg4Format = new SDPMediaFormat(SDPMediaFormatsEnum.MPEG4)
+            //{
+            //    IsStandardAttribute = false
+            //};
             SDPMediaAnnouncement media = new SDPMediaAnnouncement
             {
                 Media = SDPMediaTypesEnum.video
@@ -595,7 +595,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
 
             media.MediaFormats.Add(psFormat);
             media.MediaFormats.Add(h264Format);
-            media.MediaFormats.Add(mpeg4Format);
+            //media.MediaFormats.Add(mpeg4Format);
             media.AddExtra("a=recvonly");
             if (_sipAccount.StreamProtocol == ProtocolType.Tcp)
             {
@@ -644,10 +644,10 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
             {
                 IsStandardAttribute = false
             };
-            SDPMediaFormat mpeg4Format = new SDPMediaFormat(SDPMediaFormatsEnum.MPEG4)
-            {
-                IsStandardAttribute = false
-            };
+            //SDPMediaFormat mpeg4Format = new SDPMediaFormat(SDPMediaFormatsEnum.MPEG4)
+            //{
+            //    IsStandardAttribute = false
+            //};
             SDPMediaAnnouncement media = new SDPMediaAnnouncement
             {
                 Media = SDPMediaTypesEnum.video
@@ -655,7 +655,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
 
             media.MediaFormats.Add(psFormat);
             media.MediaFormats.Add(h264Format);
-            media.MediaFormats.Add(mpeg4Format);
+            //media.MediaFormats.Add(mpeg4Format);
             media.AddExtra("a=recvonly");
             if (_sipAccount.StreamProtocol == ProtocolType.Tcp)
             {

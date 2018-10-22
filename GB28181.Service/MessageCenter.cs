@@ -350,6 +350,10 @@ namespace GB28181Service
         {
             throw new NotImplementedException();
         }
+        internal void OnResponseCodeReceived(SIPResponseStatusCodesEnum status, string msg, SIPEndPoint remoteEP)
+        {
+            logger.Debug("OnResponseCodeReceived: " + msg);
+        }
     }
 
     /// <summary>
