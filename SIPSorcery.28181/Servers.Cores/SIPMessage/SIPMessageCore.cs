@@ -264,7 +264,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         {
             try
             {
-                logger.Debug("DeviceStateQuery started.");
+                //logger.Debug("DeviceStateQuery started.");
 
                 foreach (var item in _nodeMonitorService.ToArray())
                 {
@@ -274,7 +274,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     }
                 }
 
-                logger.Debug("DeviceStateQuery halted.");
+                //logger.Debug("DeviceStateQuery halted.");
             }
             catch (Exception excp)
             {
