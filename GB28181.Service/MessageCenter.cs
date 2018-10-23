@@ -247,7 +247,7 @@ namespace GB28181Service
                     {
                         Event.Status stat = new Event.Status();
                         stat.Status_ = false;
-                        stat.OccurredTime = (UInt64)DateTime.Now.Ticks;
+                        stat.OccurredTime = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
                         #region waiting DeviceStatuses add in for 500 Milliseconds
                         _sipCoreMessageService.DeviceStateQuery(obj.Heart.DeviceID);
                         TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
