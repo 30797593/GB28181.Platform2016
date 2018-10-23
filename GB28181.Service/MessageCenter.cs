@@ -272,39 +272,34 @@ namespace GB28181Service
                         }
                         #endregion
                         string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
-                        //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
                         Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                         var client = new Manage.Manage.ManageClient(channel);
-                        QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
+                        QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
                         QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
-                        //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
                         req.GbIds.Add(obj.Heart.DeviceID);
-                        //logger.Debug("QueryGBDeviceByGBIDs: " + obj.Heart.DeviceID);
-                        _rep = client.QueryGBDeviceByGBIDs(req);
-                        if (_rep.Devices != null && _rep.Devices.Count > 0)
+                        rep = client.QueryGBDeviceByGBIDs(req);
+                        if (rep.Devices.Count > 0)
                         {
-                            stat.DeviceID = _rep.Devices[0].Guid;
-                            stat.DeviceName = _rep.Devices[0].Name;
+                            stat.DeviceID = rep.Devices[0].Guid;
+                            stat.DeviceName = rep.Devices[0].Name;
                         }
                         else
                         {
-                            logger.Warn("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
+                            logger.Warn("QueryGBDeviceByGBIDsResponse .Devices.Count: " + rep.Devices.Count);
                             continue;
                         }
-                        logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + _rep.Devices[0].ToString());
+                        logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
 
                         Message message = new Message();
                         Dictionary<string, string> dic = new Dictionary<string, string>();
                         dic.Add("Content-Type", "application/octet-stream");
                         message.Header = dic;
                         message.Body = stat.ToByteArray();
-
                         byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-                        string subject = Event.StatusTopic.OriginalStatusTopic.ToString();//"OriginalStatusTopic"
+                        string subject = Event.StatusTopic.OriginalStatusTopic.ToString();
                         #region
                         Options opts = ConnectionFactory.GetDefaultOptions();
                         opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
-                        //logger.Debug("GB Nats Channel Address: " + opts.Url);
                         using (IConnection c = new ConnectionFactory().CreateConnection(opts))
                         {
                             c.Publish(subject, payload);
@@ -345,39 +340,69 @@ namespace GB28181Service
                 Channel channel = new Channel(EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080", ChannelCredentials.Insecure);
                 logger.Debug("Device Management Service Address: " + (EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080"));
                 var client = new Manage.Manage.ManageClient(channel);
-                if (!_sipCoreMessageService.NodeMonitorService.ContainsKey(_device.GBID))
+                //if (!_sipCoreMessageService.NodeMonitorService.ContainsKey(_device.GBID))
+                //{
+                //    AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
+                //    _AddDeviceRequest.Device.Add(_device);
+                //    _AddDeviceRequest.LoginRoleId = "XXXX";
+                //    var reply = client.AddDevice(_AddDeviceRequest);
+                //    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
+                //    {
+                //        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have added registering DMS service.");
+                //        DeviceEditEvent(_device.GBID, "add");
+                //    }
+                //    else
+                //    {
+                //        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
+                //    }
+                //}
+                //else
+                //{
+                //    UpdateDeviceRequest _UpdateDeviceRequest = new UpdateDeviceRequest();
+                //    _UpdateDeviceRequest.DeviceItem.Add(_device);
+                //    _UpdateDeviceRequest.LoginRoleId = "XXXX";
+                //    var reply = client.UpdateDevice(_UpdateDeviceRequest);
+                //    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
+                //    {
+                //        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have updated registering DMS service.");
+                //        DeviceEditEvent(_device.GBID, "update");
+                //    }
+                //    else
+                //    {
+                //        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.UpdateDevice: " + reply.Status.ToString());
+                //    }
+                //}
+
+                //query device info from db
+                QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
+                QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                req.GbIds.Add(_device.GBID);
+                rep = client.QueryGBDeviceByGBIDs(req);
+                
+                //add & update device
+                AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
+                _AddDeviceRequest.Device.Add(_device);
+                _AddDeviceRequest.LoginRoleId = "XXXX";
+                var reply = client.AddDevice(_AddDeviceRequest);
+                if (reply.Status == OP_RESULT_STATUS.OpSuccess)
                 {
-                    AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
-                    _AddDeviceRequest.Device.Add(_device);
-                    _AddDeviceRequest.LoginRoleId = "XXXX";
-                    var reply = client.AddDevice(_AddDeviceRequest);
-                    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
-                    {
-                        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have added registering DMS service.");
-                        DeviceEditEvent(_device.GBID, "add");
-                    }
-                    else
-                    {
-                        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
-                    }
+                    logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have added registering DMS service.");
                 }
                 else
                 {
-                    UpdateDeviceRequest _UpdateDeviceRequest = new UpdateDeviceRequest();
-                    _UpdateDeviceRequest.DeviceItem.Add(_device);
-                    _UpdateDeviceRequest.LoginRoleId = "XXXX";
-                    var reply = client.UpdateDevice(_UpdateDeviceRequest);
-                    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
-                    {
-                        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have updated registering DMS service.");
-                        DeviceEditEvent(_device.GBID, "update");
-                    }
-                    else
-                    {
-                        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.UpdateDevice: " + reply.Status.ToString());
-                    }
-
+                    logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
                 }
+
+                //Device Edit Event
+                if (rep.Devices.Count < 1)
+                {
+                    DeviceEditEvent(_device.GBID, "add");
+                }
+                else
+                {
+                    DeviceEditEvent(_device.GBID, "update");
+                }
+
             }
             catch (Exception ex)
             {
@@ -397,34 +422,29 @@ namespace GB28181Service
                 evt.OccurredTime = (UInt64)DateTime.Now.Ticks;
 
                 string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
-                //logger.Debug("Device Management Service Address: " + GBServerChannelAddress);
                 Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
                 var client = new Manage.Manage.ManageClient(channel);
-                QueryGBDeviceByGBIDsResponse _rep = new QueryGBDeviceByGBIDsResponse();
+                QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
                 QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
-                //logger.Debug("OnStatusReceived Status: " + JsonConvert.SerializeObject(stat));
                 req.GbIds.Add(DeviceID);
-                //logger.Debug("QueryGBDeviceByGBIDs: " + obj.Heart.DeviceID);
-                _rep = client.QueryGBDeviceByGBIDs(req);
-                if (_rep.Devices != null && _rep.Devices.Count > 0)
+                rep = client.QueryGBDeviceByGBIDs(req);
+                if (rep.Devices.Count > 0)
                 {
-                    evt.DeviceID = _rep.Devices[0].Guid;
-                    evt.DeviceName = _rep.Devices[0].Name;
+                    evt.DeviceID = rep.Devices[0].Guid;
+                    evt.DeviceName = rep.Devices[0].Name;                    
                 }
-                logger.Debug("QueryGBDeviceByGBIDsRequest-EditEvent .Devices: " + _rep.Devices[0].ToString());
+                logger.Debug("QueryGBDeviceByGBIDsRequest-EditEvent .Devices: " + rep.Devices[0].ToString());
 
                 Message message = new Message();
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("Content-Type", "application/octet-stream");
                 message.Header = dic;
                 message.Body = evt.ToByteArray();
-
                 byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
                 string subject = Event.EventTopic.OriginalEventTopic.ToString();//"OriginalEventTopic"
                 #region
                 Options opts = ConnectionFactory.GetDefaultOptions();
                 opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
-                //logger.Debug("GB Nats Channel Address: " + opts.Url);
                 using (IConnection c = new ConnectionFactory().CreateConnection(opts))
                 {
                     c.Publish(subject, payload);
