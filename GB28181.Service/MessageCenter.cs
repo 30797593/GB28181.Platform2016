@@ -358,7 +358,7 @@ namespace GB28181Service
                     }
                     else
                     {
-                        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived: " + reply.Status.ToString());
+                        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
                     }
                 }
                 else
@@ -374,7 +374,7 @@ namespace GB28181Service
                     }
                     else
                     {
-                        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived: " + reply.Status.ToString());
+                        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.UpdateDevice: " + reply.Status.ToString());
                     }
 
                 }
