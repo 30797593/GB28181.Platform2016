@@ -561,7 +561,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                 //add by zohn on 20180711
                 if (response.Header.ContentType == null)
                 {
-                    logger.Debug("Received response.Header.ContentType == null, response.Status: " + response.Status + "," + remoteEP);
+                    //logger.Debug("Received response.Header.ContentType == null, response.Status: " + response.Status + "," + remoteEP);
                     return;
                 }
 
