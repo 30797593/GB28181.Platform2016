@@ -412,7 +412,7 @@ namespace GB28181Service
             {
                 Event.Event evt = new Event.Event();
                 evt.Detail = "DeviceEditEvent: " + edittype + " " + DeviceID;
-                evt.OccurredTime = (UInt64)DateTime.Now.Ticks;
+                evt.OccurredTime = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
 
                 string GBServerChannelAddress = EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080";
                 Channel channel = new Channel(GBServerChannelAddress, ChannelCredentials.Insecure);
