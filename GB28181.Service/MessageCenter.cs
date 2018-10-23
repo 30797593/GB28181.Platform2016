@@ -190,7 +190,7 @@ namespace GB28181Service
                 }
                 else
                 {
-                    logger.Debug("QueryGBDeviceByGBIDsResponse .Devices.Count: " + _rep.Devices.Count);
+                    logger.Debug("QueryGBDeviceByGBIDsResponse Devices.Count: " + _rep.Devices.Count);
                 }
                 logger.Debug("QueryGBDeviceByGBIDsRequest-Alarm .Devices: " + _rep.Devices[0].ToString());
                 UInt64 timeStamp = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
@@ -285,7 +285,7 @@ namespace GB28181Service
                         }
                         else
                         {
-                            logger.Warn("QueryGBDeviceByGBIDsResponse .Devices.Count: " + rep.Devices.Count);
+                            logger.Warn("QueryGBDeviceByGBIDsResponse Devices.Count: " + rep.Devices.Count);
                             continue;
                         }
                         logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
@@ -304,7 +304,7 @@ namespace GB28181Service
                         {
                             c.Publish(subject, payload);
                             c.Flush();
-                            logger.Debug("Device status created connection and published.");
+                            logger.Debug("Device on/off line status published.");
                         }
                         #endregion
                     }
@@ -378,7 +378,8 @@ namespace GB28181Service
                 QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
                 req.GbIds.Add(_device.GBID);
                 rep = client.QueryGBDeviceByGBIDs(req);
-                
+                string edit = rep.Devices.Count < 1 ? "added" : "updated";
+
                 //add & update device
                 AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
                 _AddDeviceRequest.Device.Add(_device);
@@ -394,19 +395,11 @@ namespace GB28181Service
                 }
 
                 //Device Edit Event
-                if (rep.Devices.Count < 1)
-                {
-                    DeviceEditEvent(_device.GBID, "add");
-                }
-                else
-                {
-                    DeviceEditEvent(_device.GBID, "update");
-                }
-
+                DeviceEditEvent(_device.GBID, edit);
             }
             catch (Exception ex)
             {
-                logger.Error("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] register DMS failed: " + ex.Message);
+                logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived Exception: " + ex.Message);
             }
         }
 
@@ -433,7 +426,7 @@ namespace GB28181Service
                     evt.DeviceID = rep.Devices[0].Guid;
                     evt.DeviceName = rep.Devices[0].Name;                    
                 }
-                logger.Debug("QueryGBDeviceByGBIDsRequest-EditEvent .Devices: " + rep.Devices[0].ToString());
+                logger.Debug("DeviceEditEvent: " + edittype + " " + rep.Devices[0].ToString());
 
                 Message message = new Message();
                 Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -449,7 +442,7 @@ namespace GB28181Service
                 {
                     c.Publish(subject, payload);
                     c.Flush();
-                    logger.Debug("Device event created connection and published.");
+                    logger.Debug("Device add/update event published.");
                 }
                 #endregion
             }
