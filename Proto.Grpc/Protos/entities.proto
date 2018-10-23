@@ -9,7 +9,10 @@ message Status{
     uint64 occurred_time = 4;
     string description = 5;
 }
-
+enum EventTopic{
+    DeviceEventTopic = 0;
+    OriginalEventTopic=1;
+}
 enum StatusTopic{
     DeviceStatusTopic = 0;
     //ONVIFIPCStatusTopic = 1;
@@ -49,8 +52,6 @@ message Alarm{
         RuleEnginePlateDetector = 20;
         RuleEngineFaceAnalysisFaceDetector = 21;
         RuleEngineCellMotionDetectorMotion = 22;
-        MediaProfileChanged = 23;
-        MediaConfigurationChanged = 24;
         MonitoringProfileActiveConnections = 25;
         EventMotionAlarm = 26;
         VideoMask=27;
@@ -64,12 +65,28 @@ message Alarm{
         SDCardFull=35;
         AlarmInput=36;
         AlarmOutput=37;
+        RecordLost=38;//录像丢失
+        ResourceUsage=39;//资源使用率告警
+        RecordException=40;//录像异常
+        VolumCapacityIsTooLow=41;//ipsan卷容量过低
     }
     AlarmType alarm_type = 1;
     string device_ID= 2;
     string device_name =3;
     uint64 start_time = 4;
     uint64 end_time = 5;
+    string detail = 6;
+}
+
+message Event {
+    enum EventType{
+        MediaProfileChanged = 0;
+        MediaConfigurationChanged = 1;
+    }
+    EventType event_type = 1;
+    string device_ID= 2;
+    string device_name =3;
+    uint64 occurred_time = 4;
     string detail = 6;
 }
 

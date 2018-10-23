@@ -20,7 +20,7 @@ namespace GrpcAgent.WebsocketRpcServer
         public DeviceManageImpl(ISIPRegistrarCore sipRegistrarCore)
         {
             _sipRegistrarCore = sipRegistrarCore;
-            _sipRegistrarCore.RPCDmsRegisterReceived += _sipRegistrarCore_RPCDmsRegisterReceived;
+            //_sipRegistrarCore.RPCDmsRegisterReceived += _sipRegistrarCore_RPCDmsRegisterReceived;
         }
 
         private void _sipRegistrarCore_RPCDmsRegisterReceived(SIPTransaction sipTransaction, SIPSorcery.GB28181.SIP.App.SIPAccount sIPAccount)
