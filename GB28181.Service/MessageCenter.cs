@@ -411,6 +411,7 @@ namespace GB28181Service
             try
             {
                 Event.Event evt = new Event.Event();
+                evt.EventType = Event.Event.Types.EventType.MediaConfigurationChanged;
                 evt.Detail = "DeviceEditEvent: " + edittype + " " + DeviceID;
                 evt.OccurredTime = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
 
