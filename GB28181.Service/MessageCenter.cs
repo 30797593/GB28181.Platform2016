@@ -5,15 +5,16 @@ using SIPSorcery.GB28181.Servers.SIPMessage;
 using SIPSorcery.GB28181.SIP;
 using SIPSorcery.GB28181.Sys.XML;
 using NATS.Client;
-using System.Diagnostics;
+//using System.Diagnostics;
 using SIPSorcery.GB28181.Sys;
 using System.Text;
 using Logger4Net;
 using Newtonsoft.Json;
 using Google.Protobuf;
-using SIPSorcery.GB28181.SIP.App;
+//using SIPSorcery.GB28181.SIP.App;
 using Manage;
 using Grpc.Core;
+//using GrpcDeviceCatalog;
 
 namespace GB28181Service
 {
@@ -31,6 +32,8 @@ namespace GB28181Service
         public Dictionary<string, HeartBeatEndPoint> HeartBeatStatuses => _HeartBeatStatuses;
         private Dictionary<string, DeviceStatus> _DeviceStatuses = new Dictionary<string, DeviceStatus>();
         public Dictionary<string, DeviceStatus> DeviceStatuses => _DeviceStatuses;
+        private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
+        public Dictionary<string, Catalog> Catalogs => _Catalogs;
 
         public MessageCenter(ISipMessageCore sipCoreMessageService, ISIPMonitorCore sIPMonitorCore, ISIPRegistrarCore sipRegistrarCore)
         {
@@ -38,11 +41,18 @@ namespace GB28181Service
             _sIPMonitorCore = sIPMonitorCore;
             _registrarCore = sipRegistrarCore;
             _registrarCore.DeviceAlarmSubscribe += OnDeviceAlarmSubscribeReceived;
-            _sipCoreMessageService.OnDeviceStatusReceived += _sipCoreMessageService_OnDeviceStatusReceived;
             _registrarCore.RPCDmsRegisterReceived += _sipRegistrarCore_RPCDmsRegisterReceived;
         }
 
-        private void _sipCoreMessageService_OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
+        public void OnCatalogReceived(Catalog obj)
+        {
+            if (!Catalogs.ContainsKey(obj.DeviceID))
+            {
+                Catalogs.Add(obj.DeviceID, obj);
+            }
+        }
+
+        public void OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
         {
             if (!DeviceStatuses.ContainsKey(arg2.DeviceID))
             {
@@ -396,6 +406,8 @@ namespace GB28181Service
 
                 //Device Edit Event
                 DeviceEditEvent(_device.GBID, edit);
+                //Device Catalog Query
+                DeviceCatalogQuery(_device.GBID);
             }
             catch (Exception ex)
             {
@@ -450,6 +462,69 @@ namespace GB28181Service
             catch (Exception ex)
             {
                 logger.Error("DeviceEditEvent Exception: " + ex.Message);
+            }
+        }
+        /// <summary>
+        /// Device Catalog Query
+        /// </summary>
+        internal void DeviceCatalogQuery(string deviceId)
+        {
+            //Instance instance = null;
+            Catalog _Catalog = null;
+            try
+            {
+                _sipCoreMessageService.DeviceCatalogQuery(deviceId);
+                while (true)
+                {
+                    foreach (Catalog obj in Catalogs.Values)
+                    {
+                        if (deviceId.Equals(obj.DeviceID))
+                        {
+                            _Catalog = obj;
+                        }
+                    }
+                    if (_Catalog == null)
+                    {
+                        System.Threading.Thread.Sleep(500);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                logger.Debug("DeviceCatalogQuery: " + JsonConvert.SerializeObject(_Catalog).ToString());
+
+                //List<Catalog.Item> lstCatalogItems = _Catalog.DeviceList.Items;
+                //string jsonCatalog = JsonConvert.SerializeObject(_Catalog)
+                //    .Replace("\"Certifiable\":null", "\"Certifiable\":0")
+                //    .Replace("\"ErrCode\":null", "\"ErrCode\":0")
+                //    .Replace("\"Secrecy\":null", "\"Secrecy\":0")
+                //    .Replace("\"Longitude\":null", "\"Longitude\":0")
+                //    .Replace("\"Latitude\":null", "\"Latitude\":0")
+                //    .Replace("\"Parental\":null", "\"Parental\":0")
+                //    .Replace("\"SafetyWay\":null", "\"SafetyWay\":0")
+                //    .Replace("\"RegisterWay\":null", "\"RegisterWay\":0")
+                //    .Replace("\"Port\":null", "\"Port\":0")
+                //    .Replace(":null", ":\"null\"")
+                //    .Replace(",\"InfList\":\"null\"", "");//delete InfList
+                //instance = JsonConvert.DeserializeObject<Instance>(jsonCatalog);
+                //foreach (Catalog.Item cataLogItem in lstCatalogItems)
+                //{
+                //    foreach (Item instanceItem in instance.DeviceList.Items)
+                //    {
+                //        if (cataLogItem.DeviceID == instanceItem.DeviceID)
+                //        {
+                //            string jsonInfList = JsonConvert.SerializeObject(cataLogItem.InfList)
+                //                .Replace(":null", ":\"null\"");
+                //            Info instanceInfo = JsonConvert.DeserializeObject<Info>(jsonInfList);
+                //            instanceItem.InfList = instanceInfo;
+                //        }
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                logger.Error("DeviceCatalogQuery Exception: " + ex.Message);
             }
         }
 
