@@ -470,59 +470,9 @@ namespace GB28181Service
         /// </summary>
         internal void DeviceCatalogQuery(string deviceId)
         {
-            //Instance instance = null;
-            //Catalog _Catalog = null;
             try
             {
                 _sipCoreMessageService.DeviceCatalogQuery(deviceId);
-                //while (true)
-                //{
-                //    foreach (Catalog obj in Catalogs.Values)
-                //    {
-                //        if (deviceId.Equals(obj.DeviceID))
-                //        {
-                //            _Catalog = obj;
-                //        }
-                //    }
-                //    if (_Catalog == null)
-                //    {
-                //        logger.Debug("DeviceCatalogQuery: waiting catalog query...");
-                //        System.Threading.Thread.Sleep(500);
-                //    }
-                //    else
-                //    {
-                //        break;
-                //    }
-                //}
-                //logger.Debug("DeviceCatalogQuery: " + JsonConvert.SerializeObject(_Catalog).ToString());
-
-                //List<Catalog.Item> lstCatalogItems = _Catalog.DeviceList.Items;
-                //string jsonCatalog = JsonConvert.SerializeObject(_Catalog)
-                //    .Replace("\"Certifiable\":null", "\"Certifiable\":0")
-                //    .Replace("\"ErrCode\":null", "\"ErrCode\":0")
-                //    .Replace("\"Secrecy\":null", "\"Secrecy\":0")
-                //    .Replace("\"Longitude\":null", "\"Longitude\":0")
-                //    .Replace("\"Latitude\":null", "\"Latitude\":0")
-                //    .Replace("\"Parental\":null", "\"Parental\":0")
-                //    .Replace("\"SafetyWay\":null", "\"SafetyWay\":0")
-                //    .Replace("\"RegisterWay\":null", "\"RegisterWay\":0")
-                //    .Replace("\"Port\":null", "\"Port\":0")
-                //    .Replace(":null", ":\"null\"")
-                //    .Replace(",\"InfList\":\"null\"", "");//delete InfList
-                //instance = JsonConvert.DeserializeObject<Instance>(jsonCatalog);
-                //foreach (Catalog.Item cataLogItem in lstCatalogItems)
-                //{
-                //    foreach (Item instanceItem in instance.DeviceList.Items)
-                //    {
-                //        if (cataLogItem.DeviceID == instanceItem.DeviceID)
-                //        {
-                //            string jsonInfList = JsonConvert.SerializeObject(cataLogItem.InfList)
-                //                .Replace(":null", ":\"null\"");
-                //            Info instanceInfo = JsonConvert.DeserializeObject<Info>(jsonInfList);
-                //            instanceItem.InfList = instanceInfo;
-                //        }
-                //    }
-                //}
             }
             catch (Exception ex)
             {
