@@ -50,6 +50,7 @@ namespace GB28181Service
             {
                 Catalogs.Add(obj.DeviceID, obj);
             }
+            logger.Debug("OnCatalogReceived  Counts: " + Catalogs.Count);
         }
 
         public void OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
@@ -407,7 +408,7 @@ namespace GB28181Service
                 //Device Edit Event
                 DeviceEditEvent(_device.GBID, edit);
                 //Device Catalog Query
-                DeviceCatalogQuery(_device.GBID);
+                //DeviceCatalogQuery(_device.GBID);
             }
             catch (Exception ex)
             {
