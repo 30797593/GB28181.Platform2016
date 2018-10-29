@@ -50,7 +50,7 @@ namespace GB28181Service
             {
                 Catalogs.Add(obj.DeviceID, obj);
             }
-            logger.Debug("OnCatalogReceived  Counts: " + Catalogs.Count);
+            logger.Debug("OnCatalogReceived: " + JsonConvert.SerializeObject(obj).ToString());
         }
 
         public void OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
@@ -408,7 +408,7 @@ namespace GB28181Service
                 //Device Edit Event
                 DeviceEditEvent(_device.GBID, edit);
                 //Device Catalog Query
-                //DeviceCatalogQuery(_device.GBID);
+                DeviceCatalogQuery(_device.GBID);
             }
             catch (Exception ex)
             {
@@ -471,30 +471,30 @@ namespace GB28181Service
         internal void DeviceCatalogQuery(string deviceId)
         {
             //Instance instance = null;
-            Catalog _Catalog = null;
+            //Catalog _Catalog = null;
             try
             {
                 _sipCoreMessageService.DeviceCatalogQuery(deviceId);
-                while (true)
-                {
-                    foreach (Catalog obj in Catalogs.Values)
-                    {
-                        if (deviceId.Equals(obj.DeviceID))
-                        {
-                            _Catalog = obj;
-                        }
-                    }
-                    if (_Catalog == null)
-                    {
-                        logger.Debug("DeviceCatalogQuery: waiting catalog query...");
-                        System.Threading.Thread.Sleep(500);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                logger.Debug("DeviceCatalogQuery: " + JsonConvert.SerializeObject(_Catalog).ToString());
+                //while (true)
+                //{
+                //    foreach (Catalog obj in Catalogs.Values)
+                //    {
+                //        if (deviceId.Equals(obj.DeviceID))
+                //        {
+                //            _Catalog = obj;
+                //        }
+                //    }
+                //    if (_Catalog == null)
+                //    {
+                //        logger.Debug("DeviceCatalogQuery: waiting catalog query...");
+                //        System.Threading.Thread.Sleep(500);
+                //    }
+                //    else
+                //    {
+                //        break;
+                //    }
+                //}
+                //logger.Debug("DeviceCatalogQuery: " + JsonConvert.SerializeObject(_Catalog).ToString());
 
                 //List<Catalog.Item> lstCatalogItems = _Catalog.DeviceList.Items;
                 //string jsonCatalog = JsonConvert.SerializeObject(_Catalog)
