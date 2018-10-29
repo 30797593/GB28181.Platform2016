@@ -26,11 +26,11 @@ namespace Event {
           string.Concat(
             "Cg5lbnRpdGllcy5wcm90bxIFZXZlbnQibAoGU3RhdHVzEhEKCWRldmljZV9J",
             "RBgBIAEoCRITCgtkZXZpY2VfbmFtZRgCIAEoCRIOCgZzdGF0dXMYAyABKAgS",
-            "FQoNb2NjdXJyZWRfdGltZRgEIAEoBBITCgtkZXNjcmlwdGlvbhgFIAEoCSKW",
+            "FQoNb2NjdXJyZWRfdGltZRgEIAEoBBITCgtkZXNjcmlwdGlvbhgFIAEoCSKx",
             "CgoFQWxhcm0SKgoKYWxhcm1fdHlwZRgBIAEoDjIWLmV2ZW50LkFsYXJtLkFs",
             "YXJtVHlwZRIRCglkZXZpY2VfSUQYAiABKAkSEwoLZGV2aWNlX25hbWUYAyAB",
             "KAkSEgoKc3RhcnRfdGltZRgEIAEoBBIQCghlbmRfdGltZRgFIAEoBBIOCgZk",
-            "ZXRhaWwYBiABKAkiggkKCUFsYXJtVHlwZRIMCghOb3RFdmVudBAAEhMKD0Rl",
+            "ZXRhaWwYBiABKAkinQkKCUFsYXJtVHlwZRIMCghOb3RFdmVudBAAEhMKD0Rl",
             "dmljZUhlYXJ0YmVhdBABEh0KGURldmljZVRyaWdnZXJEaWdpdGFsSW5wdXQQ",
             "AhIdChlEZXZpY2VUcmlnZ2VyRGlnaXRhbFJlbGF5EAMSGgoWVmlkZW9Tb3Vy",
             "Y2VNb3Rpb25BbGFybRAEEhkKFVZpZGVvU291cmNlU2lnbmFsTG9zcxAFEhYK",
@@ -48,24 +48,31 @@ namespace Event {
             "EiUKIVJ1bGVFbmdpbmVDb3VudEFnZ3JlZ2F0aW9uQ291bnRlchASEhoKFlJ1",
             "bGVFbmdpbmVGaXJlRGV0ZWN0b3IQExIbChdSdWxlRW5naW5lUGxhdGVEZXRl",
             "Y3RvchAUEiYKIlJ1bGVFbmdpbmVGYWNlQW5hbHlzaXNGYWNlRGV0ZWN0b3IQ",
-            "FRImCiJSdWxlRW5naW5lQ2VsbE1vdGlvbkRldGVjdG9yTW90aW9uEBYSFwoT",
-            "TWVkaWFQcm9maWxlQ2hhbmdlZBAXEh0KGU1lZGlhQ29uZmlndXJhdGlvbkNo",
-            "YW5nZWQQGBImCiJNb25pdG9yaW5nUHJvZmlsZUFjdGl2ZUNvbm5lY3Rpb25z",
-            "EBkSFAoQRXZlbnRNb3Rpb25BbGFybRAaEg0KCVZpZGVvTWFzaxAbEg0KCVZp",
-            "ZGVvTG9zcxAcEhAKDENyb3NzaW5nTGluZRAdEhUKEVBlcmltZXRlckRlZmVu",
-            "ZGVyEB4SEgoOQXVkaW9EZXRlY3Rpb24QHxISCg5JbnRydXNpb25UcmFjZRAg",
-            "EhEKDVNEQ2FyZEZhaWx1cmUQIRISCg5TRENhcmRPdmVyZmxvdxAiEg4KClNE",
-            "Q2FyZEZ1bGwQIxIOCgpBbGFybUlucHV0ECQSDwoLQWxhcm1PdXRwdXQQJSIt",
-            "CgpBbGFybUNsZWFyEhEKCWRldmljZV9pZBgBIAEoCRIMCgR0aW1lGAIgASgD",
-            "Kj0KC1N0YXR1c1RvcGljEhUKEURldmljZVN0YXR1c1RvcGljEAASFwoTT3Jp",
-            "Z2luYWxTdGF0dXNUb3BpYxACKlUKCkFsYXJtVG9waWMSFAoQRGV2aWNlQWxh",
-            "cm1Ub3BpYxAAEhkKFURldmljZUFsYXJtQ2xlYXJUb3BpYxADEhYKEk9yaWdp",
-            "bmFsQWxhcm1Ub3BpYxAEYgZwcm90bzM="));
+            "FRImCiJSdWxlRW5naW5lQ2VsbE1vdGlvbkRldGVjdG9yTW90aW9uEBYSJgoi",
+            "TW9uaXRvcmluZ1Byb2ZpbGVBY3RpdmVDb25uZWN0aW9ucxAZEhQKEEV2ZW50",
+            "TW90aW9uQWxhcm0QGhINCglWaWRlb01hc2sQGxINCglWaWRlb0xvc3MQHBIQ",
+            "CgxDcm9zc2luZ0xpbmUQHRIVChFQZXJpbWV0ZXJEZWZlbmRlchAeEhIKDkF1",
+            "ZGlvRGV0ZWN0aW9uEB8SEgoOSW50cnVzaW9uVHJhY2UQIBIRCg1TRENhcmRG",
+            "YWlsdXJlECESEgoOU0RDYXJkT3ZlcmZsb3cQIhIOCgpTRENhcmRGdWxsECMS",
+            "DgoKQWxhcm1JbnB1dBAkEg8KC0FsYXJtT3V0cHV0ECUSDgoKUmVjb3JkTG9z",
+            "dBAmEhEKDVJlc291cmNlVXNhZ2UQJxITCg9SZWNvcmRFeGNlcHRpb24QKBIZ",
+            "ChVWb2x1bUNhcGFjaXR5SXNUb29Mb3cQKSLHAQoFRXZlbnQSKgoKZXZlbnRf",
+            "dHlwZRgBIAEoDjIWLmV2ZW50LkV2ZW50LkV2ZW50VHlwZRIRCglkZXZpY2Vf",
+            "SUQYAiABKAkSEwoLZGV2aWNlX25hbWUYAyABKAkSFQoNb2NjdXJyZWRfdGlt",
+            "ZRgEIAEoBBIOCgZkZXRhaWwYBiABKAkiQwoJRXZlbnRUeXBlEhcKE01lZGlh",
+            "UHJvZmlsZUNoYW5nZWQQABIdChlNZWRpYUNvbmZpZ3VyYXRpb25DaGFuZ2Vk",
+            "EAEiLQoKQWxhcm1DbGVhchIRCglkZXZpY2VfaWQYASABKAkSDAoEdGltZRgC",
+            "IAEoAyo6CgpFdmVudFRvcGljEhQKEERldmljZUV2ZW50VG9waWMQABIWChJP",
+            "cmlnaW5hbEV2ZW50VG9waWMQASo9CgtTdGF0dXNUb3BpYxIVChFEZXZpY2VT",
+            "dGF0dXNUb3BpYxAAEhcKE09yaWdpbmFsU3RhdHVzVG9waWMQAipVCgpBbGFy",
+            "bVRvcGljEhQKEERldmljZUFsYXJtVG9waWMQABIZChVEZXZpY2VBbGFybUNs",
+            "ZWFyVG9waWMQAxIWChJPcmlnaW5hbEFsYXJtVG9waWMQBGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Event.StatusTopic), typeof(global::Event.AlarmTopic), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Event.EventTopic), typeof(global::Event.StatusTopic), typeof(global::Event.AlarmTopic), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Event.Status), global::Event.Status.Parser, new[]{ "DeviceID", "DeviceName", "Status_", "OccurredTime", "Description" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Event.Alarm), global::Event.Alarm.Parser, new[]{ "AlarmType", "DeviceID", "DeviceName", "StartTime", "EndTime", "Detail" }, null, new[]{ typeof(global::Event.Alarm.Types.AlarmType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Event.Event), global::Event.Event.Parser, new[]{ "EventType", "DeviceID", "DeviceName", "OccurredTime", "Detail" }, null, new[]{ typeof(global::Event.Event.Types.EventType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Event.AlarmClear), global::Event.AlarmClear.Parser, new[]{ "DeviceId", "Time" }, null, null, null)
           }));
     }
@@ -73,6 +80,11 @@ namespace Event {
 
   }
   #region Enums
+  public enum EventTopic {
+    [pbr::OriginalName("DeviceEventTopic")] DeviceEventTopic = 0,
+    [pbr::OriginalName("OriginalEventTopic")] OriginalEventTopic = 1,
+  }
+
   public enum StatusTopic {
     [pbr::OriginalName("DeviceStatusTopic")] DeviceStatusTopic = 0,
     /// <summary>
@@ -631,8 +643,6 @@ namespace Event {
         [pbr::OriginalName("RuleEnginePlateDetector")] RuleEnginePlateDetector = 20,
         [pbr::OriginalName("RuleEngineFaceAnalysisFaceDetector")] RuleEngineFaceAnalysisFaceDetector = 21,
         [pbr::OriginalName("RuleEngineCellMotionDetectorMotion")] RuleEngineCellMotionDetectorMotion = 22,
-        [pbr::OriginalName("MediaProfileChanged")] MediaProfileChanged = 23,
-        [pbr::OriginalName("MediaConfigurationChanged")] MediaConfigurationChanged = 24,
         [pbr::OriginalName("MonitoringProfileActiveConnections")] MonitoringProfileActiveConnections = 25,
         [pbr::OriginalName("EventMotionAlarm")] EventMotionAlarm = 26,
         [pbr::OriginalName("VideoMask")] VideoMask = 27,
@@ -646,6 +656,275 @@ namespace Event {
         [pbr::OriginalName("SDCardFull")] SdcardFull = 35,
         [pbr::OriginalName("AlarmInput")] AlarmInput = 36,
         [pbr::OriginalName("AlarmOutput")] AlarmOutput = 37,
+        /// <summary>
+        ///录像丢失
+        /// </summary>
+        [pbr::OriginalName("RecordLost")] RecordLost = 38,
+        /// <summary>
+        ///资源使用率告警
+        /// </summary>
+        [pbr::OriginalName("ResourceUsage")] ResourceUsage = 39,
+        /// <summary>
+        ///录像异常
+        /// </summary>
+        [pbr::OriginalName("RecordException")] RecordException = 40,
+        /// <summary>
+        ///ipsan卷容量过低
+        /// </summary>
+        [pbr::OriginalName("VolumCapacityIsTooLow")] VolumCapacityIsTooLow = 41,
+      }
+
+    }
+    #endregion
+
+  }
+
+  public sealed partial class Event : pb::IMessage<Event> {
+    private static readonly pb::MessageParser<Event> _parser = new pb::MessageParser<Event>(() => new Event());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Event> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Event.EntitiesReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Event() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Event(Event other) : this() {
+      eventType_ = other.eventType_;
+      deviceID_ = other.deviceID_;
+      deviceName_ = other.deviceName_;
+      occurredTime_ = other.occurredTime_;
+      detail_ = other.detail_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Event Clone() {
+      return new Event(this);
+    }
+
+    /// <summary>Field number for the "event_type" field.</summary>
+    public const int EventTypeFieldNumber = 1;
+    private global::Event.Event.Types.EventType eventType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Event.Event.Types.EventType EventType {
+      get { return eventType_; }
+      set {
+        eventType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "device_ID" field.</summary>
+    public const int DeviceIDFieldNumber = 2;
+    private string deviceID_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string DeviceID {
+      get { return deviceID_; }
+      set {
+        deviceID_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "device_name" field.</summary>
+    public const int DeviceNameFieldNumber = 3;
+    private string deviceName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string DeviceName {
+      get { return deviceName_; }
+      set {
+        deviceName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "occurred_time" field.</summary>
+    public const int OccurredTimeFieldNumber = 4;
+    private ulong occurredTime_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong OccurredTime {
+      get { return occurredTime_; }
+      set {
+        occurredTime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "detail" field.</summary>
+    public const int DetailFieldNumber = 6;
+    private string detail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Detail {
+      get { return detail_; }
+      set {
+        detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Event);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Event other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (EventType != other.EventType) return false;
+      if (DeviceID != other.DeviceID) return false;
+      if (DeviceName != other.DeviceName) return false;
+      if (OccurredTime != other.OccurredTime) return false;
+      if (Detail != other.Detail) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (EventType != 0) hash ^= EventType.GetHashCode();
+      if (DeviceID.Length != 0) hash ^= DeviceID.GetHashCode();
+      if (DeviceName.Length != 0) hash ^= DeviceName.GetHashCode();
+      if (OccurredTime != 0UL) hash ^= OccurredTime.GetHashCode();
+      if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EventType != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) EventType);
+      }
+      if (DeviceID.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(DeviceID);
+      }
+      if (DeviceName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(DeviceName);
+      }
+      if (OccurredTime != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(OccurredTime);
+      }
+      if (Detail.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Detail);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (EventType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) EventType);
+      }
+      if (DeviceID.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceID);
+      }
+      if (DeviceName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceName);
+      }
+      if (OccurredTime != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(OccurredTime);
+      }
+      if (Detail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Event other) {
+      if (other == null) {
+        return;
+      }
+      if (other.EventType != 0) {
+        EventType = other.EventType;
+      }
+      if (other.DeviceID.Length != 0) {
+        DeviceID = other.DeviceID;
+      }
+      if (other.DeviceName.Length != 0) {
+        DeviceName = other.DeviceName;
+      }
+      if (other.OccurredTime != 0UL) {
+        OccurredTime = other.OccurredTime;
+      }
+      if (other.Detail.Length != 0) {
+        Detail = other.Detail;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            eventType_ = (global::Event.Event.Types.EventType) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            DeviceID = input.ReadString();
+            break;
+          }
+          case 26: {
+            DeviceName = input.ReadString();
+            break;
+          }
+          case 32: {
+            OccurredTime = input.ReadUInt64();
+            break;
+          }
+          case 50: {
+            Detail = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the Event message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum EventType {
+        [pbr::OriginalName("MediaProfileChanged")] MediaProfileChanged = 0,
+        [pbr::OriginalName("MediaConfigurationChanged")] MediaConfigurationChanged = 1,
       }
 
     }
@@ -661,7 +940,7 @@ namespace Event {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Event.EntitiesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Event.EntitiesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

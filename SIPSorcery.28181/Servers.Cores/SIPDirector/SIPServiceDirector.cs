@@ -92,7 +92,7 @@ namespace SIPSorcery.GB28181.Servers
             return Tuple.Create(ipaddress, port, header, ProtocolType.Udp);
         }
         /// <summary>
-        /// history video request
+        /// StartPlayback
         /// </summary>
         /// <param name="beginTime"></param>
         /// <param name="endTime"></param>
@@ -100,9 +100,9 @@ namespace SIPSorcery.GB28181.Servers
         /// <param name="mediaPort"></param>
         /// <param name="receiveIP"></param>
         /// <returns></returns>
-        async public Task<Tuple<string, int, ProtocolType>> BackVideoReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP)
+        async public Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> BackVideoReq(string gbid, int[] mediaPort, string receiveIP, ulong beginTime, ulong endTime)
         {
-            logger.Debug("History video request started.");
+            logger.Debug("BackVideoReq started.");
             var target = GetTargetMonitorService(gbid);
             if (target == null)
             {
@@ -116,35 +116,25 @@ namespace SIPSorcery.GB28181.Servers
             });
             var ipaddress = _sipCoreMessageService.GetReceiveIP(taskResult.Item2.Body);
             var port = _sipCoreMessageService.GetReceivePort(taskResult.Item2.Body, SDPMediaTypesEnum.video);
-            return Tuple.Create(ipaddress, port, ProtocolType.Udp);
+            var header = taskResult.Item1.Header;
+            return Tuple.Create(ipaddress, port, header, ProtocolType.Udp);
         }
         /// <summary>
         /// stop real Request
         /// </summary>
         /// <param name="gbid"></param>
         /// <returns></returns>
-        async public Task<Tuple<string, int, ProtocolType>> Stop(string gbid, string sessionid)
+        public bool Stop(string gbid, string sessionid)
         {
             var target = GetTargetMonitorService(gbid);
 
             if (target == null)
             {
-                return null;
+                return false;
             }
             target.ByeVideoReq(sessionid);
             logger.Debug("Video request stopped.");
-            return null;
-
-            //var taskResult = await Task.Factory.StartNew(() =>
-            //{
-            //    //stop
-            //    target.ByeVideoReq();
-            //    var result = target.WaitRequestResult();
-            //    return result;
-            //});
-            //var ipaddress = _sipCoreMessageService.GetReceiveIP(taskResult.Item2.Body);
-            //var port = _sipCoreMessageService.GetReceivePort(taskResult.Item2.Body, SDPMediaTypesEnum.video);
-            //return Tuple.Create(ipaddress, port, ProtocolType.Udp);
+            return true;
         }
         #endregion
 
@@ -258,6 +248,119 @@ namespace SIPSorcery.GB28181.Servers
         public int RecordFileQuery(string deviceId, DateTime startTime, DateTime endTime, string type)
         {
             return _sipCoreMessageService.RecordFileQuery(deviceId, startTime, endTime, type);
+        }
+
+        async public Task<Tuple<string, int, SIPSorcery.GB28181.SIP.SIPHeader, ProtocolType>> VideoDownloadReq(DateTime beginTime, DateTime endTime, string gbid, int[] mediaPort, string receiveIP)
+        {
+            logger.Debug("Video Download Request started.");
+            var target = GetTargetMonitorService(gbid);
+            if (target == null)
+            {
+                return null;
+            }
+            var taskResult = await Task.Factory.StartNew(() =>
+            {
+                var cSeq = target.VideoDownloadReq(beginTime, endTime, mediaPort, receiveIP, true);
+                var result = target.WaitRequestResult();
+                return result;
+            });
+            var ipaddress = _sipCoreMessageService.GetReceiveIP(taskResult.Item2.Body);
+            var port = _sipCoreMessageService.GetReceivePort(taskResult.Item2.Body, SDPMediaTypesEnum.video);
+            var header = taskResult.Item1.Header;
+            return Tuple.Create(ipaddress, port, header, ProtocolType.Udp);
+        }
+
+        /// <summary>
+        /// BackVideoStop
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <returns></returns>
+        public bool BackVideoStopPlayingControlReq(string gbid, string sessionid)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return false;
+            }
+            target.BackVideoStopPlayingControlReq(sessionid);
+            logger.Debug("BackVideoStopPlayingControlReq stopped.");
+            return true;
+        }
+        /// <summary>
+        /// BackVideoSpeed
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public bool BackVideoPlaySpeedControlReq(string gbid, string sessionid, float scale)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return false;
+            }
+            target.BackVideoPlaySpeedControlReq(sessionid, scale);
+            logger.Debug("BackVideoPlaySpeedControlReq stopped.");
+            return true;
+        }
+        /// <summary>
+        /// BackVideoPause
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <returns></returns>
+        public bool BackVideoPauseControlReq(string gbid, string sessionid)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return false;
+            }
+            target.BackVideoPauseControlReq(sessionid);
+            logger.Debug("BackVideoPauseControlReq stopped.");
+            return true;
+        }
+        /// <summary>
+        /// BackVideoContinue
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <returns></returns>
+        public bool BackVideoContinuePlayingControlReq(string gbid, string sessionid)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return false;
+            }
+            target.BackVideoContinuePlayingControlReq(sessionid);
+            logger.Debug("BackVideoContinuePlayingControlReq stopped.");
+            return true;
+        }
+        /// <summary>
+        /// BackVideoPosition
+        /// </summary>
+        /// <param name="gbid"></param>
+        /// <param name="sessionid"></param>
+        /// <param name="range"></param>
+        /// <returns></returns>
+        public bool BackVideoPlayPositionControlReq(string gbid, string sessionid, long time)
+        {
+            var target = GetTargetMonitorService(gbid);
+
+            if (target == null)
+            {
+                return false;
+            }
+            target.BackVideoPlayPositionControlReq(sessionid, time);
+            logger.Debug("BackVideoPlayPositionControlReq stopped.");
+            return true;
         }
         #endregion
     }

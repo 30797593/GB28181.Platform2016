@@ -8,11 +8,12 @@ package MediaContract;
 service VideoSession {
   //LivePlay
   rpc StartLive (StartLiveRequest) returns (StartLiveReply) {}
-  rpc StartHistory (StartHistoryRequest) returns (StartHistoryReply) {}
-  //Start playback or Dowload
+  //Playback
   rpc StartPlayback (StartPlaybackRequest) returns (StartPlaybackReply) {}
   //Stop Video
   rpc Stop (StopRequest) returns (StopReply) {}
+  //PlaybackControl
+  rpc PlaybackControl (PlaybackControlRequest) returns (PlaybackControlReply) {}
 
   //keepalive between two point
   rpc KeepAlive (KeepAliveRequest) returns (KeepAliveReply) {}
@@ -42,7 +43,6 @@ message Status {
     string msg = 2;
 }
 
-// The request message containing StartLiveRequest.
 message StartLiveRequest {
 	Header hdr =1;
 	TransportProtocol trans_proto = 2;
@@ -50,7 +50,6 @@ message StartLiveRequest {
 	string ipaddr = 4;
 	int32 port = 5;
 }
-// The response message containing the StartLiveReply.
 message StartLiveReply {
 	Header hdr = 1;
 	Status status = 2;
@@ -58,35 +57,15 @@ message StartLiveReply {
 	int32 port = 4;
 }
 
-// The request message containing StartHistoryRequest.
-message StartHistoryRequest {
-	Header hdr =1;
-	TransportProtocol trans_proto = 2;
-	string gbid = 3;
-	string ipaddr = 4;
-	int32 port = 5;
-	string begin_time = 6;
-	string end_time = 7;
-}
-// The response message containing the StartHistoryReply.
-message StartHistoryReply {
-	Header hdr = 1;
-	Status status = 2;
-	string ipaddr = 3;
-	int32 port = 4;
-}
-
-// The request message containing StartPlaybackRequest/download.
 message StartPlaybackRequest {
 	Header hdr =1;
 	TransportProtocol trans_proto = 2;
-	bool is_download = 3;
-	int32 port = 4;
-	string ipaddr = 5;
-	string gbid = 6;
+	int32 port = 3;
+	string ipaddr = 4;
+	string gbid = 5;
+	string begin_time = 7;
+	string end_time = 8;
 }
-
-// The response message containing the StartPlaybackReply/download.
 message StartPlaybackReply {
 	Header hdr = 1;
 	Status status = 2;
@@ -94,27 +73,39 @@ message StartPlaybackReply {
 	int32 port = 4;
 }
 
-// The request message containing StopLiveRequest.
 message StopRequest {
 	Header hdr =1;
 	string gbid = 2;
 	BusinessType business_type =3;
 }
-
-// The response message containing the StopLiveReply.
 message StopReply {
 	Header hdr = 1;
 	Status status = 2;
 }
 
-// The request message containing ParametersRequest.
 message KeepAliveRequest {
 	Header hdr = 1;
 	string gbid = 2;
 }
-
-// The response message containing the ParametersReply.
 message KeepAliveReply {
+	Header hdr = 1;
+	Status status = 2;
+}
+
+enum PlaybackControlType {
+	Pause = 0;
+	Resume = 1;
+	Moveto = 2;
+	Scale = 3;
+}
+message PlaybackControlRequest {
+	Header hdr =1;
+	string gbid = 2;
+	PlaybackControlType playback_type = 3;
+	float scale = 4;
+	int64 start_time = 5;
+}
+message PlaybackControlReply {
 	Header hdr = 1;
 	Status status = 2;
 }

@@ -20,7 +20,7 @@ namespace GrpcAgent.WebsocketRpcServer
         public DeviceManageImpl(ISIPRegistrarCore sipRegistrarCore)
         {
             _sipRegistrarCore = sipRegistrarCore;
-            _sipRegistrarCore.RPCDmsRegisterReceived += _sipRegistrarCore_RPCDmsRegisterReceived;
+            //_sipRegistrarCore.RPCDmsRegisterReceived += _sipRegistrarCore_RPCDmsRegisterReceived;
         }
 
         private void _sipRegistrarCore_RPCDmsRegisterReceived(SIPTransaction sipTransaction, SIPSorcery.GB28181.SIP.App.SIPAccount sIPAccount)
@@ -29,38 +29,9 @@ namespace GrpcAgent.WebsocketRpcServer
             {
                 Device _device = new Device();
                 SIPRequest sipRequest = sipTransaction.TransactionRequest;
-                //{
-                //    "_id": ObjectID("5b8f8b0aba6730933a2bdaf5"),
-                //    "uuid": "005199cd-7d06-43dc-a9cc-a2d9cf42a118",
-                //    "name": "testgbname",
-                //    "users": [
-                //        {
-                //            "loginname": "admin",
-                //            "loginpwd": "123456"
-                //        }
-                //    ],
-                //    "tag": [],
-                //    "ptztype": 0,
-                //    "description": "",
-                //    "protocoltype": 0,
-                //    "ip": "",
-                //    "port": 0,
-                //    "gbid": "42010000001180000184",
-                //    "gbparentid": "",
-                //    "mediasrctype": [],
-                //    "mediainfo": null,
-                //    "longitude": 0,
-                //    "latitude": 0,
-                //    "parentid": "",
-                //    "did": "",
-                //    "cid": "",
-                //    "pid": "",
-                //    "sid": "",
-                //    "shapetype": 2
-                //}
                 _device.Guid = Guid.NewGuid().ToString();
                 _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//IPC
-                _device.Name = "gbdevice" + "_" + _device.IP;
+                _device.Name = "gb" + _device.IP;
                 _device.LoginUser.Add(new LoginUser() { LoginName = sIPAccount.SIPUsername ?? "admin", LoginPwd = sIPAccount.SIPPassword ?? "123456" });
                 _device.Port = Convert.ToUInt32(sipTransaction.TransactionRequest.RemoteSIPEndPoint.Port);//5060
                 _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001180000184

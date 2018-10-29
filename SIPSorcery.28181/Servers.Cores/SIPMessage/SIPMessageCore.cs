@@ -178,6 +178,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     RemoteEndPoint = new SIPEndPoint(SIPProtocolsEnum.udp, ipaddress, camera.Port),
                     DeviceId = camera.DeviceID
                 });
+                logger.Debug("nodeMonitorService divces counts: " + _nodeMonitorService.Count);
                 logger.Debug("Camera[" + camera.DeviceID + "," + camera.IPAddress.ToString() + ":" + camera.Port + "] item initialized.");
             }
             catch(Exception ex)
@@ -263,7 +264,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         {
             try
             {
-                logger.Debug("DeviceStateQuery started.");
+                //logger.Debug("DeviceStateQuery started.");
 
                 foreach (var item in _nodeMonitorService.ToArray())
                 {
@@ -273,7 +274,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     }
                 }
 
-                logger.Debug("DeviceStateQuery halted.");
+                //logger.Debug("DeviceStateQuery halted.");
             }
             catch (Exception excp)
             {
@@ -560,7 +561,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                 //add by zohn on 20180711
                 if (response.Header.ContentType == null)
                 {
-                    logger.Debug("Received response.Header.ContentType == null, response.Status: " + response.Status + "," + remoteEP);
+                    //logger.Debug("Received response.Header.ContentType == null, response.Status: " + response.Status + "," + remoteEP);
                     return;
                 }
 
@@ -602,15 +603,12 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     case SIPResponseStatusCodesEnum.InternalServerError:    //服务器内部错误
                     case SIPResponseStatusCodesEnum.RequestTerminated:      //请求终止
                     case SIPResponseStatusCodesEnum.CallLegTransactionDoesNotExist: //呼叫/事务不存在
-                        logger.Warn("对方国标平台返回状态【失败】");
                         OnResponseCodeReceived(response.Status, "对方国标平台返回状态【失败】", remoteEP);
                         break;
                     case SIPResponseStatusCodesEnum.Trying:                 //等待处理
-                        logger.Warn("对方国标平台返回状态【正在尝试】");
                         OnResponseCodeReceived(response.Status, "对方国标平台返回状态【正在尝试】", remoteEP);
                         break;
                     default:
-                        logger.Warn("对方国标平台返回状态【其他】");
                         OnResponseCodeReceived(response.Status, "对方国标平台返回状态【其他】", remoteEP);
                         break;
                 }
@@ -715,7 +713,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
             //}
             OnKeepaliveReceived?.Invoke(remoteEP, keepAlive, request.Header.From.FromURI.User);
             // _subscribe = true;
-            logger.Debug("KeepAlive:" + remoteEP.ToHost() + "=====DevID:" + keepAlive.DeviceID + "=====Status:" + keepAlive.Status + "=====SN:" + keepAlive.SN);
+            logger.Debug("KeepAlive:" + remoteEP.ToHost() + "======DevID:" + keepAlive.DeviceID + "======Status:" + keepAlive.Status + "======SN:" + keepAlive.SN);
         }
 
         /// <summary>
