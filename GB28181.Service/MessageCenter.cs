@@ -485,6 +485,7 @@ namespace GB28181Service
                     }
                     if (_Catalog == null)
                     {
+                        logger.Debug("DeviceCatalogQuery: waiting catalog query...");
                         System.Threading.Thread.Sleep(500);
                     }
                     else
