@@ -293,6 +293,24 @@ namespace GB28181Service
                         {
                             stat.DeviceID = rep.Devices[0].Guid;
                             stat.DeviceName = rep.Devices[0].Name;
+                            
+                            Message message = new Message();
+                            Dictionary<string, string> dic = new Dictionary<string, string>();
+                            dic.Add("Content-Type", "application/octet-stream");
+                            message.Header = dic;
+                            message.Body = stat.ToByteArray();
+                            byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                            string subject = Event.StatusTopic.OriginalStatusTopic.ToString();
+                            #region
+                            Options opts = ConnectionFactory.GetDefaultOptions();
+                            opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
+                            using (IConnection c = new ConnectionFactory().CreateConnection(opts))
+                            {
+                                c.Publish(subject, payload);
+                                c.Flush();
+                                logger.Debug("Device on/off line status published.");
+                            }
+                            #endregion
                         }
                         else
                         {
@@ -300,24 +318,6 @@ namespace GB28181Service
                             continue;
                         }
                         logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
-
-                        Message message = new Message();
-                        Dictionary<string, string> dic = new Dictionary<string, string>();
-                        dic.Add("Content-Type", "application/octet-stream");
-                        message.Header = dic;
-                        message.Body = stat.ToByteArray();
-                        byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-                        string subject = Event.StatusTopic.OriginalStatusTopic.ToString();
-                        #region
-                        Options opts = ConnectionFactory.GetDefaultOptions();
-                        opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
-                        using (IConnection c = new ConnectionFactory().CreateConnection(opts))
-                        {
-                            c.Publish(subject, payload);
-                            c.Flush();
-                            logger.Debug("Device on/off line status published.");
-                        }
-                        #endregion
                     }
                 }
                 catch (Exception ex)
