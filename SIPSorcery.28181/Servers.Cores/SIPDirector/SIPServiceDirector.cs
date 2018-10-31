@@ -14,8 +14,8 @@ namespace SIPSorcery.GB28181.Servers
     {
         private static ILog logger = AppState.logger;
         private ISipMessageCore _sipCoreMessageService;
-        //private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
-        //public Dictionary<string, Catalog> Catalogs => _Catalogs;
+        private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
+        public Dictionary<string, Catalog> Catalogs => _Catalogs;
         private Queue<NotifyCatalog.Item> _NotifyCatalogItem = new Queue<NotifyCatalog.Item>();
         public Queue<NotifyCatalog.Item> NotifyCatalogItem => _NotifyCatalogItem; 
         private Dictionary<string, DeviceStatus> _DeviceStatuses = new Dictionary<string, DeviceStatus>();
