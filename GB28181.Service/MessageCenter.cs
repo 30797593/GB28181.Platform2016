@@ -28,8 +28,8 @@ namespace GB28181Service
         private ISipMessageCore _sipCoreMessageService;
         private ISIPMonitorCore _sIPMonitorCore;
         private ISIPRegistrarCore _registrarCore;
-        private Dictionary<string, HeartBeatEndPoint> _HeartBeatStatuses = new Dictionary<string, HeartBeatEndPoint>();
-        public Dictionary<string, HeartBeatEndPoint> HeartBeatStatuses => _HeartBeatStatuses;
+        //private Dictionary<string, HeartBeatEndPoint> _HeartBeatStatuses = new Dictionary<string, HeartBeatEndPoint>();
+        //public Dictionary<string, HeartBeatEndPoint> HeartBeatStatuses => _HeartBeatStatuses;
         private Dictionary<string, DeviceStatus> _DeviceStatuses = new Dictionary<string, DeviceStatus>();
         public Dictionary<string, DeviceStatus> DeviceStatuses => _DeviceStatuses;
         private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
@@ -72,8 +72,8 @@ namespace GB28181Service
             };
             _keepAliveQueue.Enqueue(hbPoint);
 
-            HeartBeatStatuses.Remove(devId);
-            HeartBeatStatuses.Add(devId, hbPoint);
+            //HeartBeatStatuses.Remove(devId);
+            //HeartBeatStatuses.Add(devId, hbPoint);
         }
 
         internal void OnServiceChanged(string msg, ServiceStatus state)
@@ -254,30 +254,30 @@ namespace GB28181Service
                 System.Threading.Thread.Sleep(30000);
                 try
                 {
-                    foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
+                    foreach (string deviceid in _sipCoreMessageService.NodeMonitorService.Keys)
                     {
                         Event.Status stat = new Event.Status();
                         stat.Status_ = false;
                         stat.OccurredTime = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
                         #region waiting DeviceStatuses add in for 500 Milliseconds
-                        _sipCoreMessageService.DeviceStateQuery(obj.Heart.DeviceID);
+                        _sipCoreMessageService.DeviceStateQuery(deviceid);
                         TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
                         while (true)
                         {
                             System.Threading.Thread.Sleep(1);
                             TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
-                            if (DeviceStatuses.ContainsKey(obj.Heart.DeviceID))
+                            if (DeviceStatuses.ContainsKey(deviceid))
                             {
                                 //on line
-                                stat.Status_ = DeviceStatuses[obj.Heart.DeviceID].Status.Equals("ON") ? true : false;
-                                logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: " + DeviceStatuses[obj.Heart.DeviceID].Status);
-                                DeviceStatuses.Remove(obj.Heart.DeviceID);
+                                stat.Status_ = DeviceStatuses[deviceid].Status.Equals("ON") ? true : false;
+                                logger.Debug("Device status of [" + deviceid + "]: " + DeviceStatuses[deviceid].Status);
+                                DeviceStatuses.Remove(deviceid);
                                 break;
                             }
                             else if (t2.Subtract(t1).Duration().Milliseconds > 500)
                             {
                                 //off line
-                                logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: OFF");
+                                logger.Debug("Device status of [" + deviceid + "]: OFF");
                                 break;
                             }
                         }
@@ -287,7 +287,7 @@ namespace GB28181Service
                         var client = new Manage.Manage.ManageClient(channel);
                         QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
                         QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
-                        req.GbIds.Add(obj.Heart.DeviceID);
+                        req.GbIds.Add(deviceid);
                         rep = client.QueryGBDeviceByGBIDs(req);
                         if (rep.Devices.Count > 0)
                         {
