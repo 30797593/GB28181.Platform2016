@@ -49,6 +49,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         /// Monitor Service For all Remote Node
         /// </summary>
         private ConcurrentDictionary<string, ISIPMonitorCore> _nodeMonitorService = new ConcurrentDictionary<string, ISIPMonitorCore>();
+        public ConcurrentDictionary<string, ISIPMonitorCore> NodeMonitorService => _nodeMonitorService;
 
         /// <summary>
         /// 本地sip终结点
@@ -58,18 +59,13 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         /// sip传输请求
         /// </summary>
         private ISIPTransport _transport;
-
-
         public ISIPTransport Transport => _transport;
 
         /// <summary>
         /// 本地域的sip编码
         /// </summary>
         public string LocalSIPId { get; set; }
-
-
-        public ConcurrentDictionary<string, ISIPMonitorCore> NodeMonitorService => _nodeMonitorService;
-
+        
         private Stream _g711Stream;
         private Channel _audioChannel;
         private IPEndPoint _audioRemoteEP;
