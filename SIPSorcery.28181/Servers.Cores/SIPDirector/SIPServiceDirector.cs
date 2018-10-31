@@ -14,8 +14,8 @@ namespace SIPSorcery.GB28181.Servers
     {
         private static ILog logger = AppState.logger;
         private ISipMessageCore _sipCoreMessageService;
-        private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
-        public Dictionary<string, Catalog> Catalogs => _Catalogs;
+        //private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
+        //public Dictionary<string, Catalog> Catalogs => _Catalogs;
         private Queue<NotifyCatalog.Item> _NotifyCatalogItem = new Queue<NotifyCatalog.Item>();
         public Queue<NotifyCatalog.Item> NotifyCatalogItem => _NotifyCatalogItem; 
         private Dictionary<string, DeviceStatus> _DeviceStatuses = new Dictionary<string, DeviceStatus>();
@@ -28,7 +28,7 @@ namespace SIPSorcery.GB28181.Servers
         public SIPServiceDirector(ISipMessageCore sipCoreMessageService)
         {
             _sipCoreMessageService = sipCoreMessageService;
-            _sipCoreMessageService.OnCatalogReceived += _sipCoreMessageService_OnCatalogReceived;
+            //_sipCoreMessageService.OnCatalogReceived += _sipCoreMessageService_OnCatalogReceived;
             _sipCoreMessageService.OnNotifyCatalogReceived += _sipCoreMessageService_OnNotifyCatalogReceived;
             //_sipCoreMessageService.OnAlarmReceived += _sipCoreMessageService_OnAlarmReceived;
             _sipCoreMessageService.OnDeviceStatusReceived += _sipCoreMessageService_OnDeviceStatusReceived;
@@ -139,18 +139,18 @@ namespace SIPSorcery.GB28181.Servers
         #endregion
 
         #region 设备目录
-        private void _sipCoreMessageService_OnCatalogReceived(Catalog obj)
-        {
-            if (!Catalogs.ContainsKey(obj.DeviceID))
-            {
-                Catalogs.Add(obj.DeviceID, obj);
-            }
-            else
-            {
-                Catalogs.Remove(obj.DeviceID);
-                Catalogs.Add(obj.DeviceID, obj);
-            }
-        }
+        //private void _sipCoreMessageService_OnCatalogReceived(Catalog obj)
+        //{
+        //    if (!Catalogs.ContainsKey(obj.DeviceID))
+        //    {
+        //        Catalogs.Add(obj.DeviceID, obj);
+        //    }
+        //    else
+        //    {
+        //        Catalogs.Remove(obj.DeviceID);
+        //        Catalogs.Add(obj.DeviceID, obj);
+        //    }
+        //}
         /// <summary>
         /// Device Catalog Query
         /// </summary>

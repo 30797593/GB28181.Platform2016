@@ -661,6 +661,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         {
             catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
             {
+                logger.Debug("CatalogHandle: catalogItem.DeviceID=" + catalogItem.DeviceID);
                 catalogItem.RemoteEP = remoteEP.ToHost();
                 var devCata = DevType.GetCataType(catalogItem.DeviceID);
                 if (devCata != DevCataType.Device)
@@ -676,10 +677,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     }
 
                 }
-
                 //   CommandType cmdType = i == 0 ? CommandType.Play : CommandType.Playback;
-
-
             });
 
             OnCatalogReceived?.Invoke(catalog);

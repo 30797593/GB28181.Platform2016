@@ -8,7 +8,7 @@ namespace SIPSorcery.GB28181.Servers
 {
     public interface ISIPServiceDirector
     {
-        Dictionary<string, Catalog> Catalogs { get; }
+        //Dictionary<string, Catalog> Catalogs { get; }
         Queue<NotifyCatalog.Item> NotifyCatalogItem { get; }
         ISIPMonitorCore GetTargetMonitorService(string gbid);
         Dictionary<string, DeviceStatus> DeviceStatuses { get; }
