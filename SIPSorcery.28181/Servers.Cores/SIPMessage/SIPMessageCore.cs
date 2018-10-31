@@ -663,7 +663,6 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
             {
                 catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
                 {
-                    logger.Debug("CatalogHandle: catalogItem.DeviceID=" + catalogItem.DeviceID);
                     catalogItem.RemoteEP = remoteEP.ToHost();
                     var devCata = DevType.GetCataType(catalogItem.DeviceID);
                     if (devCata != DevCataType.Device)
