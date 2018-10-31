@@ -659,29 +659,39 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         /// <param name="catalog">目录结构体</param>
         private void CatalogHandle(SIPEndPoint localEP, SIPEndPoint remoteEP, SIPRequest request, Catalog catalog)
         {
-            logger.Debug("CatalogHandle: catalog.DeviceList.Items.Count=" + catalog.DeviceList.Items.Count);
-            catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
+            try
             {
-                logger.Debug("CatalogHandle: catalogItem.DeviceID=" + catalogItem.DeviceID);
-                catalogItem.RemoteEP = remoteEP.ToHost();
-                var devCata = DevType.GetCataType(catalogItem.DeviceID);
-                if (devCata != DevCataType.Device)
+                logger.Warn("CatalogHandle: catalog=" + catalog.ToString());
+                logger.Warn("CatalogHandle: catalog.DeviceListt=" + catalog.DeviceList.ToString());
+                logger.Warn("CatalogHandle: catalog.DeviceList.Items.Count=" + catalog.DeviceList.Items.Count);
+                logger.Debug("CatalogHandle: catalog.DeviceList.Items.Count=" + catalog.DeviceList.Items.Count);
+                catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
                 {
-                    if (!_nodeMonitorService.ContainsKey(catalogItem.DeviceID))
+                    logger.Debug("CatalogHandle: catalogItem.DeviceID=" + catalogItem.DeviceID);
+                    catalogItem.RemoteEP = remoteEP.ToHost();
+                    var devCata = DevType.GetCataType(catalogItem.DeviceID);
+                    if (devCata != DevCataType.Device)
                     {
-                        remoteEP.Port = _LocalSipAccount.RemotePort;
-                        _nodeMonitorService.TryAdd(catalogItem.DeviceID, new SIPMonitorCoreService(this, _transport, _sipAccountStorage)
+                        if (!_nodeMonitorService.ContainsKey(catalogItem.DeviceID))
                         {
-                            RemoteEndPoint = remoteEP,
-                            DeviceId = catalogItem.DeviceID
-                        });
+                            remoteEP.Port = _LocalSipAccount.RemotePort;
+                            _nodeMonitorService.TryAdd(catalogItem.DeviceID, new SIPMonitorCoreService(this, _transport, _sipAccountStorage)
+                            {
+                                RemoteEndPoint = remoteEP,
+                                DeviceId = catalogItem.DeviceID
+                            });
+                        }
+
                     }
+                    //   CommandType cmdType = i == 0 ? CommandType.Play : CommandType.Playback;
+                });
 
-                }
-                //   CommandType cmdType = i == 0 ? CommandType.Play : CommandType.Playback;
-            });
-
-            OnCatalogReceived?.Invoke(catalog);
+                OnCatalogReceived?.Invoke(catalog);
+            }
+            catch(Exception ex)
+            {
+                logger.Warn("CatalogHandle Exception: " + ex.Message);
+            }
         }
 
         /// <summary>
