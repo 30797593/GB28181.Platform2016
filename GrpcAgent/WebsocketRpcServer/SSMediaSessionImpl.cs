@@ -44,6 +44,7 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             try
             {
+                logger.Debug("StartLive: request.Gbid=" + request.Gbid);
                 _eventSource?.FileLivePlayRequestEvent(request, context);
                 var reqeustProcessResult = _sipServiceDirector.RealVideoReq(request.Gbid, new int[] { request.Port }, request.Ipaddr);
 
