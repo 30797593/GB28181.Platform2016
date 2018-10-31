@@ -659,6 +659,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         /// <param name="catalog">目录结构体</param>
         private void CatalogHandle(SIPEndPoint localEP, SIPEndPoint remoteEP, SIPRequest request, Catalog catalog)
         {
+            logger.Debug("CatalogHandle: catalog.DeviceList.Items.Count=" + catalog.DeviceList.Items.Count);
             catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
             {
                 logger.Debug("CatalogHandle: catalogItem.DeviceID=" + catalogItem.DeviceID);
