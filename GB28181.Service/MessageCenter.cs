@@ -383,6 +383,10 @@ namespace GB28181Service
                 //        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.UpdateDevice: " + reply.Status.ToString());
                 //    }
                 //}
+                if (Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
+                {
+                    logger.Debug("_sipRegistrarCore_RPCDmsRegisterReceived: Catalog=" + JsonConvert.SerializeObject(Catalogs[sipTransaction.TransactionRequestFrom.URI.User]));
+                }
 
                 //query device info from db
                 QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
