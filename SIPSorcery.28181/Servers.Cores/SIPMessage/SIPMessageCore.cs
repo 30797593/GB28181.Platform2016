@@ -174,8 +174,8 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     RemoteEndPoint = new SIPEndPoint(SIPProtocolsEnum.udp, ipaddress, camera.Port),
                     DeviceId = camera.DeviceID
                 });
-                logger.Debug("nodeMonitorService divces counts: " + _nodeMonitorService.Count);
-                logger.Debug("Camera[" + camera.DeviceID + "," + camera.IPAddress.ToString() + ":" + camera.Port + "] item initialized.");
+                //logger.Debug("nodeMonitorService divces counts: " + _nodeMonitorService.Count);
+                logger.Debug("_cameraCache_OnItemAdded: [" + camera.DeviceID + "," + camera.IPAddress.ToString() + ":" + camera.Port + "] item initialized.");
             }
             catch(Exception ex)
             {
@@ -661,10 +661,6 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         {
             try
             {
-                logger.Warn("CatalogHandle: catalog=" + catalog.ToString());
-                logger.Warn("CatalogHandle: catalog.DeviceListt=" + catalog.DeviceList.ToString());
-                logger.Warn("CatalogHandle: catalog.DeviceList.Items.Count=" + catalog.DeviceList.Items.Count);
-                logger.Debug("CatalogHandle: catalog.DeviceList.Items.Count=" + catalog.DeviceList.Items.Count);
                 catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
                 {
                     logger.Debug("CatalogHandle: catalogItem.DeviceID=" + catalogItem.DeviceID);
@@ -680,6 +676,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                                 RemoteEndPoint = remoteEP,
                                 DeviceId = catalogItem.DeviceID
                             });
+                            logger.Debug("CatalogHandle: nodeMonitorService.TryAdd DeviceId=" + catalogItem.DeviceID);
                         }
 
                     }
