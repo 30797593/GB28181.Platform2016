@@ -665,6 +665,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                 {
                     catalogItem.RemoteEP = remoteEP.ToHost();
                     var devCata = DevType.GetCataType(catalogItem.DeviceID);
+                    logger.Debug("CatalogHandle: DevCataType=" + devCata);
                     if (devCata != DevCataType.Device)
                     {
                         if (!_nodeMonitorService.ContainsKey(catalogItem.DeviceID))
