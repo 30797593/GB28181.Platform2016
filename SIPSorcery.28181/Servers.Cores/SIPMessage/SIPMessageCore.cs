@@ -676,6 +676,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                                 RemoteEndPoint = remoteEP,
                                 DeviceId = catalogItem.DeviceID
                             });
+                            logger.Debug("CatalogHandle: nodeMonitorService.Count=" + _nodeMonitorService.Count);
                             logger.Debug("CatalogHandle: nodeMonitorService.TryAdd DeviceId=" + catalogItem.DeviceID);
                         }
 
