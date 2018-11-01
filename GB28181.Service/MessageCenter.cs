@@ -389,8 +389,9 @@ namespace GB28181Service
                 //}
 
                 //device from sub platform by catalog querying
-                if (Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
+                while (!Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
                 {
+                    System.Threading.Thread.Sleep(500);
                     Catalog catalog = Catalogs[sipTransaction.TransactionRequestFrom.URI.User];
                     catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
                     {
