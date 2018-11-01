@@ -63,8 +63,8 @@ namespace GB28181Service
                     if (devCata == DevCataType.Device)
                     {
                         _SIPTransaction.TransactionRequestFrom.URI.User = catalogItem.DeviceID;
-                        DeviceDmsRegister(_SIPTransaction);
                         logger.Debug("OnCatalogReceived.DeviceDmsRegister: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
+                        DeviceDmsRegister(_SIPTransaction);
                     }
                 });
             }
