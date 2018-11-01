@@ -394,7 +394,7 @@ namespace GB28181Service
                 {
                     if (!Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
                     {
-                        System.Threading.Thread.Sleep(100);
+                        System.Threading.Thread.Sleep(200);
                     }
                     else
                     {
@@ -407,8 +407,8 @@ namespace GB28181Service
                                 _device.GBID = catalogItem.DeviceID;
                             }
                             logger.Debug("_sipRegistrarCore_RPCDmsRegisterReceived: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
+                            tf = false;
                         });
-                        tf = false;
                     }
                 }
 
