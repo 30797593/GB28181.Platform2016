@@ -610,12 +610,13 @@ namespace GB28181Service
                 {
                     evt.DeviceID = rep.Devices[0].Guid;
                     evt.DeviceName = rep.Devices[0].Name;
+                    logger.Debug("DeviceEditEvent: " + edittype + " " + rep.Devices[0].ToString());
                 }
                 else
                 {
-                    logger.Warn("DeviceEditEvent: rep.Devices.Count == 0 ");
+                    logger.Warn("DeviceEditEvent: Devices[" + DeviceID + "] can't be found in database");
+                    return;
                 }
-                logger.Debug("DeviceEditEvent: " + edittype + " " + rep.Devices[0].ToString());
 
                 Message message = new Message();
                 Dictionary<string, string> dic = new Dictionary<string, string>();
