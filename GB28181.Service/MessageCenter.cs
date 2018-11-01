@@ -336,6 +336,10 @@ namespace GB28181Service
         {
             try
             {
+                //Device Catalog Query
+                DeviceCatalogQuery(sipTransaction.TransactionRequestFrom.URI.User);
+
+                //Device insert into database
                 Device _device = new Device();
                 SIPRequest sipRequest = sipTransaction.TransactionRequest;
                 _device.Guid = Guid.NewGuid().ToString();
@@ -347,6 +351,22 @@ namespace GB28181Service
                 _device.PtzType = 0;
                 _device.ProtocolType = 0;
                 _device.ShapeType = ShapeType.Dome;
+                
+                //device from sub platform by catalog querying
+                if (Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
+                {
+                    Catalog catalog = Catalogs[sipTransaction.TransactionRequestFrom.URI.User];
+                    catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
+                    {
+                        var devCata = DevType.GetCataType(catalogItem.DeviceID);
+                        if (devCata == DevCataType.Device)
+                        {
+                            _device.GBID = catalogItem.DeviceID;
+                        }
+                    });
+                    logger.Debug("_sipRegistrarCore_RPCDmsRegisterReceived: Catalog=" + JsonConvert.SerializeObject(catalog));
+                }
+
                 //var options = new List<ChannelOption> { new ChannelOption(ChannelOptions.MaxMessageLength, int.MaxValue) };
                 Channel channel = new Channel(EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080", ChannelCredentials.Insecure);
                 logger.Debug("Device Management Service Address: " + (EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080"));
@@ -383,10 +403,6 @@ namespace GB28181Service
                 //        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.UpdateDevice: " + reply.Status.ToString());
                 //    }
                 //}
-                if (Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
-                {
-                    logger.Debug("_sipRegistrarCore_RPCDmsRegisterReceived: Catalog=" + JsonConvert.SerializeObject(Catalogs[sipTransaction.TransactionRequestFrom.URI.User]));
-                }
 
                 //query device info from db
                 QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
@@ -402,17 +418,15 @@ namespace GB28181Service
                 var reply = client.AddDevice(_AddDeviceRequest);
                 if (reply.Status == OP_RESULT_STATUS.OpSuccess)
                 {
-                    logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have added registering DMS service.");
+                    logger.Debug("Device added into DMS service: " + JsonConvert.SerializeObject(_device));
                 }
                 else
                 {
-                    logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
+                    logger.Warn("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
                 }
 
                 //Device Edit Event
                 DeviceEditEvent(_device.GBID, edit);
-                //Device Catalog Query
-                DeviceCatalogQuery(_device.GBID);
             }
             catch (Exception ex)
             {
