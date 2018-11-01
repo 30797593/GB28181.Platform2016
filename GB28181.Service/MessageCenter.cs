@@ -355,7 +355,10 @@ namespace GB28181Service
             {
                 _SIPAccount = sIPAccount;
                 //Device SIPTransactions Dictionary
-                DeviceSIPTransactions.Add(sipTransaction.TransactionRequestFrom.URI.User, sipTransaction);
+                if (!DeviceSIPTransactions.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
+                {
+                    DeviceSIPTransactions.Add(sipTransaction.TransactionRequestFrom.URI.User, sipTransaction);
+                }
                 //Device Catalog Query
                 DeviceCatalogQuery(sipTransaction.TransactionRequestFrom.URI.User);
                 //Device Dms Register
