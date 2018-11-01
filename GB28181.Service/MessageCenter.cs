@@ -314,11 +314,11 @@ namespace GB28181Service
                         QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
                         req.GbIds.Add(deviceid);
                         rep = client.QueryGBDeviceByGBIDs(req);
-                        if (rep.Devices.Count > 0)
+                        if (rep.Devices != null && rep.Devices.Count > 0)
                         {
                             stat.DeviceID = rep.Devices[0].Guid;
                             stat.DeviceName = rep.Devices[0].Name;
-                            
+
                             Message message = new Message();
                             Dictionary<string, string> dic = new Dictionary<string, string>();
                             dic.Add("Content-Type", "application/octet-stream");
@@ -342,7 +342,7 @@ namespace GB28181Service
                             logger.Warn("QueryGBDeviceByGBIDsRequest: Devices[" + deviceid + "] can't be found in database");
                             continue;
                         }
-                        logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
+                        //logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
                     }
                 }
                 catch (Exception ex)
