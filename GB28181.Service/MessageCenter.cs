@@ -388,20 +388,28 @@ namespace GB28181Service
                 //    }
                 //}
 
-                //device from sub platform by catalog querying
-                while (!Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
+                //device from sub platform by catalog querying                
+                bool tf = true;
+                while (tf)
                 {
-                    System.Threading.Thread.Sleep(500);
-                    Catalog catalog = Catalogs[sipTransaction.TransactionRequestFrom.URI.User];
-                    catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
+                    if (!Catalogs.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
                     {
-                        var devCata = DevType.GetCataType(catalogItem.DeviceID);
-                        if (devCata == DevCataType.Device)
+                        System.Threading.Thread.Sleep(100);
+                    }
+                    else
+                    {
+                        Catalog catalog = Catalogs[sipTransaction.TransactionRequestFrom.URI.User];
+                        catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
                         {
-                            _device.GBID = catalogItem.DeviceID;
-                        }
-                    });
-                    logger.Debug("_sipRegistrarCore_RPCDmsRegisterReceived: Catalog=" + JsonConvert.SerializeObject(catalog));
+                            var devCata = DevType.GetCataType(catalogItem.DeviceID);
+                            if (devCata == DevCataType.Device)
+                            {
+                                _device.GBID = catalogItem.DeviceID;
+                            }
+                            logger.Debug("_sipRegistrarCore_RPCDmsRegisterReceived: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
+                        });
+                        tf = false;
+                    }
                 }
 
                 //query device info from db
