@@ -34,6 +34,9 @@ namespace GB28181Service
         public Dictionary<string, DeviceStatus> DeviceStatuses => _DeviceStatuses;
         private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
         public Dictionary<string, Catalog> Catalogs => _Catalogs;
+        private Dictionary<string, SIPTransaction> _DeviceSIPTransactions = new Dictionary<string, SIPTransaction>();
+        public Dictionary<string, SIPTransaction> DeviceSIPTransactions => _DeviceSIPTransactions;
+        SIPSorcery.GB28181.SIP.App.SIPAccount _SIPAccount;
 
         public MessageCenter(ISipMessageCore sipCoreMessageService, ISIPMonitorCore sIPMonitorCore, ISIPRegistrarCore sipRegistrarCore)
         {
@@ -49,8 +52,22 @@ namespace GB28181Service
             if (!Catalogs.ContainsKey(obj.DeviceID))
             {
                 Catalogs.Add(obj.DeviceID, obj);
+                logger.Debug("OnCatalogReceived: " + JsonConvert.SerializeObject(obj).ToString());
             }
-            logger.Debug("OnCatalogReceived: " + JsonConvert.SerializeObject(obj).ToString());
+            if (DeviceSIPTransactions.ContainsKey(obj.DeviceID))
+            {
+                SIPTransaction _SIPTransaction = DeviceSIPTransactions[obj.DeviceID];
+                obj.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
+                {
+                    var devCata = DevType.GetCataType(catalogItem.DeviceID);
+                    if (devCata == DevCataType.Device)
+                    {
+                        _SIPTransaction.TransactionRequestFrom.URI.User = catalogItem.DeviceID;
+                        DeviceDmsRegister(_SIPTransaction);
+                        logger.Debug("OnCatalogReceived.DeviceDmsRegister: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
+                    }
+                });
+            }
         }
 
         public void OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
@@ -336,9 +353,14 @@ namespace GB28181Service
         {
             try
             {
+                _SIPAccount = sIPAccount;
+                //Device SIPTransactions Dictionary
+                DeviceSIPTransactions.Add(sipTransaction.TransactionRequestFrom.URI.User, sipTransaction);
                 //Device Catalog Query
                 DeviceCatalogQuery(sipTransaction.TransactionRequestFrom.URI.User);
-
+                //Device Dms Register
+                DeviceDmsRegister(sipTransaction);
+                /*
                 //Device insert into database
                 Device _device = new Device();
                 SIPRequest sipRequest = sipTransaction.TransactionRequest;
@@ -388,7 +410,7 @@ namespace GB28181Service
                 //    }
                 //}
 
-                //device from sub platform by catalog querying                
+                //device from sub platform by catalog querying  
                 bool tf = true;
                 while (tf)
                 {
@@ -435,10 +457,93 @@ namespace GB28181Service
 
                 //Device Edit Event
                 DeviceEditEvent(_device.GBID, edit);
+                */
             }
             catch (Exception ex)
             {
                 logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived Exception: " + ex.Message);
+            }
+        }
+        private void DeviceDmsRegister(SIPTransaction sipTransaction)
+        {
+            try
+            {
+                //Device insert into database
+                Device _device = new Device();
+                SIPRequest sipRequest = sipTransaction.TransactionRequest;
+                _device.Guid = Guid.NewGuid().ToString();
+                _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//IPC
+                _device.Name = "gb" + _device.IP;
+                _device.LoginUser.Add(new LoginUser() { LoginName = _SIPAccount.SIPUsername ?? "admin", LoginPwd = _SIPAccount.SIPPassword ?? "123456" });//same to GB config service
+                _device.Port = Convert.ToUInt32(sipTransaction.TransactionRequest.RemoteSIPEndPoint.Port);//5060
+                _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001180000184
+                _device.PtzType = 0;
+                _device.ProtocolType = 0;
+                _device.ShapeType = ShapeType.Dome;
+                //var options = new List<ChannelOption> { new ChannelOption(ChannelOptions.MaxMessageLength, int.MaxValue) };
+                Channel channel = new Channel(EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080", ChannelCredentials.Insecure);
+                logger.Debug("Device Management Service Address: " + (EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080"));
+                var client = new Manage.Manage.ManageClient(channel);
+                //if (!_sipCoreMessageService.NodeMonitorService.ContainsKey(_device.GBID))
+                //{
+                //    AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
+                //    _AddDeviceRequest.Device.Add(_device);
+                //    _AddDeviceRequest.LoginRoleId = "XXXX";
+                //    var reply = client.AddDevice(_AddDeviceRequest);
+                //    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
+                //    {
+                //        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have added registering DMS service.");
+                //        DeviceEditEvent(_device.GBID, "add");
+                //    }
+                //    else
+                //    {
+                //        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
+                //    }
+                //}
+                //else
+                //{
+                //    UpdateDeviceRequest _UpdateDeviceRequest = new UpdateDeviceRequest();
+                //    _UpdateDeviceRequest.DeviceItem.Add(_device);
+                //    _UpdateDeviceRequest.LoginRoleId = "XXXX";
+                //    var reply = client.UpdateDevice(_UpdateDeviceRequest);
+                //    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
+                //    {
+                //        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have updated registering DMS service.");
+                //        DeviceEditEvent(_device.GBID, "update");
+                //    }
+                //    else
+                //    {
+                //        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.UpdateDevice: " + reply.Status.ToString());
+                //    }
+                //}
+
+                //query device info from db
+                QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
+                QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                req.GbIds.Add(_device.GBID);
+                rep = client.QueryGBDeviceByGBIDs(req);
+                string edit = rep.Devices.Count < 1 ? "added" : "updated";
+
+                //add & update device
+                AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
+                _AddDeviceRequest.Device.Add(_device);
+                _AddDeviceRequest.LoginRoleId = "XXXX";
+                var reply = client.AddDevice(_AddDeviceRequest);
+                if (reply.Status == OP_RESULT_STATUS.OpSuccess)
+                {
+                    logger.Debug("Device added into DMS service: " + JsonConvert.SerializeObject(_device));
+                }
+                else
+                {
+                    logger.Warn("DeviceDmsRegister.AddDevice: " + reply.Status.ToString());
+                }
+
+                //Device Edit Event
+                DeviceEditEvent(_device.GBID, edit);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("DeviceDmsRegister Exception: " + ex.Message);
             }
         }
 
