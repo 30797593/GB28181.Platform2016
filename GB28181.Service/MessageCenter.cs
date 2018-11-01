@@ -373,14 +373,14 @@ namespace GB28181Service
                 //Device Catalog Query
                 DeviceCatalogQuery(deviceid);
 
-                //query device info from db
-                string edit = IsDeviceExisted(deviceid) ? "updated" : "added";
+                ////query device info from db
+                //string edit = IsDeviceExisted(deviceid) ? "updated" : "added";
 
-                //Device Dms Register
-                DeviceDmsRegister(sipTransaction);
+                ////Device Dms Register
+                //DeviceDmsRegister(sipTransaction);
 
-                //Device Edit Event
-                DeviceEditEvent(deviceid, edit);
+                ////Device Edit Event
+                //DeviceEditEvent(deviceid, edit);
             }
             catch (Exception ex)
             {
