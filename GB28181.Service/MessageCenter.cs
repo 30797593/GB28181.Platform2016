@@ -64,7 +64,15 @@ namespace GB28181Service
                     {
                         _SIPTransaction.TransactionRequestFrom.URI.User = catalogItem.DeviceID;
                         logger.Debug("OnCatalogReceived.DeviceDmsRegister: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
+
+                        //query device info from db
+                        string edit = IsDeviceExisted(catalogItem.DeviceID) ? "updated" : "added";
+
+                        //Device Dms Register
                         DeviceDmsRegister(_SIPTransaction);
+
+                        //Device Edit Event
+                        DeviceEditEvent(catalogItem.DeviceID, edit);
                     }
                 });
             }
@@ -354,15 +362,26 @@ namespace GB28181Service
             try
             {
                 _SIPAccount = sIPAccount;
+                string deviceid = sipTransaction.TransactionRequestFrom.URI.User;
+
                 //Device SIPTransactions Dictionary
-                if (!DeviceSIPTransactions.ContainsKey(sipTransaction.TransactionRequestFrom.URI.User))
+                if (!DeviceSIPTransactions.ContainsKey(deviceid))
                 {
-                    DeviceSIPTransactions.Add(sipTransaction.TransactionRequestFrom.URI.User, sipTransaction);
+                    DeviceSIPTransactions.Add(deviceid, sipTransaction);
                 }
+
                 //Device Catalog Query
-                DeviceCatalogQuery(sipTransaction.TransactionRequestFrom.URI.User);
+                DeviceCatalogQuery(deviceid);
+
+                //query device info from db
+                string edit = IsDeviceExisted(deviceid) ? "updated" : "added";
+
                 //Device Dms Register
                 DeviceDmsRegister(sipTransaction);
+
+                //Device Edit Event
+                DeviceEditEvent(deviceid, edit);
+
                 /*
                 //Device insert into database
                 Device _device = new Device();
@@ -512,7 +531,6 @@ namespace GB28181Service
                 //    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
                 //    {
                 //        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have updated registering DMS service.");
-                //        DeviceEditEvent(_device.GBID, "update");
                 //    }
                 //    else
                 //    {
@@ -520,12 +538,12 @@ namespace GB28181Service
                 //    }
                 //}
 
-                //query device info from db
-                QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
-                QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
-                req.GbIds.Add(_device.GBID);
-                rep = client.QueryGBDeviceByGBIDs(req);
-                string edit = rep.Devices.Count < 1 ? "added" : "updated";
+                ////query device info from db
+                //QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
+                //QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+                //req.GbIds.Add(_device.GBID);
+                //rep = client.QueryGBDeviceByGBIDs(req);
+                //string edit = rep.Devices.Count < 1 ? "added" : "updated";
 
                 //add & update device
                 AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
@@ -541,13 +559,32 @@ namespace GB28181Service
                     logger.Warn("DeviceDmsRegister.AddDevice: " + reply.Status.ToString());
                 }
 
-                //Device Edit Event
-                DeviceEditEvent(_device.GBID, edit);
+                ////Device Edit Event
+                //DeviceEditEvent(_device.GBID, edit);
             }
             catch (Exception ex)
             {
                 logger.Error("DeviceDmsRegister Exception: " + ex.Message);
             }
+        }
+        /// <summary>
+        /// query device info from db
+        /// </summary>
+        /// <param name="deviceid"></param>
+        /// <returns></returns>
+        private bool IsDeviceExisted(string deviceid)
+        {
+            bool tf = false;
+            //var options = new List<ChannelOption> { new ChannelOption(ChannelOptions.MaxMessageLength, int.MaxValue) };
+            Channel channel = new Channel(EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080", ChannelCredentials.Insecure);
+            logger.Debug("Device Management Service Address: " + (EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080"));
+            var client = new Manage.Manage.ManageClient(channel);
+            QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
+            QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+            req.GbIds.Add(deviceid);
+            rep = client.QueryGBDeviceByGBIDs(req);
+            tf = rep.Devices.Count > 0;
+            return tf;
         }
 
         /// <summary>
@@ -572,7 +609,11 @@ namespace GB28181Service
                 if (rep.Devices.Count > 0)
                 {
                     evt.DeviceID = rep.Devices[0].Guid;
-                    evt.DeviceName = rep.Devices[0].Name;                    
+                    evt.DeviceName = rep.Devices[0].Name;
+                }
+                else
+                {
+                    logger.Warn("DeviceEditEvent: rep.Devices.Count == 0 ");
                 }
                 logger.Debug("DeviceEditEvent: " + edittype + " " + rep.Devices[0].ToString());
 
