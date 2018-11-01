@@ -371,7 +371,7 @@ namespace GB28181Service
                 }
 
                 //Device Catalog Query
-                DeviceCatalogQuery(deviceid);
+                _sipCoreMessageService.DeviceCatalogQuery(deviceid);
 
                 ////query device info from db
                 //string edit = IsDeviceExisted(deviceid) ? "updated" : "added";
@@ -530,20 +530,6 @@ namespace GB28181Service
             catch (Exception ex)
             {
                 logger.Error("DeviceEditEvent Exception: " + ex.Message);
-            }
-        }
-        /// <summary>
-        /// Device Catalog Query
-        /// </summary>
-        internal void DeviceCatalogQuery(string deviceId)
-        {
-            try
-            {
-                _sipCoreMessageService.DeviceCatalogQuery(deviceId);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("DeviceCatalogQuery Exception: " + ex.Message);
             }
         }
 
