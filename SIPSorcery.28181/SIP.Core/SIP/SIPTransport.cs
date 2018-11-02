@@ -1255,7 +1255,8 @@ namespace SIPSorcery.GB28181.SIP
                         }
                         else
                         {
-                            rawSIPMessage = Encoding.Default.GetString(buffer, 0, buffer.Length);
+                            //rawSIPMessage = Encoding.Default.GetString(buffer, 0, buffer.Length);
+                            rawSIPMessage = Encoding.GetEncoding("GB2312").GetString(buffer, 0, buffer.Length);
                             if (!rawSIPMessage.StartsWith("REGISTER") && !rawSIPMessage.StartsWith("MESSAGE"))
                             {
                                 string debug = rawSIPMessage;
