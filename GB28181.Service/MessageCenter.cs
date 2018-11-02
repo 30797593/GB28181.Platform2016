@@ -63,13 +63,18 @@ namespace GB28181Service
                     if (devCata == DevCataType.Device)
                     {
                         _SIPTransaction.TransactionRequestFrom.URI.User = catalogItem.DeviceID;
+                        string gbname = "gb_" + catalogItem.Name;
+                        if (!string.IsNullOrEmpty(catalogItem.ParentID) && !obj.DeviceID.Equals(catalogItem.DeviceID))
+                        {
+                            gbname = "gb_" + catalogItem.Name;
+                        }
                         logger.Debug("OnCatalogReceived.DeviceDmsRegister: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
 
                         //query device info from db
                         string edit = IsDeviceExisted(catalogItem.DeviceID) ? "updated" : "added";
 
                         //Device Dms Register
-                        DeviceDmsRegister(_SIPTransaction);
+                        DeviceDmsRegister(_SIPTransaction, gbname);
 
                         //Device Edit Event
                         DeviceEditEvent(catalogItem.DeviceID, edit);
@@ -380,7 +385,7 @@ namespace GB28181Service
                 //string edit = IsDeviceExisted(deviceid) ? "updated" : "added";
 
                 ////Device Dms Register
-                //DeviceDmsRegister(sipTransaction);
+                //DeviceDmsRegister(sipTransaction,"gb");
 
                 ////Device Edit Event
                 //DeviceEditEvent(deviceid, edit);
@@ -390,7 +395,7 @@ namespace GB28181Service
                 logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived Exception: " + ex.Message);
             }
         }
-        private void DeviceDmsRegister(SIPTransaction sipTransaction)
+        private void DeviceDmsRegister(SIPTransaction sipTransaction, string gbname)
         {
             try
             {
@@ -399,7 +404,7 @@ namespace GB28181Service
                 SIPRequest sipRequest = sipTransaction.TransactionRequest;
                 _device.Guid = Guid.NewGuid().ToString();
                 _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//IPC
-                _device.Name = "gb" + _device.IP;
+                _device.Name = gbname;
                 _device.LoginUser.Add(new LoginUser() { LoginName = _SIPAccount.SIPUsername ?? "admin", LoginPwd = _SIPAccount.SIPPassword ?? "123456" });//same to GB config service
                 _device.Port = Convert.ToUInt32(sipTransaction.TransactionRequest.RemoteSIPEndPoint.Port);//5060
                 _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001180000184
