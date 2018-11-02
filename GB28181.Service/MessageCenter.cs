@@ -289,7 +289,7 @@ namespace GB28181Service
                         TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
                         while (true)
                         {
-                            System.Threading.Thread.Sleep(1);
+                            System.Threading.Thread.Sleep(100);
                             TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
                             if (DeviceStatuses.ContainsKey(deviceid))
                             {
