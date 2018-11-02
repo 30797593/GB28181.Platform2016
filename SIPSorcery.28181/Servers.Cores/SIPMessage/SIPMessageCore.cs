@@ -49,6 +49,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         /// Monitor Service For all Remote Node
         /// </summary>
         private ConcurrentDictionary<string, ISIPMonitorCore> _nodeMonitorService = new ConcurrentDictionary<string, ISIPMonitorCore>();
+        public ConcurrentDictionary<string, ISIPMonitorCore> NodeMonitorService => _nodeMonitorService;
 
         /// <summary>
         /// 本地sip终结点
@@ -58,18 +59,13 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         /// sip传输请求
         /// </summary>
         private ISIPTransport _transport;
-
-
         public ISIPTransport Transport => _transport;
 
         /// <summary>
         /// 本地域的sip编码
         /// </summary>
         public string LocalSIPId { get; set; }
-
-
-        public ConcurrentDictionary<string, ISIPMonitorCore> NodeMonitorService => _nodeMonitorService;
-
+        
         private Stream _g711Stream;
         private Channel _audioChannel;
         private IPEndPoint _audioRemoteEP;
@@ -178,8 +174,8 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     RemoteEndPoint = new SIPEndPoint(SIPProtocolsEnum.udp, ipaddress, camera.Port),
                     DeviceId = camera.DeviceID
                 });
-                logger.Debug("nodeMonitorService divces counts: " + _nodeMonitorService.Count);
-                logger.Debug("Camera[" + camera.DeviceID + "," + camera.IPAddress.ToString() + ":" + camera.Port + "] item initialized.");
+                //logger.Debug("nodeMonitorService divces counts: " + _nodeMonitorService.Count);
+                logger.Debug("_cameraCache_OnItemAdded: [" + camera.DeviceID + "," + camera.IPAddress.ToString() + ":" + camera.Port + "] item initialized.");
             }
             catch(Exception ex)
             {
@@ -663,30 +659,37 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
         /// <param name="catalog">目录结构体</param>
         private void CatalogHandle(SIPEndPoint localEP, SIPEndPoint remoteEP, SIPRequest request, Catalog catalog)
         {
-            catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
+            try
             {
-                catalogItem.RemoteEP = remoteEP.ToHost();
-                var devCata = DevType.GetCataType(catalogItem.DeviceID);
-                if (devCata != DevCataType.Device)
+                catalog.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
                 {
-                    if (!_nodeMonitorService.ContainsKey(catalogItem.DeviceID))
+                    catalogItem.RemoteEP = remoteEP.ToHost();
+                    var devCata = DevType.GetCataType(catalogItem.DeviceID);
+                    //logger.Debug("CatalogHandle: DevCataType=" + devCata);
+                    if (devCata == DevCataType.Device)
                     {
-                        remoteEP.Port = _LocalSipAccount.RemotePort;
-                        _nodeMonitorService.TryAdd(catalogItem.DeviceID, new SIPMonitorCoreService(this, _transport, _sipAccountStorage)
+                        if (!_nodeMonitorService.ContainsKey(catalogItem.DeviceID))
                         {
-                            RemoteEndPoint = remoteEP,
-                            DeviceId = catalogItem.DeviceID
-                        });
+                            //remoteEP.Port = _LocalSipAccount.RemotePort;
+                            _nodeMonitorService.TryAdd(catalogItem.DeviceID, new SIPMonitorCoreService(this, _transport, _sipAccountStorage)
+                            {
+                                RemoteEndPoint = remoteEP,
+                                DeviceId = catalogItem.DeviceID
+                            });
+                            logger.Debug("CatalogHandle: nodeMonitorService.Count=" + _nodeMonitorService.Count);
+                            logger.Debug("CatalogHandle: nodeMonitorService.TryAdd DeviceId=" + catalogItem.DeviceID);
+                        }
+
                     }
+                    //   CommandType cmdType = i == 0 ? CommandType.Play : CommandType.Playback;
+                });
 
-                }
-
-                //   CommandType cmdType = i == 0 ? CommandType.Play : CommandType.Playback;
-
-
-            });
-
-            OnCatalogReceived?.Invoke(catalog);
+                OnCatalogReceived?.Invoke(catalog);
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("CatalogHandle Exception: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -713,7 +716,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
             //}
             OnKeepaliveReceived?.Invoke(remoteEP, keepAlive, request.Header.From.FromURI.User);
             // _subscribe = true;
-            logger.Debug("KeepAlive:" + remoteEP.ToHost() + "======DevID:" + keepAlive.DeviceID + "======Status:" + keepAlive.Status + "======SN:" + keepAlive.SN);
+            logger.Debug("KeepAlive:" + remoteEP.ToHost() + "=====DevID:" + keepAlive.DeviceID + "=====Status:" + keepAlive.Status + "=====SN:" + keepAlive.SN);
         }
 
         /// <summary>

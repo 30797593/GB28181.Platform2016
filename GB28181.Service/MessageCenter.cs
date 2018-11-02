@@ -5,15 +5,16 @@ using SIPSorcery.GB28181.Servers.SIPMessage;
 using SIPSorcery.GB28181.SIP;
 using SIPSorcery.GB28181.Sys.XML;
 using NATS.Client;
-using System.Diagnostics;
+//using System.Diagnostics;
 using SIPSorcery.GB28181.Sys;
 using System.Text;
 using Logger4Net;
 using Newtonsoft.Json;
 using Google.Protobuf;
-using SIPSorcery.GB28181.SIP.App;
+//using SIPSorcery.GB28181.SIP.App;
 using Manage;
 using Grpc.Core;
+//using GrpcDeviceCatalog;
 
 namespace GB28181Service
 {
@@ -27,10 +28,15 @@ namespace GB28181Service
         private ISipMessageCore _sipCoreMessageService;
         private ISIPMonitorCore _sIPMonitorCore;
         private ISIPRegistrarCore _registrarCore;
-        private Dictionary<string, HeartBeatEndPoint> _HeartBeatStatuses = new Dictionary<string, HeartBeatEndPoint>();
-        public Dictionary<string, HeartBeatEndPoint> HeartBeatStatuses => _HeartBeatStatuses;
+        //private Dictionary<string, HeartBeatEndPoint> _HeartBeatStatuses = new Dictionary<string, HeartBeatEndPoint>();
+        //public Dictionary<string, HeartBeatEndPoint> HeartBeatStatuses => _HeartBeatStatuses;
         private Dictionary<string, DeviceStatus> _DeviceStatuses = new Dictionary<string, DeviceStatus>();
         public Dictionary<string, DeviceStatus> DeviceStatuses => _DeviceStatuses;
+        private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
+        public Dictionary<string, Catalog> Catalogs => _Catalogs;
+        private Dictionary<string, SIPTransaction> _DeviceSIPTransactions = new Dictionary<string, SIPTransaction>();
+        public Dictionary<string, SIPTransaction> DeviceSIPTransactions => _DeviceSIPTransactions;
+        SIPSorcery.GB28181.SIP.App.SIPAccount _SIPAccount;
 
         public MessageCenter(ISipMessageCore sipCoreMessageService, ISIPMonitorCore sIPMonitorCore, ISIPRegistrarCore sipRegistrarCore)
         {
@@ -38,11 +44,41 @@ namespace GB28181Service
             _sIPMonitorCore = sIPMonitorCore;
             _registrarCore = sipRegistrarCore;
             _registrarCore.DeviceAlarmSubscribe += OnDeviceAlarmSubscribeReceived;
-            _sipCoreMessageService.OnDeviceStatusReceived += _sipCoreMessageService_OnDeviceStatusReceived;
             _registrarCore.RPCDmsRegisterReceived += _sipRegistrarCore_RPCDmsRegisterReceived;
         }
 
-        private void _sipCoreMessageService_OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
+        public void OnCatalogReceived(Catalog obj)
+        {
+            if (!Catalogs.ContainsKey(obj.DeviceID))
+            {
+                Catalogs.Add(obj.DeviceID, obj);
+                logger.Debug("OnCatalogReceived: " + JsonConvert.SerializeObject(obj).ToString());
+            }
+            if (DeviceSIPTransactions.ContainsKey(obj.DeviceID))
+            {
+                SIPTransaction _SIPTransaction = DeviceSIPTransactions[obj.DeviceID];
+                obj.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
+                {
+                    var devCata = DevType.GetCataType(catalogItem.DeviceID);
+                    if (devCata == DevCataType.Device)
+                    {
+                        _SIPTransaction.TransactionRequestFrom.URI.User = catalogItem.DeviceID;
+                        logger.Debug("OnCatalogReceived.DeviceDmsRegister: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
+
+                        //query device info from db
+                        string edit = IsDeviceExisted(catalogItem.DeviceID) ? "updated" : "added";
+
+                        //Device Dms Register
+                        DeviceDmsRegister(_SIPTransaction);
+
+                        //Device Edit Event
+                        DeviceEditEvent(catalogItem.DeviceID, edit);
+                    }
+                });
+            }
+        }
+
+        public void OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
         {
             if (!DeviceStatuses.ContainsKey(arg2.DeviceID))
             {
@@ -61,8 +97,8 @@ namespace GB28181Service
             };
             _keepAliveQueue.Enqueue(hbPoint);
 
-            HeartBeatStatuses.Remove(devId);
-            HeartBeatStatuses.Add(devId, hbPoint);
+            //HeartBeatStatuses.Remove(devId);
+            //HeartBeatStatuses.Add(devId, hbPoint);
         }
 
         internal void OnServiceChanged(string msg, ServiceStatus state)
@@ -243,30 +279,30 @@ namespace GB28181Service
                 System.Threading.Thread.Sleep(30000);
                 try
                 {
-                    foreach (HeartBeatEndPoint obj in HeartBeatStatuses.Values)
+                    foreach (string deviceid in _sipCoreMessageService.NodeMonitorService.Keys)
                     {
                         Event.Status stat = new Event.Status();
                         stat.Status_ = false;
                         stat.OccurredTime = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
                         #region waiting DeviceStatuses add in for 500 Milliseconds
-                        _sipCoreMessageService.DeviceStateQuery(obj.Heart.DeviceID);
+                        _sipCoreMessageService.DeviceStateQuery(deviceid);
                         TimeSpan t1 = new TimeSpan(DateTime.Now.Ticks);
                         while (true)
                         {
-                            System.Threading.Thread.Sleep(1);
+                            System.Threading.Thread.Sleep(100);
                             TimeSpan t2 = new TimeSpan(DateTime.Now.Ticks);
-                            if (DeviceStatuses.ContainsKey(obj.Heart.DeviceID))
+                            if (DeviceStatuses.ContainsKey(deviceid))
                             {
                                 //on line
-                                stat.Status_ = DeviceStatuses[obj.Heart.DeviceID].Status.Equals("ON") ? true : false;
-                                logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: " + DeviceStatuses[obj.Heart.DeviceID].Status);
-                                DeviceStatuses.Remove(obj.Heart.DeviceID);
+                                stat.Status_ = DeviceStatuses[deviceid].Status.Equals("ON") ? true : false;
+                                logger.Debug("Device status of [" + deviceid + "]: " + DeviceStatuses[deviceid].Status);
+                                DeviceStatuses.Remove(deviceid);
                                 break;
                             }
                             else if (t2.Subtract(t1).Duration().Milliseconds > 500)
                             {
                                 //off line
-                                logger.Debug("Device status of [" + obj.Heart.DeviceID + "]: OFF");
+                                logger.Debug("Device status of [" + deviceid + "]: OFF");
                                 break;
                             }
                         }
@@ -276,37 +312,37 @@ namespace GB28181Service
                         var client = new Manage.Manage.ManageClient(channel);
                         QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
                         QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
-                        req.GbIds.Add(obj.Heart.DeviceID);
+                        req.GbIds.Add(deviceid);
                         rep = client.QueryGBDeviceByGBIDs(req);
-                        if (rep.Devices.Count > 0)
+                        if (rep.Devices != null && rep.Devices.Count > 0)
                         {
                             stat.DeviceID = rep.Devices[0].Guid;
                             stat.DeviceName = rep.Devices[0].Name;
+
+                            Message message = new Message();
+                            Dictionary<string, string> dic = new Dictionary<string, string>();
+                            dic.Add("Content-Type", "application/octet-stream");
+                            message.Header = dic;
+                            message.Body = stat.ToByteArray();
+                            byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                            string subject = Event.StatusTopic.OriginalStatusTopic.ToString();
+                            #region
+                            Options opts = ConnectionFactory.GetDefaultOptions();
+                            opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
+                            using (IConnection c = new ConnectionFactory().CreateConnection(opts))
+                            {
+                                c.Publish(subject, payload);
+                                c.Flush();
+                                logger.Debug("Device on/off line status published.");
+                            }
+                            #endregion
                         }
                         else
                         {
-                            logger.Warn("QueryGBDeviceByGBIDsResponse Devices.Count: " + rep.Devices.Count);
+                            logger.Debug("QueryGBDeviceByGBIDsRequest: Devices[" + deviceid + "] can't be found in database");
                             continue;
                         }
                         logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
-
-                        Message message = new Message();
-                        Dictionary<string, string> dic = new Dictionary<string, string>();
-                        dic.Add("Content-Type", "application/octet-stream");
-                        message.Header = dic;
-                        message.Body = stat.ToByteArray();
-                        byte[] payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-                        string subject = Event.StatusTopic.OriginalStatusTopic.ToString();
-                        #region
-                        Options opts = ConnectionFactory.GetDefaultOptions();
-                        opts.Url = EnvironmentVariables.GBNatsChannelAddress ?? Defaults.Url;
-                        using (IConnection c = new ConnectionFactory().CreateConnection(opts))
-                        {
-                            c.Publish(subject, payload);
-                            c.Flush();
-                            logger.Debug("Device on/off line status published.");
-                        }
-                        #endregion
                     }
                 }
                 catch (Exception ex)
@@ -325,12 +361,43 @@ namespace GB28181Service
         {
             try
             {
+                _SIPAccount = sIPAccount;
+                string deviceid = sipTransaction.TransactionRequestFrom.URI.User;
+
+                //Device SIPTransactions Dictionary
+                if (!DeviceSIPTransactions.ContainsKey(deviceid))
+                {
+                    DeviceSIPTransactions.Add(deviceid, sipTransaction);
+                }
+
+                //Device Catalog Query
+                _sipCoreMessageService.DeviceCatalogQuery(deviceid);
+
+                ////query device info from db
+                //string edit = IsDeviceExisted(deviceid) ? "updated" : "added";
+
+                ////Device Dms Register
+                //DeviceDmsRegister(sipTransaction);
+
+                ////Device Edit Event
+                //DeviceEditEvent(deviceid, edit);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived Exception: " + ex.Message);
+            }
+        }
+        private void DeviceDmsRegister(SIPTransaction sipTransaction)
+        {
+            try
+            {
+                //Device insert into database
                 Device _device = new Device();
                 SIPRequest sipRequest = sipTransaction.TransactionRequest;
                 _device.Guid = Guid.NewGuid().ToString();
                 _device.IP = sipTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();//IPC
                 _device.Name = "gb" + _device.IP;
-                _device.LoginUser.Add(new LoginUser() { LoginName = sIPAccount.SIPUsername ?? "admin", LoginPwd = sIPAccount.SIPPassword ?? "123456" });
+                _device.LoginUser.Add(new LoginUser() { LoginName = _SIPAccount.SIPUsername ?? "admin", LoginPwd = _SIPAccount.SIPPassword ?? "123456" });//same to GB config service
                 _device.Port = Convert.ToUInt32(sipTransaction.TransactionRequest.RemoteSIPEndPoint.Port);//5060
                 _device.GBID = sipTransaction.TransactionRequestFrom.URI.User;//42010000001180000184
                 _device.PtzType = 0;
@@ -365,20 +432,12 @@ namespace GB28181Service
                 //    if (reply.Status == OP_RESULT_STATUS.OpSuccess)
                 //    {
                 //        logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have updated registering DMS service.");
-                //        DeviceEditEvent(_device.GBID, "update");
                 //    }
                 //    else
                 //    {
                 //        logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.UpdateDevice: " + reply.Status.ToString());
                 //    }
                 //}
-
-                //query device info from db
-                QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
-                QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
-                req.GbIds.Add(_device.GBID);
-                rep = client.QueryGBDeviceByGBIDs(req);
-                string edit = rep.Devices.Count < 1 ? "added" : "updated";
 
                 //add & update device
                 AddDeviceRequest _AddDeviceRequest = new AddDeviceRequest();
@@ -387,20 +446,36 @@ namespace GB28181Service
                 var reply = client.AddDevice(_AddDeviceRequest);
                 if (reply.Status == OP_RESULT_STATUS.OpSuccess)
                 {
-                    logger.Debug("Device[" + sipTransaction.TransactionRequest.RemoteSIPEndPoint + "] have added registering DMS service.");
+                    logger.Debug("Device added into DMS service: " + JsonConvert.SerializeObject(_device));
                 }
                 else
                 {
-                    logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived.AddDevice: " + reply.Status.ToString());
+                    logger.Warn("DeviceDmsRegister.AddDevice: " + reply.Status.ToString());
                 }
-
-                //Device Edit Event
-                DeviceEditEvent(_device.GBID, edit);
             }
             catch (Exception ex)
             {
-                logger.Error("_sipRegistrarCore_RPCDmsRegisterReceived Exception: " + ex.Message);
+                logger.Error("DeviceDmsRegister Exception: " + ex.Message);
             }
+        }
+        /// <summary>
+        /// query device info from db
+        /// </summary>
+        /// <param name="deviceid"></param>
+        /// <returns></returns>
+        private bool IsDeviceExisted(string deviceid)
+        {
+            bool tf = false;
+            //var options = new List<ChannelOption> { new ChannelOption(ChannelOptions.MaxMessageLength, int.MaxValue) };
+            Channel channel = new Channel(EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080", ChannelCredentials.Insecure);
+            logger.Debug("Device Management Service Address: " + (EnvironmentVariables.DeviceManagementServiceAddress ?? "devicemanagementservice:8080"));
+            var client = new Manage.Manage.ManageClient(channel);
+            QueryGBDeviceByGBIDsResponse rep = new QueryGBDeviceByGBIDsResponse();
+            QueryGBDeviceByGBIDsRequest req = new QueryGBDeviceByGBIDsRequest();
+            req.GbIds.Add(deviceid);
+            rep = client.QueryGBDeviceByGBIDs(req);
+            tf = rep.Devices.Count > 0;
+            return tf;
         }
 
         /// <summary>
@@ -425,9 +500,14 @@ namespace GB28181Service
                 if (rep.Devices.Count > 0)
                 {
                     evt.DeviceID = rep.Devices[0].Guid;
-                    evt.DeviceName = rep.Devices[0].Name;                    
+                    evt.DeviceName = rep.Devices[0].Name;
+                    logger.Debug("DeviceEditEvent: " + edittype + " " + rep.Devices[0].ToString());
                 }
-                logger.Debug("DeviceEditEvent: " + edittype + " " + rep.Devices[0].ToString());
+                else
+                {
+                    logger.Warn("DeviceEditEvent: Devices[" + DeviceID + "] can't be found in database");
+                    return;
+                }
 
                 Message message = new Message();
                 Dictionary<string, string> dic = new Dictionary<string, string>();
