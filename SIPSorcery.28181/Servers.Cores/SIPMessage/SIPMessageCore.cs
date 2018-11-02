@@ -670,7 +670,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
                     {
                         if (!_nodeMonitorService.ContainsKey(catalogItem.DeviceID))
                         {
-                            remoteEP.Port = _LocalSipAccount.RemotePort;
+                            //remoteEP.Port = _LocalSipAccount.RemotePort;
                             _nodeMonitorService.TryAdd(catalogItem.DeviceID, new SIPMonitorCoreService(this, _transport, _sipAccountStorage)
                             {
                                 RemoteEndPoint = remoteEP,
