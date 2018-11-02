@@ -281,6 +281,9 @@ namespace GB28181Service
                 {
                     foreach (string deviceid in _sipCoreMessageService.NodeMonitorService.Keys)
                     {
+                        //if not device then skip
+                        if (!DevType.GetCataType(deviceid).Equals(DevCataType.Device)) continue;
+
                         Event.Status stat = new Event.Status();
                         stat.Status_ = false;
                         stat.OccurredTime = (UInt64)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
