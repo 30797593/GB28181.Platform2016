@@ -339,10 +339,10 @@ namespace GB28181Service
                         }
                         else
                         {
-                            logger.Warn("QueryGBDeviceByGBIDsRequest: Devices[" + deviceid + "] can't be found in database");
+                            logger.Debug("QueryGBDeviceByGBIDsRequest: Devices[" + deviceid + "] can't be found in database");
                             continue;
                         }
-                        //logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
+                        logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
                     }
                 }
                 catch (Exception ex)
