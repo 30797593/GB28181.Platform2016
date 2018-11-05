@@ -572,13 +572,12 @@ namespace SIPSorcery.GB28181.SIP
                     //    sipChannel.Send(dstEndPoint.GetIPEndPoint(), Encoding.GetEncoding("gb2312").GetBytes(sipRequest.ToString()));
                     //}
                     //else
-
                     //{
 
-                    if (sipRequest.ToString().ToLower().IndexOf("invite") > -1)
-                    {
-                        logger.Warn(sipRequest.ToString());
-                    }
+                    //if (sipRequest.ToString().ToLower().IndexOf("invite") > -1)
+                    //{
+                    //    logger.Warn(sipRequest.ToString());
+                    //}
                     sipChannel.Send(dstEndPoint.GetIPEndPoint(), Encoding.UTF8.GetBytes(sipRequest.ToString()));
 
                     //sipChannel.Send(dstEndPoint.GetIPEndPoint(), ConvertUnicodeToUTF8(sipRequest.ToString()));
