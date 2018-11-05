@@ -34,8 +34,8 @@ namespace GB28181Service
         public Dictionary<string, DeviceStatus> DeviceStatuses => _DeviceStatuses;
         private Dictionary<string, Catalog> _Catalogs = new Dictionary<string, Catalog>();
         public Dictionary<string, Catalog> Catalogs => _Catalogs;
-        private Dictionary<string, SIPTransaction> _DeviceSIPTransactions = new Dictionary<string, SIPTransaction>();
-        public Dictionary<string, SIPTransaction> DeviceSIPTransactions => _DeviceSIPTransactions;
+        private Dictionary<string, SIPTransaction> _GBSIPTransactions = new Dictionary<string, SIPTransaction>();
+        public Dictionary<string, SIPTransaction> GBSIPTransactions => _GBSIPTransactions;
         SIPSorcery.GB28181.SIP.App.SIPAccount _SIPAccount;
 
         public MessageCenter(ISipMessageCore sipCoreMessageService, ISIPMonitorCore sIPMonitorCore, ISIPRegistrarCore sipRegistrarCore)
@@ -54,9 +54,9 @@ namespace GB28181Service
                 Catalogs.Add(obj.DeviceID, obj);
                 logger.Debug("OnCatalogReceived: " + JsonConvert.SerializeObject(obj).ToString());
             }
-            if (DeviceSIPTransactions.ContainsKey(obj.DeviceID))
+            if (GBSIPTransactions.ContainsKey(obj.DeviceID))
             {
-                SIPTransaction _SIPTransaction = DeviceSIPTransactions[obj.DeviceID];
+                SIPTransaction _SIPTransaction = GBSIPTransactions[obj.DeviceID];
                 obj.DeviceList.Items.FindAll(item => item != null).ForEach(catalogItem =>
                 {
                     var devCata = DevType.GetCataType(catalogItem.DeviceID);
@@ -372,11 +372,9 @@ namespace GB28181Service
                 _SIPAccount = sIPAccount;
                 string deviceid = sipTransaction.TransactionRequestFrom.URI.User;
 
-                //Device SIPTransactions Dictionary
-                if (!DeviceSIPTransactions.ContainsKey(deviceid))
-                {
-                    DeviceSIPTransactions.Add(deviceid, sipTransaction);
-                }
+                //GB SIPTransactions Dictionary
+                GBSIPTransactions.Remove(deviceid);
+                GBSIPTransactions.Add(deviceid, sipTransaction);
 
                 //Device Catalog Query
                 _sipCoreMessageService.DeviceCatalogQuery(deviceid);
