@@ -575,12 +575,10 @@ namespace SIPSorcery.GB28181.SIP
 
                     //{
 
-                    //string sip = "";
-                    //if (sipRequest.ToString().ToLower().IndexOf("invite") > 0)
-                    //{
-                    //    sip = sipRequest.ToString().Replace("34010000002000000001", "34010000001320000002");
-                    //}
-                    //logger.Warn(sipRequest.ToString());
+                    if (sipRequest.ToString().ToLower().IndexOf("invite") > -1)
+                    {
+                        logger.Warn(sipRequest.ToString());
+                    }
                     sipChannel.Send(dstEndPoint.GetIPEndPoint(), Encoding.UTF8.GetBytes(sipRequest.ToString()));
 
                     //sipChannel.Send(dstEndPoint.GetIPEndPoint(), ConvertUnicodeToUTF8(sipRequest.ToString()));
