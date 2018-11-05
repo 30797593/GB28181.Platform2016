@@ -29,6 +29,7 @@ using GrpcVideoOnDemand;
 //using Manage;
 using Newtonsoft.Json;
 using SystemConfig;
+using System.Text;
 
 namespace GB28181Service
 {
@@ -67,7 +68,7 @@ namespace GB28181Service
 
         public MainProcess()
         {
-
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
         #region IDisposable interface
