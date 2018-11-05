@@ -44,7 +44,7 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             try
             {
-                logger.Debug("StartLive: request.Gbid=" + request.Gbid);
+                logger.Debug("StartLive: request=" + request.ToString());
                 _eventSource?.FileLivePlayRequestEvent(request, context);
                 var reqeustProcessResult = _sipServiceDirector.RealVideoReq(request.Gbid, new int[] { request.Port }, request.Ipaddr);
 
@@ -87,6 +87,7 @@ namespace GrpcAgent.WebsocketRpcServer
         {
             try
             {
+                logger.Debug("StartPlayback: request=" + request.ToString());
                 _eventSource?.FilePlaybackRequestEvent(request, context);
                 var reqeustProcessResult = _sipServiceDirector.BackVideoReq(request.Gbid, new int[] { request.Port }, request.Ipaddr, Convert.ToUInt64(request.BeginTime), Convert.ToUInt64(request.EndTime));
                 reqeustProcessResult?.Wait(System.TimeSpan.FromSeconds(1));
