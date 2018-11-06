@@ -66,7 +66,7 @@ namespace GrpcAgent.WebsocketRpcServer
                 Dictionary<string, DateTime> _Dictionary = new Dictionary<string, DateTime>();
                 _Dictionary.Add(request.Gbid + ',' + resReply.Hdr.Sessionid, DateTime.Now);
                 _sipServiceDirector.VideoSessionAlive.Add(_Dictionary);
-
+                logger.Debug("StartLive: resReply=" + resReply.ToString());
                 return Task.FromResult(resReply);
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace GrpcAgent.WebsocketRpcServer
                 Dictionary<string, DateTime> _Dictionary = new Dictionary<string, DateTime>();
                 _Dictionary.Add(request.Gbid + ',' + resReply.Hdr.Sessionid, DateTime.Now);
                 _sipServiceDirector.VideoSessionAlive.Add(_Dictionary);
-
+                logger.Debug("StartPlayback: resReply=" + resReply.ToString());
                 return Task.FromResult(resReply);
             }
             catch (Exception ex)
