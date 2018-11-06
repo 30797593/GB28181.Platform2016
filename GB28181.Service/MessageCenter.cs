@@ -63,11 +63,11 @@ namespace GB28181Service
                     if (devCata == DevCataType.Device)
                     {
                         _SIPTransaction.TransactionRequestFrom.URI.User = catalogItem.DeviceID;
-                        //string gbname = "gb_" + catalogItem.Name;
-                        string gbname = "gb" + _SIPTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();
+                        string gbname = "GB_" + catalogItem.Name;
+                        //string gbname = "gb" + _SIPTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();
                         if (!string.IsNullOrEmpty(catalogItem.ParentID) && !obj.DeviceID.Equals(catalogItem.DeviceID))
                         {
-                            gbname = "pt" + _SIPTransaction.TransactionRequest.RemoteSIPEndPoint.Address.ToString();
+                            gbname = "GB_" + catalogItem.Name;
                         }
                         logger.Debug("OnCatalogReceived.DeviceDmsRegister: catalogItem=" + JsonConvert.SerializeObject(catalogItem));
 
