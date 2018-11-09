@@ -1,4 +1,7 @@
 ## release v6.0.0.1
+* realtime video and playback video successfully finished
+
+## release v6.0.0.1
 * Registered device to DMS
 * Get GBserver config info from devicemanagementservice
 * Real video request and play
