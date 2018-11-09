@@ -573,7 +573,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMonitor
                 Connection = sdpConn,
                 Timing = startTime + " " + stopTime,
                 Address = localIp,
-                URI = DeviceId + ":" + 1
+                URI = DeviceId + ":" + 3
             };
 
             SDPMediaFormat psFormat = new SDPMediaFormat(SDPMediaFormatsEnum.PS)
