@@ -84,7 +84,7 @@ namespace SIPSorcery.GB28181.Sys
                         logger.Debug("EnvironmentVariables.DEVICE_MANAGEMENT_SERVICE_ADDRESS: " + EnvironmentVariables.DeviceManagementServiceAddress);
                         logger.Debug("EnvironmentVariables.SYSTEM_CONFIGURATION_SERVICE_ADDRESS: " + EnvironmentVariables.SystemConfigurationServiceAddress);
                         logger.Debug("EnvironmentVariables.GB_SERVICE_LOCAL_IP: " + EnvironmentVariables.GbServiceLocalIp);
-                        logger.Debug("EnvironmentVariables.GbServiceLocalPort: " + EnvironmentVariables.GbServiceLocalPort);
+                        //logger.Debug("EnvironmentVariables.GbServiceLocalPort: " + EnvironmentVariables.GbServiceLocalPort);
                         logger.Debug("EnvironmentVariables.GB_SERVICE_LOCAL_ID: " + EnvironmentVariables.GbServiceLocalId);
                         logger.Debug("EnvironmentVariables.GBServerGrpcPort: " + EnvironmentVariables.GBServerGrpcPort);
                         logger.Debug("Notes: if EnvironmentVariables have no value, it gets from xml config.");

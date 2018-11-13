@@ -65,7 +65,7 @@ namespace SIPSorcery.GB28181.SIP
             {
                 //IPEndPoint ipedp = new IPEndPoint(IPAddress.Parse("0.0.0.0"), EnvironmentVariables.GbServiceLocalPort);
                 IPEndPoint ipedp = new IPEndPoint(IPAddress.Parse("0.0.0.0"), m_localSIPEndPoint.GetIPEndPoint().Port);
-                logger.Debug("SIPUDPChannel.Initialise: Port=" + ipedp.ToString());
+                //logger.Debug("SIPUDPChannel.Initialise: IPEndPoint=" + ipedp.ToString());
                 //m_sipConn = new UdpClient(m_localSIPEndPoint.GetIPEndPoint());
                 m_sipConn = new UdpClient(ipedp);
                 //m_sipConn.Client.ReceiveTimeout = 3000;
@@ -99,7 +99,7 @@ namespace SIPSorcery.GB28181.SIP
 			{
 				byte[] buffer = null;
 
-                logger.Debug("SIPUDPChannel socket on 0.0.0.0:" + EnvironmentVariables.GbServiceLocalPort + " listening started.");
+                logger.Debug("SIPUDPChannel socket on 0.0.0.0:" + m_localSIPEndPoint.GetIPEndPoint().Port + " listening started.");
 
                 while (!Closed)
 				{
