@@ -61,8 +61,11 @@ namespace SIPSorcery.GB28181.SIP
         }
 
         private void Initialise() {
-            try {
-                IPEndPoint ipedp = new IPEndPoint(IPAddress.Parse("0.0.0.0"), EnvironmentVariables.GbServiceLocalPort);
+            try
+            {
+                //IPEndPoint ipedp = new IPEndPoint(IPAddress.Parse("0.0.0.0"), EnvironmentVariables.GbServiceLocalPort);
+                IPEndPoint ipedp = new IPEndPoint(IPAddress.Parse("0.0.0.0"), m_localSIPEndPoint.GetIPEndPoint().Port);
+                logger.Debug("SIPUDPChannel.Initialise: Port=" + ipedp.ToString());
                 //m_sipConn = new UdpClient(m_localSIPEndPoint.GetIPEndPoint());
                 m_sipConn = new UdpClient(ipedp);
                 //m_sipConn.Client.ReceiveTimeout = 3000;
