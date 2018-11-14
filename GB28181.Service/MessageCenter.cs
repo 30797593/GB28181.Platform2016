@@ -311,7 +311,7 @@ namespace GB28181Service
                             else if (t2.Subtract(t1).Duration().Milliseconds > 500)
                             {
                                 //off line
-                                logger.Debug("Device status of [" + deviceid + "]: OFF");
+                                //logger.Debug("Device status of [" + deviceid + "]: OFF");
                                 break;
                             }
                         }
