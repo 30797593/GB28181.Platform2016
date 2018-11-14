@@ -281,8 +281,8 @@ namespace GB28181Service
             TimeSpan pre = new TimeSpan(DateTime.Now.Ticks);
             while (true)
             {
-                //report status every 30 seconds 
-                System.Threading.Thread.Sleep(30000);
+                //report status every 8 seconds 
+                System.Threading.Thread.Sleep(8000);
                 try
                 {
                     foreach (string deviceid in _sipCoreMessageService.NodeMonitorService.Keys)
@@ -304,7 +304,7 @@ namespace GB28181Service
                             {
                                 //on line
                                 stat.Status_ = DeviceStatuses[deviceid].Status.Equals("ON") ? true : false;
-                                logger.Debug("Device status of [" + deviceid + "]: " + DeviceStatuses[deviceid].Status);
+                                //logger.Debug("Device status of [" + deviceid + "]: " + DeviceStatuses[deviceid].Status);
                                 DeviceStatuses.Remove(deviceid);
                                 break;
                             }
@@ -342,7 +342,7 @@ namespace GB28181Service
                             {
                                 c.Publish(subject, payload);
                                 c.Flush();
-                                logger.Debug("Device on/off line status published.");
+                                //logger.Debug("Device on/off line status published.");
                             }
                             #endregion
                         }
@@ -351,7 +351,7 @@ namespace GB28181Service
                             logger.Debug("QueryGBDeviceByGBIDsRequest: Devices[" + deviceid + "] can't be found in database");
                             continue;
                         }
-                        logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
+                        //logger.Debug("QueryGBDeviceByGBIDsRequest-Status .Devices: " + rep.Devices[0].ToString());
                     }
                 }
                 catch (Exception ex)
