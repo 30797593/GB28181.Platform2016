@@ -78,7 +78,7 @@ namespace SIPSorcery.GB28181.Sys
                     try
                     {
                         logger = LogManager.GetLogger(APP_LOGGING_ID);
-                        logger.Debug("Logging initialised.");
+                        logger.Debug("Target framework: .Net Core 2.1");
                         logger.Debug("EnvironmentVariables.MICRO_REGISTRY_ADDRESS: " + EnvironmentVariables.MicroRegistryAddress);
                         logger.Debug("EnvironmentVariables.GB_NATS_CHANNEL_ADDRESS: " + EnvironmentVariables.GBNatsChannelAddress);
                         logger.Debug("EnvironmentVariables.DEVICE_MANAGEMENT_SERVICE_ADDRESS: " + EnvironmentVariables.DeviceManagementServiceAddress);

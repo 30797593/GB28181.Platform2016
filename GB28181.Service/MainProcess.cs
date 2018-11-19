@@ -362,8 +362,8 @@ namespace GB28181Service
             {
                 localaddr = obj;
             }
-            localip = localaddr.ToString();
-            localip = EnvironmentVariables.GbServiceLocalIp ?? "10.78.115.182";
+            //localip = localaddr.ToString();
+            localip = EnvironmentVariables.GbServiceLocalIp ?? localaddr.ToString();
             logger.Debug("Gb Service Local Ip: " + localip);
             return localip;
         }
@@ -393,7 +393,7 @@ namespace GB28181Service
         }
         private void ConfigurationOverview(ConsulClientConfiguration obj)
         {
-            obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? "10.78.115.182:8500"));
+            obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? GetIPAddress() + ":8500"));
             logger.Debug("Consul Client: " + obj.Address);
             obj.Datacenter = "dc1";
         }
