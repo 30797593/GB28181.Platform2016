@@ -364,7 +364,7 @@ namespace GB28181Service
             }
             //localip = localaddr.ToString();
             localip = EnvironmentVariables.GbServiceLocalIp ?? localaddr.ToString();
-            logger.Debug("Gb Service Local Ip: " + localip);
+            //logger.Debug("Gb Service Local Ip: " + localip);
             return localip;
         }
         /// <summary>
