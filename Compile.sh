@@ -1,5 +1,5 @@
 #!/bin/bash
 #test
-cd /workspace/GB28181.Service
+cd /workspace/gb28181-service
 dotnet clean
 dotnet publish
