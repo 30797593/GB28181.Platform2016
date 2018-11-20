@@ -42,6 +42,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Consul">
+      <HintPath>..\packages\Consul\Consul.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Config\gb28181.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
