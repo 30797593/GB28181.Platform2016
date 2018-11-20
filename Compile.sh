@@ -1,6 +1,6 @@
 #!/bin/bash
 
 cd /workspace/GB28181.Service
-dotnet restore
+MSBuild /t:restore
 dotnet clean
 dotnet publish
