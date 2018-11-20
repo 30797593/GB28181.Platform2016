@@ -23,7 +23,7 @@ using GrpcDeviceCatalog;
 using Grpc.Core;
 //using GrpcGb28181Config;
 using GrpcDeviceFeature;
-using Consul;
+//using Consul;
 using System.Net;
 using GrpcVideoOnDemand;
 //using Manage;
@@ -64,7 +64,7 @@ namespace GB28181Service
 
         private ServiceProvider _serviceProvider = null;
 
-        private AgentServiceRegistration _AgentServiceRegistration = null;
+        //private AgentServiceRegistration _AgentServiceRegistration = null;
 
         public MainProcess()
         {
@@ -114,7 +114,7 @@ namespace GB28181Service
             //var sect = config.GetSection("sipaccounts");
 
             //Consul Register
-            ServiceRegister();
+            //ServiceRegister();
             //InitServer
             SipAccountStorage.RPCGBServerConfigReceived += SipAccountStorage_RPCGBServerConfigReceived;
 
@@ -367,36 +367,36 @@ namespace GB28181Service
             logger.Debug("Gb Service Local Ip: " + localip);
             return localip;
         }
-        /// <summary>
-        /// Consul Register
-        /// </summary>
-        /// <param name="client"></param>
-        private void ServiceRegister()
-        {
-            try
-            {
-                var clients = new ConsulClient(ConfigurationOverview);
-                _AgentServiceRegistration = new AgentServiceRegistration()
-                {
-                    Address = GetIPAddress(),
-                    ID = "gbdeviceservice",//"gb28181" + Dns.GetHostName(),
-                    Name = "gbdeviceservice",
-                    Port = EnvironmentVariables.GBServerGrpcPort,
-                    Tags = new[] { "gb28181" }
-                };
-                var result = clients.Agent.ServiceRegister(_AgentServiceRegistration).Result;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("Consul Register: " + ex.Message);
-            }
-        }
-        private void ConfigurationOverview(ConsulClientConfiguration obj)
-        {
-            obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? GetIPAddress() + ":8500"));
-            logger.Debug("Consul Client: " + obj.Address);
-            obj.Datacenter = "dc1";
-        }
+        ///// <summary>
+        ///// Consul Register
+        ///// </summary>
+        ///// <param name="client"></param>
+        //private void ServiceRegister()
+        //{
+        //    try
+        //    {
+        //        var clients = new ConsulClient(ConfigurationOverview);
+        //        _AgentServiceRegistration = new AgentServiceRegistration()
+        //        {
+        //            Address = GetIPAddress(),
+        //            ID = "gbdeviceservice",//"gb28181" + Dns.GetHostName(),
+        //            Name = "gbdeviceservice",
+        //            Port = EnvironmentVariables.GBServerGrpcPort,
+        //            Tags = new[] { "gb28181" }
+        //        };
+        //        var result = clients.Agent.ServiceRegister(_AgentServiceRegistration).Result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error("Consul Register: " + ex.Message);
+        //    }
+        //}
+        //private void ConfigurationOverview(ConsulClientConfiguration obj)
+        //{
+        //    obj.Address = new Uri("http://" + (EnvironmentVariables.MicroRegistryAddress ?? GetIPAddress() + ":8500"));
+        //    logger.Debug("Consul Client: " + obj.Address);
+        //    obj.Datacenter = "dc1";
+        //}
         #endregion
     }
 }

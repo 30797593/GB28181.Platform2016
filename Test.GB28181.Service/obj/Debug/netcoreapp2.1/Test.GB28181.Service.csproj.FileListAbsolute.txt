@@ -49,7 +49,6 @@ D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\ne
 D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\netcoreapp2.1\Logger4Net.dll
 D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\netcoreapp2.1\NATS.Client.dll
 D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\netcoreapp2.1\SIPSorcery.28181.dll
-D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\netcoreapp2.1\Consul.dll
 D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\netcoreapp2.1\GB28181.Service.pdb
 D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\netcoreapp2.1\GB28181.Service.dll.config
 D:\Codes\honeywell.com\husplus\gb28181-service\Test.GB28181.Service\bin\Debug\netcoreapp2.1\SIPSorcery.28181.pdb
