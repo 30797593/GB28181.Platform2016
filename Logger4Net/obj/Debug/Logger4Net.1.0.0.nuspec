@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Logger4Net</id>
+    <version>1.0.0</version>
+    <authors>Logger4Net</authors>
+    <owners>Logger4Net</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp2.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\bin\Debug\netcoreapp2.1\Logger4Net.dll" target="lib\netcoreapp2.1\Logger4Net.dll" />
+  </files>
+</package>

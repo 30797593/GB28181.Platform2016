@@ -1,0 +1,7 @@
+D:\Codes\honeywell.com\husplus\gb28181-service\SLW.MeidaNetEngine\bin\Debug\SLW.MeidaNetEngine.dll
+D:\Codes\honeywell.com\husplus\gb28181-service\SLW.MeidaNetEngine\bin\Debug\SLW.MeidaNetEngine.pdb
+D:\Codes\honeywell.com\husplus\gb28181-service\SLW.MeidaNetEngine\obj\Debug\SLW.MeidaNetEngine.csprojAssemblyReference.cache
+D:\Codes\honeywell.com\husplus\gb28181-service\SLW.MeidaNetEngine\obj\Debug\SLW.MeidaNetEngine.csproj.CoreCompileInputs.cache
+D:\Codes\honeywell.com\husplus\gb28181-service\SLW.MeidaNetEngine\obj\Debug\SLW.MeidaNetEngine.csproj.CopyComplete
+D:\Codes\honeywell.com\husplus\gb28181-service\SLW.MeidaNetEngine\obj\Debug\SLW.MeidaNetEngine.dll
+D:\Codes\honeywell.com\husplus\gb28181-service\SLW.MeidaNetEngine\obj\Debug\SLW.MeidaNetEngine.pdb

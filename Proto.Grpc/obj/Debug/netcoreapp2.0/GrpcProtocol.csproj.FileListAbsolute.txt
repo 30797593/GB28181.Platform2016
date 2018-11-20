@@ -1,0 +1,9 @@
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\bin\Debug\netcoreapp2.0\GrpcProtocol.deps.json
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\bin\Debug\netcoreapp2.0\GrpcProtocol.dll
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\bin\Debug\netcoreapp2.0\GrpcProtocol.pdb
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\obj\Debug\netcoreapp2.0\GrpcProtocol.csproj.CoreCompileInputs.cache
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\obj\Debug\netcoreapp2.0\GrpcProtocol.AssemblyInfoInputs.cache
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\obj\Debug\netcoreapp2.0\GrpcProtocol.AssemblyInfo.cs
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\obj\Debug\netcoreapp2.0\GrpcProtocol.dll
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\obj\Debug\netcoreapp2.0\GrpcProtocol.pdb
+D:\Codes\honeywell.com\husplus\gb28181-service\Proto.Grpc\obj\Debug\netcoreapp2.0\GrpcProtocol.csprojAssemblyReference.cache

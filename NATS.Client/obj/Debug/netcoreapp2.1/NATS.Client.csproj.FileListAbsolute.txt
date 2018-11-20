@@ -1,0 +1,11 @@
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\bin\Debug\netcoreapp2.1\NATS.Client.deps.json
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\bin\Debug\netcoreapp2.1\NATS.Client.dll
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\bin\Debug\netcoreapp2.1\NATS.Client.pdb
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\bin\Debug\netcoreapp2.1\NATS.Client.xml
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\obj\Debug\netcoreapp2.1\NATS.Client.csprojAssemblyReference.cache
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\obj\Debug\netcoreapp2.1\NATS.Client.csproj.CoreCompileInputs.cache
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\obj\Debug\netcoreapp2.1\NATS.Client.AssemblyInfoInputs.cache
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\obj\Debug\netcoreapp2.1\NATS.Client.AssemblyInfo.cs
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\obj\Debug\netcoreapp2.1\NATS.Client.dll
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\obj\Debug\netcoreapp2.1\NATS.Client.xml
+D:\Codes\honeywell.com\husplus\gb28181-service\NATS.Client\obj\Debug\netcoreapp2.1\NATS.Client.pdb
