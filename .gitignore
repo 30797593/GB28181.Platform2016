@@ -151,3 +151,5 @@ $RECYCLE.BIN/
 .DS_Store
 .vs
 *.cache
+/Build/netcoreapp2.1/GB28181.Service.dll
+/Build/netcoreapp2.1/GB28181.Service.dll
