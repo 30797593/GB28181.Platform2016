@@ -49,9 +49,11 @@ namespace GB28181Service
 
         public void OnCatalogReceived(Catalog obj)
         {
-            Catalogs.Remove(obj.DeviceID);
-            Catalogs.Add(obj.DeviceID, obj);
-            logger.Debug("OnCatalogReceived: " + JsonConvert.SerializeObject(obj).ToString());
+            if (!Catalogs.ContainsKey(obj.DeviceID))
+            {
+                Catalogs.Add(obj.DeviceID, obj);
+                logger.Debug("OnCatalogReceived: " + JsonConvert.SerializeObject(obj).ToString());
+            }
             if (GBSIPTransactions.ContainsKey(obj.DeviceID))
             {
                 SIPTransaction _SIPTransaction = GBSIPTransactions[obj.DeviceID];
