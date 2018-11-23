@@ -716,7 +716,7 @@ namespace SIPSorcery.GB28181.Servers.SIPMessage
             //}
             OnKeepaliveReceived?.Invoke(remoteEP, keepAlive, request.Header.From.FromURI.User);
             // _subscribe = true;
-            logger.Debug("KeepAlive:" + remoteEP.ToHost() + "======DevID:" + keepAlive.DeviceID + "=====Status:" + keepAlive.Status + "=====SN:" + keepAlive.SN);
+            logger.Debug("KeepAlive:" + remoteEP.ToHost() + "=====DevID:" + keepAlive.DeviceID + "=====Status:" + keepAlive.Status + "=====SN:" + keepAlive.SN);
         }
 
         /// <summary>
