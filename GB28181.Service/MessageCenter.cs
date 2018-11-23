@@ -86,10 +86,8 @@ namespace GB28181Service
 
         public void OnDeviceStatusReceived(SIPEndPoint arg1, DeviceStatus arg2)
         {
-            if (!DeviceStatuses.ContainsKey(arg2.DeviceID))
-            {
-                DeviceStatuses.Add(arg2.DeviceID, arg2);
-            }
+            DeviceStatuses.Remove(arg2.DeviceID);
+            DeviceStatuses.Add(arg2.DeviceID, arg2);
         }
 
         internal void OnKeepaliveReceived(SIPEndPoint remoteEP, KeepAlive keapalive, string devId)
