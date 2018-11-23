@@ -10,7 +10,7 @@ namespace SIPSorcery.GB28181.Sys
         private static string _MICRO_REGISTRY_ADDRESS;
         private const string GB_SERVICE_LOCAL_ID = "GB_SERVICE_LOCAL_ID";//42010000002100000002
         private static string _GB_SERVICE_LOCAL_ID;
-        private const string GB_SERVICE_LOCAL_IP = "GB_SERVICE_LOCAL_IP";//10.78.115.182
+        private const string GB_SERVICE_LOCAL_IP = "GB_SERVICE_LOCAL_IP";//localhost
         private static string _GB_SERVICE_LOCAL_IP;
         private const string DEVICE_MANAGEMENT_SERVICE_ADDRESS = "DEVICE_MANAGEMENT_SERVICE_ADDRESS";//devicemanagementservice:8080
         private static string _DEVICE_MANAGEMENT_SERVICE_ADDRESS;
