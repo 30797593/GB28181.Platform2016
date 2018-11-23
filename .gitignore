@@ -153,3 +153,17 @@ $RECYCLE.BIN/
 *.cache
 /Build/netcoreapp2.1/GB28181.Service.dll
 /Build/netcoreapp2.1/GB28181.Service.dll
+/Build/netcoreapp2.1/SIPSorcery.28181.dll
+/Build/netcoreapp2.1/SIPSorcery.28181.dll
+/Build/netcoreapp2.1/SIPSorcery.28181.pdb
+/GB28181.Service/obj/Debug/netcoreapp2.1/GB28181.Service.csprojAssemblyReference.cache
+/GrpcAgent/bin/Debug/netcoreapp2.1/SIPSorcery.28181.dll
+/GrpcAgent/bin/Debug/netcoreapp2.1/SIPSorcery.28181.pdb
+/GrpcAgent/obj/Debug/netcoreapp2.1/GrpcAgent.csprojAssemblyReference.cache
+/SIPSorcery.28181/bin/Debug/netcoreapp2.1/SIPSorcery.28181.dll
+/SIPSorcery.28181/bin/Debug/netcoreapp2.1/SIPSorcery.28181.pdb
+/SIPSorcery.28181/obj/Debug/netcoreapp2.1/SIPSorcery.28181.dll
+/SIPSorcery.28181/obj/Debug/netcoreapp2.1/SIPSorcery.28181.pdb
+/Test.GB28181.Service/bin/Debug/netcoreapp2.1/SIPSorcery.28181.dll
+/Test.GB28181.Service/bin/Debug/netcoreapp2.1/SIPSorcery.28181.pdb
+/Test.GB28181.Service/obj/Debug/netcoreapp2.1/Test.GB28181.Service.csprojAssemblyReference.cache
