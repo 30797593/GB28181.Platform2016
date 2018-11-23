@@ -230,7 +230,6 @@ namespace GB28181Service
             }
             finally
             {
-
             }
         }
 

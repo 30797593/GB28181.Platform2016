@@ -1,9 +1,0 @@
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\bin\Debug\netcoreapp2.1\Logger4Net.deps.json
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\bin\Debug\netcoreapp2.1\Logger4Net.dll
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\bin\Debug\netcoreapp2.1\Logger4Net.pdb
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\obj\Debug\netcoreapp2.1\Logger4Net.csprojAssemblyReference.cache
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\obj\Debug\netcoreapp2.1\Logger4Net.csproj.CoreCompileInputs.cache
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\obj\Debug\netcoreapp2.1\Logger4Net.AssemblyInfoInputs.cache
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\obj\Debug\netcoreapp2.1\Logger4Net.AssemblyInfo.cs
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\obj\Debug\netcoreapp2.1\Logger4Net.dll
-D:\Codes\honeywell.com\husplus\gb28181-service\Logger4Net\obj\Debug\netcoreapp2.1\Logger4Net.pdb
