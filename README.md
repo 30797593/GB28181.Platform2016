@@ -21,3 +21,7 @@ Device History Video Query
 ## License
 
 BSD v2
+
+## Inspired By
+
+https://github.com/qinpengit/Gb28181_Platform2016_Test
