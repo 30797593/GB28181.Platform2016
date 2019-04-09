@@ -24,4 +24,5 @@ BSD v2
 
 ## Inspired By
 
-https://github.com/qinpengit/Gb28181_Platform2016_Test
+[GB28181_Platform2016_Test](https://github.com/qinpengit/Gb28181_Platform2016_Test). 
+
