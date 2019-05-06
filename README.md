@@ -19,7 +19,8 @@ Device History Video Query
 ~~~
 
 ## instruction
-Mainly on `develop` branch ,in order to support .net core2.1+
+Mainly on `develop` branch ,in order to support .net core2.1+.
+
 The windows function part was not maintained , you can reffer to other branch in this repo , `PRs` are always welcome.
 
 ## License
